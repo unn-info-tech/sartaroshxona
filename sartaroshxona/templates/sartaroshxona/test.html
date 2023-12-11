@@ -1,0 +1,51 @@
+{% extends 'sartaroshxona/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Content specific to this page -->
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Appointment List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Customer Appointment List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>2023-10-04</td>
+                <td>10:00 AM</td>
+                <td>123 Main Street</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>2023-10-05</td>
+                <td>2:00 PM</td>
+                <td>456 Elm Street</td>
+            </tr>
+            <tr>
+                <td>Peter Jones</td>
+                <td>2023-10-06</td>
+                <td>5:00 PM</td>
+                <td>789 Park Avenue</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+{% endblock %}

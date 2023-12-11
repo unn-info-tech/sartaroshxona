@@ -1,0 +1,56 @@
+{% extends 'sartaroshxona/base.html' %}
+
+
+{% block content %}
+<!-- Content specific to this page -->
+
+
+<div class="container">
+    <div class="formGroup">
+      <div class="formHeading">
+          <i class="fa fa-user"></i>
+          <span>Hi There !..</span>
+      </div>
+    <div class="formContainer">
+      <div class="form signupForm">
+        <form action="#">
+          <div class="inputGroup">
+            <input type="text" id="signUp_email" placeholder="Email">
+          </div>
+          <div class="inputGroup">
+            <input type="text" id="signUp_username" placeholder="Username">
+          </div>
+          <div class="inputGroup">
+            <input type="password" id="signUp_password" placeholder="Password">
+          </div>
+          <div class="submitAction">
+            <a href="#" class="trigger">Already Member ? Sign In</a>
+              <button>Sign Up</button>
+
+          </div> 
+        </form>
+      </div>
+      <div class="form signinForm">
+        <form action="#">
+          <div class="inputGroup">
+            <input type="text" id="signIn_email" placeholder="Email">
+          </div>
+          <div class="inputGroup">
+              
+            <input type="password" id="signIn_password" placeholder="Password">
+          </div>
+          <div class="submitAction">
+              <a href="#" class="trigger">Not a Member Yet ? Sign Up</a>
+                <button>Sign In</button>
+  
+            </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+<!-- Paste the provided HTML code here -->
+{% endblock %}
+

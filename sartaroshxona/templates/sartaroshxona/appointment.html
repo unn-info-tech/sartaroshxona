@@ -1,0 +1,170 @@
+{% extends 'sartaroshxona/base.html' %}
+
+
+{% block content %}
+<!-- Content specific to this page -->
+
+<!-- Navigation -->
+<nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+       <!-- Left Nav Section -->
+       <img style="margin-right: 25px" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/738817/lawlogoblack.png" width="47" height="47" uk-img>
+    </div>
+    <div class="uk-navbar-right">
+       <!-- Right Nav Section -->
+       <div>
+          <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
+          <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+             <form class="uk-search-navbar uk-width-1-1">
+                <input class="uk-search-input" type="search" style="font-size: 16px; padding-top: 0px !important;" placeholder="What are you looking for?" autofocus>
+             </form>
+          </div>
+       </div>
+       <ul class="uk-navbar-nav">
+          <li>
+             <a href="#" uk-icon="icon: menu"></a>
+             <div class="uk-navbar-dropdown">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                   <li class="uk-active"><a href="#">Account</a></li>
+                   <li><a href="#">Edit Profile</a></li>
+                   <li class="uk-nav-header">Settings</li>
+                   <li><a href="#">Notifications</a></li>
+                   <li><a href="#">Payment</a></li>
+                   <li class="uk-nav-divider"></li>
+                   <li><a href="#">Logout</a></li>
+                </ul>
+             </div>
+          </li>
+       </ul>
+    </div>
+ </nav>
+ <!-- Header -->
+ <div class="booking-header-container uk-animation-fade">
+    <ul class="uk-breadcrumb">
+     <li><a href="https://codepen.io/amitroopnarine/live/GwXmYO">Select Time</a></li>
+     <li><a href="https://codepen.io/amitroopnarine/live/Oarayp">Review & Submit</a></li>
+ </ul>
+    <hr></hr>
+    <h2 style="text-align: left; font-size: 32px; padding-bottom: 15px; letter-spacing: -1.7px;">Schedule a Phone Call with Hera J.</h2>
+              <h2 style="font-size: 17px; padding-top: 15px; color: #222; font-weight: 500; letter-spacing: -.3px;">Booking with: Hera J. <span uk-icon="icon: chevron-down"></span></h2>
+          <h5>★★★★★ (89 Reviews)</h5>
+          <hr></hr>
+          <h3 style="font-size: 17px; font-weight: 500; color: #7e838e; text-align: right;">This Week <span uk-icon="icon: chevron-down"></span></h3>
+ </h4>
+ </div>
+ <!-- Slider -->
+ <div class="booking-body-container uk-animation-fade">
+ <div uk-slider="center: true">
+    <div class="uk-position-relative uk-visible-toggle uk-light header-container">
+       <ul class="uk-slider-items uk-child-width-1-2@s uk-grid">
+          <!-- Thursday -->
+          <li>
+             <div class="none">
+                <div class="uk-card-calendar uk-card-hover">
+                   <h1>28</h1>
+                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Thursday</h3>
+                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
+                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
+                   <ul class="uk-list-time">
+                      <li class="time">2:30pm - 3:00pm</li>
+                      <li class="time">3:30pm - 4:00pm</li>
+                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
+                      <li class="active-time"> ‣ 5:30pm - 6:00pm</li>
+                      <li class="time">6:00pm - 6:30pm</li>
+                      <li class="time">6:30pm - 7:00pm</li>
+                   </ul>
+                </div>
+             </div>
+          </li>
+          <!-- Friday -->
+          <li>
+             <div class="none">
+                <div class="uk-card-calendar uk-card-hover">
+                   <h1>29</h1>
+                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Friday</h3>
+                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
+                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
+                   <ul class="uk-list-time">
+                      <li class="time">2:30pm - 3:00pm</li>
+                      <li class="time">3:30pm - 4:00pm</li>
+                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
+                      <li class="time">  5:30pm - 6:00pm</li>
+                      <li class="time">6:00pm - 6:30pm</li>
+                      <li class="time">6:30pm - 7:00pm</li>
+                   </ul>
+                </div>
+             </div>
+          </li>
+          <!-- Monday -->
+          <li>
+             <div class="none">
+                <div class="uk-card-calendar uk-card-hover">
+                   <h1>30</h1>
+                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Monday</h3>
+                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
+                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
+                   <ul class="uk-list-time">
+                      <li class="time">2:30pm - 3:00pm</li>
+                      <li class="time">3:30pm - 4:00pm</li>
+                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
+                      <li class="time">  5:30pm - 6:00pm</li>
+                      <li class="time">6:00pm - 6:30pm</li>
+                      <li class="time">6:30pm - 7:00pm</li>
+                   </ul>
+                </div>
+             </div>
+          </li>
+          <!-- Tuesday -->
+          <li>
+             <div class="none">
+                <div class="uk-card-calendar uk-card-hover">
+                   <h1>31</h1>
+                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Tuesday</h3>
+                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
+                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
+                   <ul class="uk-list-time">
+                      <li class="time">2:30pm - 3:00pm</li>
+                      <li class="time">3:30pm - 4:00pm</li>
+                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
+                      <li class="time">  5:30pm - 6:00pm</li>
+                      <li class="time">6:00pm - 6:30pm</li>
+                      <li class="time">6:30pm - 7:00pm</li>
+                   </ul>
+                </div>
+             </div>
+          </li>
+          <!-- Wednesday -->
+          <li>
+             <div class="none">
+                <div class="uk-card-calendar uk-card-hover">
+                   <h1>01</h1>               
+                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Wednesday</h3>
+                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
+                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
+                   <ul class="uk-list-time">
+                      <li class="time">2:30pm - 3:00pm</li>
+                      <li class="time">3:30pm - 4:00pm</li>
+                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
+                      <li class="time">  5:30pm - 6:00pm</li>
+                      <li class="time">6:00pm - 6:30pm</li>
+                      <li class="time">6:30pm - 7:00pm</li>
+                   </ul>
+                </div>
+             </div>
+          </li>
+       </ul>
+       
+       
+       <!-- Indicator -->
+       <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+       <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+    </div>
+ </div>
+ </div>
+ <a class="uk-button uk-calendar-date-button uk-animation-slide-right" href="https://codepen.io/amitroopnarine/live/Oarayp">Next: Confirm Details</a>
+ </div>
+{% endblock %}
+
+
+
+

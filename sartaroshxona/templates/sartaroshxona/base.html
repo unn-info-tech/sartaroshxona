@@ -1,0 +1,25 @@
+<!-- This is base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Title</title>
+    <!-- Include necessary CSS and JavaScript files -->
+    {% load static %}
+    <!--Appointment static-->
+    <link rel="stylesheet" href="{% static 'css/appointment.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/css/uikit.min.css" />
+
+    <!--Sign static-->
+    <link rel="stylesheet" href="{% static 'css/sign.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Other meta tags, stylesheets, or scripts -->
+</head>
+<body>
+    <!-- Your navigation code -->
+    {% block content %}
+    {% endblock %}
+    <!-- Other common elements like footer, scripts, etc. -->
+</body>
+</html>
