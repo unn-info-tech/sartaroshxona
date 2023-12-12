@@ -1,170 +1,117 @@
-{% extends 'sartaroshxona/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule a Meeting</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp'); /* Replace URL with your image URL */
+      background-size: cover;
+      background-position: center;
+      color: #fff; /* Set text color to white */
+      font-family: 'Arial', sans-serif; /* Change font for better readability */
+      margin: 0; /* Remove default margin */
+      padding: 0; /* Remove default padding */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center; /* Center align content inside container */
+      width: 80%; /* Adjust the width as needed */
+    }
+    .card {
+      background-color: rgba(0, 0, 0, 0.7); /* Set card background color with opacity */
+      color: #fff; /* Set text color inside cards to white */
+      border: 2px solid #fff; /* Add white border */
+      margin-bottom: 20px; /* Add margin between containers */
+      padding: 30px 20px; /* Padding for the card */
+    }
+    .table-bordered {
+      border-color: #fff; /* Set border color for tables */
+    }
+    .btn-outline-primary {
+      color: #fff; /* Set button text color to white */
+      border-color: #fff; /* Set button border color to white */
+    }
+    .btn-outline-primary:hover {
+      background-color: #fff; /* Change button background on hover */
+      color: #000; /* Change text color on hover */
+    }
+    select.form-select {
+      background-color: #000; /* Set select background color to black */
+      color: #fff; /* Set select text color to white */
+      border: 2px solid #fff; /* Add white border */
+    }
+    select.form-select option {
+      background-color: #000; /* Set select option background color to black */
+      color: #fff; /* Set select option text color to white */
+    }
+    input[type="date"] {
+      background-color: #000; /* Set date field background color to black */
+      color: #fff; /* Set date field text color to white */
+      border: 2px solid #fff; /* Add white border */
+      padding: 8px 12px; /* Adjust padding as needed */
+      width: calc(100% - 4px); /* Adjust width */
+      border-radius: 4px; /* Add border-radius for a softer look */
+      box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+    /* Custom styles for the buttons */
+    .btn-duration {
+      color: #fff;
+      background-color: #000;
+      border-color: #fff;
+    }
+    .btn-duration:focus,
+    .btn-duration:active {
+      color: #000;
+      background-color: #fff;
+    }
+    /* Adjust profile image and name alignment */
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+    }
 
-
-{% block content %}
-<!-- Content specific to this page -->
-
-<!-- Navigation -->
-<nav class="uk-navbar-container" uk-navbar>
-    <div class="uk-navbar-left">
-       <!-- Left Nav Section -->
-       <img style="margin-right: 25px" data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/738817/lawlogoblack.png" width="47" height="47" uk-img>
+    .black-input {
+      background-color: #000;
+      color: #fff;
+    }
+    /* Add any additional styling as needed */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card p-4">
+      <h1 class="text-center mb-4">Schedule a Meeting</h1>
+      <img src="https://via.placeholder.com/60" class="mx-auto d-block rounded-circle mb-3" alt="Profile Image">
+      <h5 class="text-center">John Doe</h5>
+      <div class="row">
+        
+      </div>
     </div>
-    <div class="uk-navbar-right">
-       <!-- Right Nav Section -->
-       <div>
-          <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
-          <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
-             <form class="uk-search-navbar uk-width-1-1">
-                <input class="uk-search-input" type="search" style="font-size: 16px; padding-top: 0px !important;" placeholder="What are you looking for?" autofocus>
-             </form>
-          </div>
-       </div>
-       <ul class="uk-navbar-nav">
-          <li>
-             <a href="#" uk-icon="icon: menu"></a>
-             <div class="uk-navbar-dropdown">
-                <ul class="uk-nav uk-navbar-dropdown-nav">
-                   <li class="uk-active"><a href="#">Account</a></li>
-                   <li><a href="#">Edit Profile</a></li>
-                   <li class="uk-nav-header">Settings</li>
-                   <li><a href="#">Notifications</a></li>
-                   <li><a href="#">Payment</a></li>
-                   <li class="uk-nav-divider"></li>
-                   <li><a href="#">Logout</a></li>
-                </ul>
-             </div>
-          </li>
-       </ul>
+    <div class="card p-4">
+      <h5 class="card-title mb-4">How long do you need?</h5>
+      <div class="btn-group w-100 mb-4" role="group">
+        <button type="button" class="btn btn-outline-primary btn-duration" data-duration="15min">15 Minutes</button>
+        <button type="button" class="btn btn-outline-primary btn-duration" data-duration="30min">30 Minutes</button>
+        <button type="button" class="btn btn-outline-primary btn-duration" data-duration="1hour">1 Hour</button>
+      </div>
+      <h5 class="card-title mb-4">Select a Date</h5>
+      <input type="datetime-local" class="form-control mb-4 black-input" id="appointmentDatetime">
+
+
+      <div class="d-grid gap-2">
+        <!-- Time Slots -->
+        <button type="button" class="btn btn-outline-primary">9:00 AM</button>
+        <!-- Add more time slots here -->
+      </div>
     </div>
- </nav>
- <!-- Header -->
- <div class="booking-header-container uk-animation-fade">
-    <ul class="uk-breadcrumb">
-     <li><a href="https://codepen.io/amitroopnarine/live/GwXmYO">Select Time</a></li>
-     <li><a href="https://codepen.io/amitroopnarine/live/Oarayp">Review & Submit</a></li>
- </ul>
-    <hr></hr>
-    <h2 style="text-align: left; font-size: 32px; padding-bottom: 15px; letter-spacing: -1.7px;">Schedule a Phone Call with Hera J.</h2>
-              <h2 style="font-size: 17px; padding-top: 15px; color: #222; font-weight: 500; letter-spacing: -.3px;">Booking with: Hera J. <span uk-icon="icon: chevron-down"></span></h2>
-          <h5>★★★★★ (89 Reviews)</h5>
-          <hr></hr>
-          <h3 style="font-size: 17px; font-weight: 500; color: #7e838e; text-align: right;">This Week <span uk-icon="icon: chevron-down"></span></h3>
- </h4>
- </div>
- <!-- Slider -->
- <div class="booking-body-container uk-animation-fade">
- <div uk-slider="center: true">
-    <div class="uk-position-relative uk-visible-toggle uk-light header-container">
-       <ul class="uk-slider-items uk-child-width-1-2@s uk-grid">
-          <!-- Thursday -->
-          <li>
-             <div class="none">
-                <div class="uk-card-calendar uk-card-hover">
-                   <h1>28</h1>
-                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Thursday</h3>
-                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
-                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
-                   <ul class="uk-list-time">
-                      <li class="time">2:30pm - 3:00pm</li>
-                      <li class="time">3:30pm - 4:00pm</li>
-                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
-                      <li class="active-time"> ‣ 5:30pm - 6:00pm</li>
-                      <li class="time">6:00pm - 6:30pm</li>
-                      <li class="time">6:30pm - 7:00pm</li>
-                   </ul>
-                </div>
-             </div>
-          </li>
-          <!-- Friday -->
-          <li>
-             <div class="none">
-                <div class="uk-card-calendar uk-card-hover">
-                   <h1>29</h1>
-                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Friday</h3>
-                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
-                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
-                   <ul class="uk-list-time">
-                      <li class="time">2:30pm - 3:00pm</li>
-                      <li class="time">3:30pm - 4:00pm</li>
-                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
-                      <li class="time">  5:30pm - 6:00pm</li>
-                      <li class="time">6:00pm - 6:30pm</li>
-                      <li class="time">6:30pm - 7:00pm</li>
-                   </ul>
-                </div>
-             </div>
-          </li>
-          <!-- Monday -->
-          <li>
-             <div class="none">
-                <div class="uk-card-calendar uk-card-hover">
-                   <h1>30</h1>
-                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Monday</h3>
-                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
-                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
-                   <ul class="uk-list-time">
-                      <li class="time">2:30pm - 3:00pm</li>
-                      <li class="time">3:30pm - 4:00pm</li>
-                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
-                      <li class="time">  5:30pm - 6:00pm</li>
-                      <li class="time">6:00pm - 6:30pm</li>
-                      <li class="time">6:30pm - 7:00pm</li>
-                   </ul>
-                </div>
-             </div>
-          </li>
-          <!-- Tuesday -->
-          <li>
-             <div class="none">
-                <div class="uk-card-calendar uk-card-hover">
-                   <h1>31</h1>
-                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Tuesday</h3>
-                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
-                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
-                   <ul class="uk-list-time">
-                      <li class="time">2:30pm - 3:00pm</li>
-                      <li class="time">3:30pm - 4:00pm</li>
-                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
-                      <li class="time">  5:30pm - 6:00pm</li>
-                      <li class="time">6:00pm - 6:30pm</li>
-                      <li class="time">6:30pm - 7:00pm</li>
-                   </ul>
-                </div>
-             </div>
-          </li>
-          <!-- Wednesday -->
-          <li>
-             <div class="none">
-                <div class="uk-card-calendar uk-card-hover">
-                   <h1>01</h1>               
-                   <h3 style="color: #009688; padding-top: 25px; font-size: 25px;">Wednesday</h3>
-                   <h4 style="font-size: 14px;">from 9:00am-6:00pm</h4>
-                   <h3 style="color: #000; font-size: 16px; padding-top: 35px; padding-bottom: 15px;">Afternoon</h3>
-                   <ul class="uk-list-time">
-                      <li class="time">2:30pm - 3:00pm</li>
-                      <li class="time">3:30pm - 4:00pm</li>
-                      <h3 style="color: #000; font-size: 16px; padding-top: 15px; padding-bottom: 15px;">Evening</h3>
-                      <li class="time">  5:30pm - 6:00pm</li>
-                      <li class="time">6:00pm - 6:30pm</li>
-                      <li class="time">6:30pm - 7:00pm</li>
-                   </ul>
-                </div>
-             </div>
-          </li>
-       </ul>
-       
-       
-       <!-- Indicator -->
-       <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-       <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-    </div>
- </div>
- </div>
- <a class="uk-button uk-calendar-date-button uk-animation-slide-right" href="https://codepen.io/amitroopnarine/live/Oarayp">Next: Confirm Details</a>
- </div>
-{% endblock %}
-
-
-
-
+  </div>
+</body>
+</html>
