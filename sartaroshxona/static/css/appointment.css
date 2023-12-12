@@ -1,112 +1,80 @@
-/* Custom Barbershop Style CSS */
-
-/* Body Styles */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f7f7f7;
+  background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp'); /* Replace URL with your image URL */
+  background-size: cover;
+  background-position: center;
+  color: #fff; /* Set text color to white */
+  font-family: 'Arial', sans-serif; /* Change font for better readability */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-
-/* Header Styles */
-h1 {
-  color: #222;
+.container {
+  text-align: center; /* Center align content inside container */
+  width: 80%; /* Adjust the width as needed */
 }
-
-/* Card Styles */
 .card {
-  border: none;
-  border-radius: 15px;
-  background-color: #fff;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7); /* Set card background color with opacity */
+  color: #fff; /* Set text color inside cards to white */
+  border: 2px solid #fff; /* Add white border */
+  margin-bottom: 20px; /* Add margin between containers */
+  padding: 30px 20px; /* Padding for the card */
 }
-
-/* Profile Image */
-.card img {
-  border-radius: 50%;
-  border: 3px solid #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+.table-bordered {
+  border-color: #fff; /* Set border color for tables */
 }
-
-/* Calendar Styles */
-.table {
-  background-color: #fff;
-}
-
-.table th,
-.table td {
-  border: none;
-  color: #333;
-}
-
-/* Button Styles */
-.btn-link {
-  color: #fff;
-  text-decoration: none;
-}
-
-.btn-link:hover,
-.btn-link.active {
-  background-color: #222;
-  color: #fff;
-}
-
-/* Form Styles */
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-control {
-  border-radius: 8px;
-}
-
-/* Select Styles */
-.select2 {
-  border-radius: 8px;
-}
-
-/* Time Slots */
-.btn-outline-secondary {
-  border-radius: 50px;
-}
-
-/* Title Styles */
-.card-title {
-  color: #222;
-}
-
-/* Button Group Styles */
-.btn-group .btn {
-  border-radius: 15px !important;
-}
-
-/* Radio Button Styles */
 .btn-outline-primary {
-  border-radius: 25px !important;
+  color: #fff; /* Set button text color to white */
+  border-color: #fff; /* Set button border color to white */
+}
+.btn-outline-primary:hover {
+  background-color: #fff; /* Change button background on hover */
+  color: #000; /* Change text color on hover */
+}
+select.form-select {
+  background-color: #000; /* Set select background color to black */
+  color: #fff; /* Set select text color to white */
+  border: 2px solid #fff; /* Add white border */
+}
+select.form-select option {
+  background-color: #000; /* Set select option background color to black */
+  color: #fff; /* Set select option text color to white */
+}
+input[type="date"] {
+  background-color: #000; /* Set date field background color to black */
+  color: #fff; /* Set date field text color to white */
+  border: 2px solid #fff; /* Add white border */
+  padding: 8px 12px; /* Adjust padding as needed */
+  width: calc(100% - 4px); /* Adjust width */
+  border-radius: 4px; /* Add border-radius for a softer look */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+/* Custom styles for the buttons */
+.btn-duration {
+  color: #fff;
+  background-color: #000;
+  border-color: #fff;
+}
+.btn-duration:focus,
+.btn-duration:active {
+  color: #000;
+  background-color: #fff;
+}
+/* Adjust profile image and name alignment */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
 }
 
-/* Custom Margin and Padding */
-.mt-5 {
-  margin-top: 3rem;
+.black-input {
+  background-color: #000;
+  color: #fff;
 }
 
-.mb-5 {
-  margin-bottom: 3rem;
-}
 
-.mt-3 {
-  margin-top: 1.5rem;
-}
 
-.mx-4 {
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
-
-.mb-4 {
-  margin-bottom: 1.5rem;
-}
-
-.my-0 {
-  margin: 0;
-}
-
-/* Additional styles can be added or modified based on your preferences */
+/* Add any additional styling as needed */
