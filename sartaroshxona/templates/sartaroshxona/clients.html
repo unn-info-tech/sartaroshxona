@@ -3,114 +3,128 @@
 
 {% block content %}
 <style>
-    /* Existing CSS remains unchanged */
-
-    /* Existing CSS remains unchanged */
-
-    .header {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    body {
+    background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp'); /* Replace URL with your image URL */
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Set text color to white */
+    font-family: 'Arial', sans-serif; /* Change font for better readability */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     }
 
+    .container {
+    text-align: center; /* Center align content inside container */
+    width: 80%; /* Adjust the width as needed */
+    backdrop-filter: blur(5px); /* Apply a blur effect to the container */
+    }
+
+    .header {
+    background-color: rgba(0, 0, 0, 0.5); /* Set container background color to semi-transparent black */
+    padding: 20px 0;
+    border-radius: 10px;
+    }
 
     .category {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    margin: 5px;
+    display: inline-block;
+    width: 25%;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
     }
 
     .category h2 {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
     margin-bottom: 10px;
+    color: #fff;
     }
 
     .count {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 12px;
+    color: #999;
+    font-weight: 300;
+    color: #fff;
     }
 
-    .center-head {
-    position: absolute;
-    top: 200px; /* Set the position after the header */
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 20px;
-    text-align: center;
+    /* New styles for the table */
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        background-color: rgba(0, 0, 0, 0.5);/* Semi-transparent white background */
     }
 
-
-    .attendance {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
     }
 
-    .client {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   
+
+    .list-content {
+        padding-top: 20px; /* Adjust the padding as needed */
     }
-
-    /* Other styles remain the same */
-
+    
 
 </style>
 <div class="container">
     <div class="header">
-      <div class="category">
-        <h2>Canceled Appointments</h2>
-        <p class="count">3</p>
-      </div>
-      <div class="category">
-        <h2>Confirmed Appointments</h2>
-        <p class="count">7</p>
-      </div>
-      <div class="category">
-        <h2>Schedule Appointments</h2>
-        <p class="count">10</p>
-      </div>
+        <div class="category">
+            <h2>Canceled Appointments</h2>
+            <p class="count">3</p>
+        </div>
+        <div class="category">
+            <h2>Confirmed Appointments</h2>
+            <p class="count">7</p>
+        </div>
+        <div class="category">
+            <h2>Schedule Appointments</h2>
+            <p class="count">10</p>
+        </div>
     </div>
-  
-    
-    
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Customer Name</th>
-                <th>Appointment Date</th>
-                <th>Appointment Time</th>
-                <th>Location</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>John Doe</td>
-                <td>2023-10-04</td>
-                <td>10:00 AM</td>
-                <td>123 Main Street</td>
-            </tr>
-            <tr>
-                <td>Jane Smith</td>
-                <td>2023-10-05</td>
-                <td>2:00 PM</td>
-                <td>456 Elm Street</td>
-            </tr>
-            <tr>
-                <td>Peter Jones</td>
-                <td>2023-10-06</td>
-                <td>5:00 PM</td>
-                <td>789 Park Avenue</td>
-            </tr>
-        </tbody>
-    </table>
+
+    <!-- Content from the second HTML -->
+    <div class="list-content">
+        <h1>Customer Appointment List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>2023-10-04</td>
+                    <td>10:00 AM</td>
+                    <td>123 Main Street</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>2023-10-05</td>
+                    <td>2:00 PM</td>
+                    <td>456 Elm Street</td>
+                </tr>
+                <tr>
+                    <td>Peter Jones</td>
+                    <td>2023-10-06</td>
+                    <td>5:00 PM</td>
+                    <td>789 Park Avenue</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
   
   

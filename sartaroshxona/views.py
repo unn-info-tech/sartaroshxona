@@ -7,4 +7,4 @@ def sign(request):
     return render(request, 'sartaroshxona/sign.html')
 
 def test(request):
-    return render(request, 'sartaroshxona/test.html')
+    return render(request, 'sartaroshxona/clients.html')
