@@ -2,79 +2,10 @@
 {% load static %}
 
 {% block content %}
-<style>
-    body {
-    background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp'); /* Replace URL with your image URL */
-    background-size: cover;
-    background-position: center;
-    color: #fff; /* Set text color to white */
-    font-family: 'Arial', sans-serif; /* Change font for better readability */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    }
 
-    .container {
-    text-align: center; /* Center align content inside container */
-    width: 80%; /* Adjust the width as needed */
-    backdrop-filter: blur(5px); /* Apply a blur effect to the container */
-    }
+<link rel="stylesheet" href="{% static 'css/clients.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .header {
-    background-color: rgba(0, 0, 0, 0.5); /* Set container background color to semi-transparent black */
-    padding: 20px 0;
-    border-radius: 10px;
-    }
-
-    .category {
-    display: inline-block;
-    width: 25%;
-    margin: 0 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    }
-
-    .category h2 {
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    color: #fff;
-    }
-
-    .count {
-    font-size: 12px;
-    color: #999;
-    font-weight: 300;
-    color: #fff;
-    }
-
-    /* New styles for the table */
-    table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-        border-spacing: 0;
-        background-color: rgba(0, 0, 0, 0.5);/* Semi-transparent white background */
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-   
-
-    .list-content {
-        padding-top: 20px; /* Adjust the padding as needed */
-    }
-    
-
-</style>
 <div class="container">
     <div class="header">
         <div class="category">
@@ -98,9 +29,8 @@
             <thead>
                 <tr>
                     <th>Customer Name</th>
-                    <th>Appointment Date</th>
-                    <th>Appointment Time</th>
-                    <th>Location</th>
+                    <th>Appointment Date and Time</th>
+                    <th>Service</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,19 +38,16 @@
                     <td>John Doe</td>
                     <td>2023-10-04</td>
                     <td>10:00 AM</td>
-                    <td>123 Main Street</td>
                 </tr>
                 <tr>
                     <td>Jane Smith</td>
                     <td>2023-10-05</td>
                     <td>2:00 PM</td>
-                    <td>456 Elm Street</td>
                 </tr>
                 <tr>
                     <td>Peter Jones</td>
                     <td>2023-10-06</td>
                     <td>5:00 PM</td>
-                    <td>789 Park Avenue</td>
                 </tr>
             </tbody>
         </table>

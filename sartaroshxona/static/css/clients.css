@@ -1,0 +1,84 @@
+body {
+background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp'); /* Replace URL with your image URL */
+background-size: cover;
+background-position: center;
+color: #fff; /* Set text color to white */
+font-family: 'Arial', sans-serif; /* Change font for better readability */
+margin: 0; /* Remove default margin */
+padding: 0; /* Remove default padding */
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+.container {
+text-align: center; /* Center align content inside container */
+width: 80%; /* Adjust the width as needed */
+backdrop-filter: blur(5px); /* Apply a blur effect to the container */
+}
+
+.header {
+background-color: rgba(0, 0, 0, 0.5); /* Set container background color to semi-transparent black */
+padding: 20px 0;
+border-radius: 10px;
+}
+
+.category {
+display: inline-block;
+width: 25%;
+margin: 0 10px;
+border-radius: 10px;
+cursor: pointer;
+}
+
+.category h2 {
+font-size: 16px;
+font-weight: 600;
+text-transform: uppercase;
+margin-bottom: 10px;
+color: #fff;
+}
+
+.count {
+font-size: 12px;
+color: #999;
+font-weight: 300;
+color: #fff;
+}
+
+/* New styles for the table */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: rgba(0, 0, 0, 0.5);/* Semi-transparent white background */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+.list-content {
+    padding-top: 20px; /* Adjust the padding as needed */
+}
+
+
+@media screen and (max-width: 767px) {
+    .container {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .category {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    th, td {
+        font-size: 12px; /* Reduced font size for smaller screens */
+    }
+}
