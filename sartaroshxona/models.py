@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from main.models import CustomUser
+
+
 
 class Service(models.Model):
 
 
-    master = models.ForeignKey('Master', on_delete=models.CASCADE, related_name='services')
+    master = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='services')
     name = models.CharField(max_length=50)
     CURRENCY_CHOICES = [
         ('USD', 'US Dollar'),
@@ -18,9 +22,9 @@ class Service(models.Model):
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='TJS')
     duration_minutes = models.PositiveIntegerField()  # Duration of the service in minutes
 
-class Master(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='working_time')
-
+class Barber(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='working_time')
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
     start_work = models.TimeField()
     end_work = models.TimeField()
     launch_start_time = models.TimeField()
