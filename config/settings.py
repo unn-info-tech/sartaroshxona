@@ -101,6 +101,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+
+    {
+        'NAME': 'main.validators.NoRepeatingSequencesValidator',  # Replace 'path.to' with your actual path
+    },
+    # Include other validators as needed
 ]
 
 

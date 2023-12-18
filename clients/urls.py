@@ -5,6 +5,5 @@ app_name = 'clients'
 
 urlpatterns = [
     
-    path('test/', views.test, name='testcl'),
         
 ]
