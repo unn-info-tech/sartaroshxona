@@ -4,7 +4,7 @@ function showMessage() {
     message.classList.add('show');
     setTimeout(function () {
         message.classList.remove('show');
-    }, 3000); // Change the duration (in milliseconds) as needed
+    }, 5000); // Change the duration (in milliseconds) as needed
 }
 
 // Call the showMessage function when the page loads

@@ -1,0 +1,29 @@
+<form method="post" action="{% url 'signin' %}">
+    {% csrf_token %}
+    
+    <div class="field-wrapper">
+        {{ formMe_signIn.username.label }}
+        {{ formMe_signIn.username }}
+        {% if formMe_signIn.username.errors %}
+            <ul class="errorlist">
+                {% for error in formMe_signIn.username.errors %}
+                    <li><span class="error-message">{{ error }}</span></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="field-wrapper">
+        {{ formMe_signIn.password.label }}
+        {{ formMe_signIn.password }}
+        {% if formMe_signIn.password.errors %}
+            <ul class="errorlist">
+                {% for error in formMe_signIn.password.errors %}
+                    <li><span class="error-message">{{ error }}</span></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    
+    <button type="submit">Submit</button>
+</form>

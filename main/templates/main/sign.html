@@ -1,9 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-
-
-
 {% block content %}
 <!-- Content specific to this page -->
 
@@ -14,68 +11,75 @@
 <script src="{% static 'js/sign.js' %}"></script>
 <script src="{% static 'js/error.js' %}"></script>
 
-
-
-<!-- Add message rendering -->
+<!-- Display form errors -->
 <div class="popup-message">
-  {% if messages %}
-      <ul>
-          {% for message in messages %}
-              <li>{{ message }}</li>
-          {% endfor %}
-      </ul>
+  {% if formMe_signup.errors %}
+    <ul>
+      {% for field, error_list in formMe_signup.errors.items %}
+        {% for error in error_list %}
+          <li>{{ field|title }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if formMe_signIn.errors %}
+    <ul>
+      {% for field, error_list in formMe_signIn.errors.items %}
+        {% for error in error_list %}
+          <li>{{ field|title }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
   {% endif %}
 </div>
 
-
 <div class="container">
     <div class="formGroup">
-      <div class="formHeading">
-          <i class="fa fa-user"></i>
-          <span>Hi There !..</span>
-      </div>
-    <div class="formContainer">
-      <div class="form signupForm">
-        <form action="{% url 'signup' %}" method="post">
-          {% csrf_token %}
-          <div class="inputGroup">
-            {{ formMe_signup.username }}
-          </div>
-          <div class="inputGroup">
-            {{ formMe_signup.password1 }}
-          </div>
-          <div class="inputGroup">
-            {{ formMe_signup.password2 }}
-          </div>
-          <div class="inputGroup">
-            {{ formMe_signup.is_barber }}
-          </div>
-          <div class="submitAction">
-              <a href="#" class="trigger">Already Member ? Sign In</a>
-              <button type="submit">Sign Up</button>
-          </div>
-      </form>
-      </div>
-      <div class="form signinForm">
-        <form action="#">
-          <div class="inputGroup">
-            <input type="text" id="signIn_email" placeholder="Email">
-          </div>
-          <div class="inputGroup">
-              
-            <input type="password" id="signIn_password" placeholder="Password">
-          </div>
-          <div class="submitAction">
-              <a href="#" class="trigger">Not a Member Yet ? Sign Up</a>
-                <button>Sign In</button>
-  
-            </div> 
-        </form>
-      </div>
+        <div class="formHeading">
+            <i class="fa fa-user"></i>
+            <span>Hi There!..</span>
+        </div>
+        <div class="formContainer">
+            <!-- Signup Form -->
+            <div class="form signupForm">
+                <form action="{% url 'signup' %}" method="post">
+                    {% csrf_token %}
+                    <div class="inputGroup">
+                        {{ formMe_signup.username }}
+                    </div>
+                    <div class="inputGroup">
+                        {{ formMe_signup.password1 }}
+                    </div>
+                    <div class="inputGroup">
+                        {{ formMe_signup.password2 }}
+                    </div>
+                    <div class="inputGroup">
+                        {{ formMe_signup.is_barber }}
+                    </div>
+                    <div class="submitAction">
+                        <a href="#" class="trigger">Already Member? Sign In</a>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Signin Form -->
+            <div class="form signinForm">
+                <form action="{% url 'signin' %}" method="post">
+                    {% csrf_token %}
+                    <div class="inputGroup">
+                        {{ formMe_signIn.username }}
+                    </div>
+                    <div class="inputGroup">
+                        {{ formMe_signIn.password }}
+                    </div>
+                    <div class="submitAction">
+                        <a href="{% url 'signup' %}" class="trigger">Not a Member Yet? Sign Up</a>
+                        <button type="submit">Sign In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-
 </div>
-
-<!-- Paste the provided HTML code here -->
 {% endblock %}

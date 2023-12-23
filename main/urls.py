@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
+    path('signin/', views.signin, name='signin'),
     
     # Other URL patterns for your app
 ]

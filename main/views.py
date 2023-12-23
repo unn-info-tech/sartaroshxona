@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_POST
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.http import HttpResponse
 from .models import CustomUser
 
@@ -39,7 +39,7 @@ def signup(request):
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError  
 
-'''from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 def signup(request):
@@ -53,10 +53,30 @@ def signup(request):
             return redirect('home')
     else:
         formMe_signup = CustomUserCreationForm()
-    return render(request, 'main/sign.html', {'formMe_signup': formMe_signup})'''
+    return render(request, 'main/sign2.html', {'formMe_signup': formMe_signup})
 
 
-def signup(request):
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from .forms import CustomAuthenticationForm
+
+def signin(request):
+    if request.method == 'POST':
+        formMe_signIn = CustomAuthenticationForm(data=request.POST)
+        if formMe_signIn.is_valid():
+            username = formMe_signIn.cleaned_data.get('username')
+            password = formMe_signIn.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')  # Redirect to home upon successful login
+    else:
+        formMe_signIn = CustomAuthenticationForm()
+    return render(request, 'main/sign3.html', {'formMe_signIn': formMe_signIn})
+
+
+
+'''def signup(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password1 = request.POST.get('password1')
@@ -93,7 +113,7 @@ def signup(request):
         return HttpResponse("cool")
     else:
         return render(request, 'main/sign1.html')
-
+'''
 
 
 '''def user_login(request):
