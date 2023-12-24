@@ -3,17 +3,18 @@
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
-      <title>Login Form Design | CodeLab</title>
+      <title>Дизайн формы входа | КодЛаб</title>
       {% load static %}
 
-      <link rel="stylesheet" href="{% static 'css/sign3.css' %}">
+      <link rel="stylesheet" href="{% static 'css/signboth.css' %}">
    </head>
    <body>
       <div class="wrapper">
          <div class="title">
-            Login Form
+            Вход
          </div>
-         <form action="#">
+         <form action="{% url 'signin' %}" method="post">
+            {% csrf_token %}
             <div class="field">
                 {{ formMe_signIn.username }}
             </div>
@@ -30,7 +31,7 @@
                </div>
             </div>
             <div class="field">
-               <input type="submit" value="Login">
+               <button type="submit">Sign In</button>
             </div>
             <div class="signup-link">
                Not a member? <a href="/main/signup/">Signup now</a>

@@ -49,11 +49,9 @@ def signup(request):
             user = formMe_signup.save()
             username = formMe_signup.cleaned_data.get('username')
             messages.success(request, f'Welcome, {username}! Your account has been created.')
-            login(request, user)  # Automatically log in the user after signing up
-            return redirect('home')
     else:
         formMe_signup = CustomUserCreationForm()
-    return render(request, 'main/sign2.html', {'formMe_signup': formMe_signup})
+    return render(request, 'main/signUp.html', {'formMe_signup': formMe_signup})
 
 
 from django.contrib.auth import authenticate, login
@@ -69,10 +67,9 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Redirect to home upon successful login
     else:
         formMe_signIn = CustomAuthenticationForm()
-    return render(request, 'main/sign3.html', {'formMe_signIn': formMe_signIn})
+    return render(request, 'main/signIn.html', {'formMe_signIn': formMe_signIn})
 
 
 

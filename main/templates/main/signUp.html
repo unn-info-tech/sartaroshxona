@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<meta charset="utf-8">
+<title>Login Form Design | CodeLab</title>
+
+{% block content %}
+<meta charset="utf-8">
+<title>Login Form Design | CodeLab</title>
+<link rel="stylesheet" href="{% static 'css/signboth.css' %}">
+<link rel="stylesheet" href="{% static 'css/error.css' %}">
+<script src="{% static 'js/error.js' %}"></script>
+
+<!-- Display form errors -->
+<div class="popup-message">
+   {% if formMe_signup.errors %}
+     <ul>
+       {% for field, error_list in formMe_signup.errors.items %}
+         {% for error in error_list %}
+           <li>{{ field|title }}: {{ error }}</li>
+         {% endfor %}
+       {% endfor %}
+     </ul>
+   {% endif %}
+ 
+   {% if formMe_signIn.errors %}
+     <ul>
+       {% for field, error_list in formMe_signIn.errors.items %}
+         {% for error in error_list %}
+           <li>{{ field|title }}: {{ error }}</li>
+         {% endfor %}
+       {% endfor %}
+     </ul>
+   {% endif %}
+ </div>
+
+      <div class="wrapper">
+         <div class="title">
+            Sign Up
+         </div>
+         <form action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
+            <div class="field">
+                {{ formMe_signup.username }}
+            </div>
+            <div class="field">
+               {{ formMe_signup.email }}
+           </div>
+            <div class="field">
+                {{ formMe_signup.password1 }}
+            </div>
+            <div class="field">
+                {{ formMe_signup.password2 }}
+            </div>
+            <div class="content">
+               <div class="checkbox">
+                  {{ formMe_signup.is_barber }}
+                  <label for="is_barber">I'm a barber</label>
+               </div>
+            <!--<div class="pass-link">
+                  <a href="#">Forgot password?</a>
+               </div>-->
+            </div>
+            <div class="field">
+               <button type="submit">Sign Up</button>
+            </div>
+            <div class="signup-link">
+               Do you have an account? <a href="/main/signin/">Sign in now</a>
+            </div>
+         </form>
+      </div>
+{% endblock %}
+
