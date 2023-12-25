@@ -1,0 +1,38 @@
+{% extends 'sartaroshxona/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- barber_profile.html -->
+<h1>Barber Profile</h1>
+
+<!-- Edit Barber Information -->
+<h2>Edit Barber Information</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ barber_form.as_p }}
+    <button type="submit" name="barber_info_form">Save Changes</button>
+</form>
+
+<!-- Display Existing Services -->
+<h2>Existing Services</h2>
+{% if services %}
+    <ul>
+    {% for service in services %}
+        <li>{{ service.name }} - {{ service.price }}</li>
+        <!-- Display other service fields -->
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No services found.</p>
+{% endif %}
+
+<!-- Add New Service Form -->
+<h2>Add New Service</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ service_form.as_p }}
+    <button type="submit" name="service_form">Add Service</button>
+</form>
+
+{% endblock %}
