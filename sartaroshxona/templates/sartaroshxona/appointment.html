@@ -12,13 +12,30 @@
 <body>
   <div class="container">
     <div class="card p-4">
-      <h1 class="text-center mb-4">Make an appointment</h1>
-      <img src="https://via.placeholder.com/60" class="mx-auto d-block rounded-circle mb-3" alt="Profile Image">
-      <h5 class="text-center">Utkir Aka</h5>
-      <div class="row">
-        
-      </div>
+        <!-- <h1 class="text-center mb-4">Make an appointment</h1> -->
+        <img src="https://via.placeholder.com/60" class="mx-auto d-block rounded-circle mb-3" alt="Profile Image">
+        <h5 class="text-center">{{ barber.user.username }}</h5>
+        <p class="text-center">Location: {{ barber.location }}</p>
+        <p class="text-center">Magazin: {{ barber.magazin }}</p>
+        <p class="text-center">Working Time: {{ barber.start_work }} - {{ barber.end_work }}</p>
+        <p class="text-center">Launch Time: {{ barber.launch_start_time }} - {{ barber.launch_end_time }}</p>
     </div>
+    
+
+    <div class="card p-4">
+        <h5>Not available times</h5>
+        <div class="scrollable-cards">
+          <div class="appointments-list">
+            {% for appointment in appointments %}
+              <div class="appointment-item">
+                <p>{{ appointment.start_time }} - {{ appointment.end_time }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+
+
     <div class="card p-4">
       <h5 class="card-title mb-4">How long do you need?</h5>
       <div class="btn-group w-100 mb-4" role="group">
