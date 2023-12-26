@@ -19,7 +19,7 @@ def barber_profile(request):
 
     if request.method == 'POST':
         if 'barber_info_form' in request.POST:  # Update barber information
-            barber_form = BarberForm(request.POST, instance=barber)
+            barber_form = BarberForm(request.POST, request.FILES, instance=barber)
             if barber_form.is_valid():
                 barber_form.save()
                 return redirect('barber_profile')

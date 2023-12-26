@@ -6,13 +6,23 @@
 <!-- barber_profile.html -->
 <h1>Barber Profile</h1>
 
-<!-- Edit Barber Information -->
-<h2>Edit Barber Information</h2>
-<form method="post">
+<!-- Edit Barber Information and Upload Image -->
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    <h2>Edit Barber Information</h2>
     {{ barber_form.as_p }}
+
+    <br>
+    {% if barber.profile_image %}
+        <img src="{{ barber.profile_image.url }}" alt="Profile Image" style="width: 200px; height: auto;">
+        <br>
+    {% else %}
+        <p>No image found.</p>
+    {% endif %}
+
     <button type="submit" name="barber_info_form">Save Changes</button>
 </form>
+
 
 <!-- Display Existing Services -->
 <h2>Existing Services</h2>
