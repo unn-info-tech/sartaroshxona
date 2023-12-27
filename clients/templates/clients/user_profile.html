@@ -3,61 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>User Profile</title>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        window.onload = function() {
-            const editButton = document.getElementById('editButton');
-            const editForm = document.getElementById('editForm');
-            const saveButton = document.getElementById('saveButton');
-            const cancelButton = document.getElementById('cancelButton');
+        $(document).ready(function() {
+            // Hide the edit form initially
+            $("#editForm").hide();
 
-            function toggleEditMode() {
-                if (editForm.style.display === 'none') {
-                    editButton.style.display = 'none';
-                    editForm.style.display = 'block';
-                } else {
-                    editButton.style.display = 'block';
-                    editForm.style.display = 'none';
-                }
-            }
-
-            editButton.addEventListener('click', () => {
-                toggleEditMode();
+            // Function to toggle between read-only and edit mode
+            $("#editButton").click(function() {
+                $("#readOnlyMode").hide();
+                $("#editForm").show();
             });
 
-            cancelButton.addEventListener('click', () => {
-                toggleEditMode();
+            $("#cancelButton").click(function() {
+                $("#editForm").hide();
+                $("#readOnlyMode").show();
             });
 
-            saveButton.addEventListener('click', () => {
-                const newUsername = document.getElementById('usernameField').value;
-                const newEmail = document.getElementById('emailField').value;
-                // Send data to the server for saving/updating user information
-                // For demonstration purposes, log the updated values to console
-                console.log('New Username:', newUsername);
-                console.log('New Email:', newEmail);
-                // Toggle back to read-only mode after saving
-                toggleEditMode();
-            });
-        }
+            // Additional JavaScript logic for handling form submission via AJAX or other methods
+            // ...
+        });
     </script>
 </head>
 <body>
     <h1>User Profile</h1>
     <!-- Read-only mode -->
     <div id="readOnlyMode">
-        <p>Username: JohnDoe</p>
-        <p>Email: johndoe@example.com</p>
+        <p>Username: {{ user_form.username }}</p>
+        <p>Email: {{ user_form.email }}</p>
         <!-- Other user details -->
         <button id="editButton">Edit</button>
     </div>
     
     <!-- Edit mode -->
-    <form id="editForm" style="display: none;">
-        <input type="text" id="usernameField" value="JohnDoe">
-        <input type="email" id="emailField" value="johndoe@example.com">
-        <!-- Other editable fields -->
-        <button id="saveButton">Save Changes</button>
-        <button id="cancelButton">Cancel</button>
-    </form>
+    <div id="editForm">
+        <form method="post">
+            {% csrf_token %}
+            <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}"></p>
+            <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}"></p>
+            <!-- Other editable fields -->
+            <button type="submit">Save Changes</button>
+            <button id="cancelButton" type="button">Cancel</button>
+        </form>
+    </div>
 </body>
 </html>
