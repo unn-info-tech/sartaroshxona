@@ -8,7 +8,7 @@ from main.models import CustomUser
 class Service(models.Model):
 
 
-    master = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='services')
+    barber = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='services')
     name = models.CharField(max_length=50)
     CURRENCY_CHOICES = [
         ('USD', 'US Dollar'),
@@ -26,12 +26,15 @@ class Barber(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='working_time')
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-    start_work = models.TimeField()
-    end_work = models.TimeField()
-    launch_start_time = models.TimeField()
-    launch_end_time = models.TimeField()
-    location = models.CharField(max_length=50)
+    start_work = models.TimeField(null=True, blank=True)
+    end_work = models.TimeField(null=True, blank=True)
+    launch_start_time = models.TimeField(null=True, blank=True)
+    launch_end_time = models.TimeField(null=True, blank=True)
+    location = models.CharField(max_length=50, null=True, blank=True)
 
     # A method to get all services associated with a Master
     def get_services(self):
         return self.services.all()
+    
+    def __str__(self):
+        return str(self.user)

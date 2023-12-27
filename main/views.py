@@ -1,46 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.views.decorators.http import require_POST
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from django.http import HttpResponse
-from .models import CustomUser
-
-from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponse
 from .models import CustomUser  # Import your CustomUser model
-
-'''from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
-
-def signup(request):
-    if request.method == 'POST':
-        formMe_signup = UserCreationForm(request.POST)  # Create a form instance and populate it with data from the request
-        if formMe_signup.is_valid():  # Check if the form data is valid
-            user = formMe_signup.save()  # Save the user to the database
-            # Log the user in after successful signup
-            username = formMe_signup.cleaned_data.get('username')  # Get the username from the form data
-            raw_password = formMe_signup.cleaned_data.get('password1')  # Get the password from the form data
-            user = authenticate(username=username, password=raw_password)  # Authenticate the user
-            login(request, user)  # Log the user in
-            # Redirect to a different page after successful signup and login
-            return redirect('home')  # Replace 'home' with your desired URL name or path
-    else:
-        formMe_signup = UserCreationForm()  # If it's a GET request, create a blank form
-
-    return render(request, 'main/sign.html', {'formMe_signup': formMe_signup})  # Render the signup form template with the form instance'''
-
-
-
-
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError  
-
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from sartaroshxona.models import Barber
 
 def signup(request):
     if request.method == 'POST':
@@ -49,6 +15,20 @@ def signup(request):
             user = formMe_signup.save()
             username = formMe_signup.cleaned_data.get('username')
             messages.success(request, f'Welcome, {username}! Your account has been created.')
+
+            # Check if the user is a barber and create a barber instance
+            if user.is_barber:
+                # Creating a Barber object with required fields
+                Barber.objects.create(
+                    user=user,
+                    phone_number = None, # Set phone_number to null
+                    start_work = None,  # Set start_work to current time
+                    end_work = None,  # Set end_work to null
+                    launch_start_time = None,  # Set launch_start_time to null
+                    launch_end_time = None,  # Set launch_end_time to null
+                    location = None,  # Set location to null  # Provide a default start work value or adjust as needed
+                        # Add other required fields here
+                )
     else:
         formMe_signup = CustomUserCreationForm()
     return render(request, 'main/signUp.html', {'formMe_signup': formMe_signup})
@@ -70,6 +50,26 @@ def signin(request):
     else:
         formMe_signIn = CustomAuthenticationForm()
     return render(request, 'main/signIn.html', {'formMe_signIn': formMe_signIn})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -110,41 +110,4 @@ def signin(request):
         return HttpResponse("cool")
     else:
         return render(request, 'main/sign1.html')
-'''
-
-
-'''def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, 'Logged in successfully!')
-                return redirect('home')  # Redirect to your desired URL after successful login
-            else:
-                messages.error(request, 'Invalid login credentials.')
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form': form})
-
-@login_required
-def user_logout(request):
-    logout(request)
-    messages.success(request, 'Logged out successfully!')
-    return redirect('home')  # Redirect to your desired URL after logout
-
-@login_required
-@require_POST
-def delete_profile(request):
-    if request.user.is_authenticated:
-        user = request.user
-        user.delete()
-        messages.success(request, 'Profile deleted successfully!')
-        return redirect('home')  # Redirect to your desired URL after profile deletion
-    else:
-        messages.error(request, 'You need to be logged in to delete your profile.')
-        return redirect('login')  # Redirect to login if not authenticated
 '''

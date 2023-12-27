@@ -1,9 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'clients'
-
 urlpatterns = [
-    
-        
+    path('user_profile/', views.user_profile, name='user_profile'),
+    # Add more URLs as needed
 ]

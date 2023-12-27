@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <script>
+        window.onload = function() {
+            const editButton = document.getElementById('editButton');
+            const editForm = document.getElementById('editForm');
+            const saveButton = document.getElementById('saveButton');
+            const cancelButton = document.getElementById('cancelButton');
+
+            function toggleEditMode() {
+                if (editForm.style.display === 'none') {
+                    editButton.style.display = 'none';
+                    editForm.style.display = 'block';
+                } else {
+                    editButton.style.display = 'block';
+                    editForm.style.display = 'none';
+                }
+            }
+
+            editButton.addEventListener('click', () => {
+                toggleEditMode();
+            });
+
+            cancelButton.addEventListener('click', () => {
+                toggleEditMode();
+            });
+
+            saveButton.addEventListener('click', () => {
+                const newUsername = document.getElementById('usernameField').value;
+                const newEmail = document.getElementById('emailField').value;
+                // Send data to the server for saving/updating user information
+                // For demonstration purposes, log the updated values to console
+                console.log('New Username:', newUsername);
+                console.log('New Email:', newEmail);
+                // Toggle back to read-only mode after saving
+                toggleEditMode();
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <!-- Read-only mode -->
+    <div id="readOnlyMode">
+        <p>Username: JohnDoe</p>
+        <p>Email: johndoe@example.com</p>
+        <!-- Other user details -->
+        <button id="editButton">Edit</button>
+    </div>
+    
+    <!-- Edit mode -->
+    <form id="editForm" style="display: none;">
+        <input type="text" id="usernameField" value="JohnDoe">
+        <input type="email" id="emailField" value="johndoe@example.com">
+        <!-- Other editable fields -->
+        <button id="saveButton">Save Changes</button>
+        <button id="cancelButton">Cancel</button>
+    </form>
+</body>
+</html>
