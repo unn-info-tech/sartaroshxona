@@ -7,9 +7,9 @@ class ServiceForm(forms.ModelForm):
         model = Service
         fields = '__all__'  # Use all fields from the Service model
 
-    def __init__(self, *args, **kwargs):
+    '''def __init__(self, *args, **kwargs):
         super(ServiceForm, self).__init__(*args, **kwargs)
-        self.fields['barber'].widget = forms.HiddenInput()  # Hide the 'barber' field in the form
+        self.fields['barber'].widget = forms.HiddenInput()  # Hide the 'barber' field in the form'''
 
 class BarberForm(forms.ModelForm):
     class Meta:

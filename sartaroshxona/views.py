@@ -13,14 +13,22 @@ def test(request):
 from django.shortcuts import render, redirect
 from .models import Barber, Service
 from .forms import BarberForm, ServiceForm
+from clients.forms import UserProfileForm
 from django.conf import settings
 import os
 
 def barber_profile(request):
-    barber = Barber.objects.get(user=request.user)  # Fetch the logged-in barber's data
+    user = request.user
+    barber = Barber.objects.get(user=user)  # Fetch the logged-in barber's data
 
     if request.method == 'POST':
-        if 'barber_info_form' in request.POST:
+        if 'user_profile' in request.POST:
+            user_form = UserProfileForm(request.POST, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+                return redirect('barber_profile')
+            
+        elif 'barber_info_form' in request.POST:
             old_profile_image = barber.profile_image  # Get the old profile image
 
             barber_form = BarberForm(request.POST, request.FILES, instance=barber)
@@ -46,10 +54,12 @@ def barber_profile(request):
         initial_sevice = {'barber': barber}
         barber_form = BarberForm(instance=barber, initial=initial_barber)
         service_form = ServiceForm(initial=initial_sevice)
+        user_form = UserProfileForm(instance=user)
 
     services = barber.get_services()  # Fetch services associated with the barber
 
     return render(request, 'sartaroshxona/prof.html', {
+        'user_form': user_form,
         'barber': barber,
         'barber_form': barber_form,
         'services': services,

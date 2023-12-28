@@ -4,48 +4,29 @@
     <meta charset="UTF-8">
     <title>User Profile</title>
     <!-- Include jQuery library -->
+    {% load static %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Hide the edit form initially
-            $("#editForm").hide();
-
-            // Function to toggle between read-only and edit mode
-            $("#editButton").click(function() {
-                $("#readOnlyMode").hide();
-                $("#editForm").show();
-            });
-
-            $("#cancelButton").click(function() {
-                $("#editForm").hide();
-                $("#readOnlyMode").show();
-            });
-
-            // Additional JavaScript logic for handling form submission via AJAX or other methods
-            // ...
-        });
-    </script>
+    <link rel="stylesheet" href="{% static '/css/user_profile.css' %}">
+    <script src="{% static 'js/user_profile.js' %}"></script>
 </head>
 <body>
     <h1>User Profile</h1>
     <!-- Read-only mode -->
     <div id="readOnlyMode">
-        <p>Username: {{ user_form.username }}</p>
-        <p>Email: {{ user_form.email }}</p>
-        <!-- Other user details -->
+        <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
+        <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
         <button id="editButton">Edit</button>
-    </div>
-    
-    <!-- Edit mode -->
-    <div id="editForm">
+      </div>
+      
+      <div id="editForm">
         <form method="post">
-            {% csrf_token %}
-            <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}"></p>
-            <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}"></p>
-            <!-- Other editable fields -->
-            <button type="submit">Save Changes</button>
-            <button id="cancelButton" type="button">Cancel</button>
+          {% csrf_token %}
+          <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
+          <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
+          <button type="submit">Save Changes</button>
+          <button id="cancelButton" type="button">Cancel</button>
         </form>
-    </div>
+      </div>
+      
 </body>
 </html>
