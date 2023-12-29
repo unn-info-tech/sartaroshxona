@@ -24,19 +24,16 @@ def barber_profile(request):
     barber = Barber.objects.get(user=user)  # Fetch the logged-in barber's data
 
     if request.method == 'POST':
-        if 'user_profile' in request.POST:
-           user_form = UserProfileForm(request.POST, instance=request.user)
-
-           if user_form.is_valid():
+        if 'user_info_form' in request.POST:
+            user_form = UserProfileForm(request.POST, instance=request.user)
+            if user_form.is_valid():
                 user_form.save()
                 return redirect('barber_profile')
-           
-        
-        if 'password_change_form' in request.POST:
+            
+        elif 'password_change_form' in request.POST:
             password_change_form = PasswordChangeForm(request.user, request.POST)
             if password_change_form.is_valid():
                 user = password_change_form.save()
-                # Important: To keep the user logged in after changing the password
                 update_session_auth_hash(request, user)
                 return redirect('barber_profile')
             
@@ -64,11 +61,9 @@ def barber_profile(request):
                 return redirect('barber_profile')
 
     else:
-        initial_barber = {'user': request.user}
-        initial_sevice = {'barber': barber}
-        barber_form = BarberForm(instance=barber, initial=initial_barber)
-        service_form = ServiceForm(initial=initial_sevice)
-        user_form = UserProfileForm(instance=user)
+        barber_form = BarberForm(instance=barber)
+        service_form = ServiceForm()
+        user_form = UserProfileForm(instance=request.user)
         password_change_form = PasswordChangeForm(request.user)
 
     services = barber.get_services()  # Fetch services associated with the barber
