@@ -27,11 +27,9 @@
     </form>
 </div>
 
-<h1>Password</h1>
-
 <!-- Read-only mode for Password Change -->
 <div id="readOnlyPasswordMode">
-  <p>Password: <input type="password" name="old_password" value="{{ password_change_form.password.value }}" id="old_password" disabled></p>
+  <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
   <button id="editPasswordButton">Change Password</button>
 </div>
 
@@ -39,10 +37,7 @@
 <div id="editPasswordForm" style="display: none;">
   <form method="post">
       {% csrf_token %}
-      <p>Old Password: <input type="password" name="old_password" id="old_password"></p>
-      <p>New Password: <input type="password" name="new_password" id="new_password"></p>
-      <p>Confirm Password: <input type="password" name="confirm_password" id="confirm_password"></p>
-
+      {{ password_change_form.as_p}}
       <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
       <button id="cancelPasswordButton" type="button">Cancel</button>
   </form>
