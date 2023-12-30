@@ -23,7 +23,7 @@ class Service(models.Model):
     duration_minutes = models.PositiveIntegerField()  # Duration of the service in minutes
 
 class Barber(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='working_time')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     start_work = models.TimeField(null=True, blank=True)

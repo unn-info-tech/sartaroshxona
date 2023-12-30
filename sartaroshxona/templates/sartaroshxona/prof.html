@@ -137,11 +137,12 @@
             <ol>
                 {% for service in services %}
                     <li>
-                        <p><input type="hidden" name="id" value="{{ service.id }}"></p>
-                        <p>Title: <input type="text" name="title" value="{{ service.title }}"></p>
-                        <p>Price: <input type="number" name="price" value="{{ service.price }}"></p>
-                        <p>Currency: <input type="text" name="currency" value="{{ service.currency }}"></p>
-                        <p>Duration minutes: <input type="number" name="duration_minutes" value="{{ service.duration_minutes }}"></p>
+                        <input type="checkbox" name="delete[]" value="{{ service.id }}">
+                        <input type="hidden" name="id[]" value="{{ service.id }}">
+                        <p>Title: <input type="text" name="title[]" value="{{ service.title }}"></p>
+                        <p>Price: <input type="number" name="price[]" value="{{ service.price }}"></p>
+                        <p>Currency: <input type="text" name="currency[]" value="{{ service.currency }}"></p>
+                        <p>Duration minutes: <input type="number" name="duration_minutes[]" value="{{ service.duration_minutes }}"></p>
                     </li>
                 {% endfor %}
             </ol>
@@ -149,6 +150,7 @@
             <p>No services found to edit.</p>
         {% endif %}
         <button type="submit" name="service_edit_form">Save Changes</button>
+        <button type="submit" name="service_delete_form">Delete Selected</button>
         <button id="cancelServiceButton" type="button">Cancel</button>
     </form>
 </div>

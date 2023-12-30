@@ -22,16 +22,6 @@
        {% endfor %}
      </ul>
    {% endif %}
- 
-   {% if formMe_signIn.errors %}
-     <ul>
-       {% for field, error_list in formMe_signIn.errors.items %}
-         {% for error in error_list %}
-           <li>{{ field|title }}: {{ error }}</li>
-         {% endfor %}
-       {% endfor %}
-     </ul>
-   {% endif %}
  </div>
 
       <div class="wrapper">

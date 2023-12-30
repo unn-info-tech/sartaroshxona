@@ -7,7 +7,7 @@ def sign(request):
     return render(request, 'sartaroshxona/sign.html')
 
 def test(request):
-    return render(request, 'sartaroshxona/clients.html')
+    return render(request, 'sartaroshxona/appointment.html')
 
 # views.py
 from django.shortcuts import render, redirect
@@ -53,11 +53,11 @@ def barber_profile(request):
                 return redirect('barber_profile')
             
         elif 'service_edit_form' in request.POST:
-            service_ids = request.POST.getlist('id')
-            titles = request.POST.getlist('title')
-            prices = request.POST.getlist('price')
-            currencies = request.POST.getlist('currency')
-            durations = request.POST.getlist('duration_minutes')
+            service_ids = request.POST.getlist('id[]')
+            titles = request.POST.getlist('title[]')
+            prices = request.POST.getlist('price[]')
+            currencies = request.POST.getlist('currency[]')
+            durations = request.POST.getlist('duration_minutes[]')
             print(service_ids)
 
             for i, service_id in enumerate(service_ids):
@@ -67,6 +67,14 @@ def barber_profile(request):
                 service.currency = currencies[i]
                 service.duration_minutes = durations[i]
                 service.save()
+
+            return redirect('barber_profile')
+        
+        elif 'service_delete_form' in request.POST:
+            service_ids_to_delete = request.POST.getlist('delete[]')
+            for service_id in service_ids_to_delete:
+                service = Service.objects.get(pk=service_id)
+                service.delete()
 
             return redirect('barber_profile')
         

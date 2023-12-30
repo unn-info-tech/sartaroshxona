@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
@@ -7,6 +6,10 @@ from .models import CustomUser  # Import your CustomUser model
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError  
 from sartaroshxona.models import Barber
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from .forms import CustomAuthenticationForm
+
 
 def signup(request):
     if request.method == 'POST':
@@ -21,22 +24,14 @@ def signup(request):
                 # Creating a Barber object with required fields
                 Barber.objects.create(
                     user=user,
-                    phone_number = None, # Set phone_number to null
-                    start_work = None,  # Set start_work to current time
-                    end_work = None,  # Set end_work to null
-                    launch_start_time = None,  # Set launch_start_time to null
-                    launch_end_time = None,  # Set launch_end_time to null
-                    location = None,  # Set location to null  # Provide a default start work value or adjust as needed
-                        # Add other required fields here
+                    
                 )
     else:
         formMe_signup = CustomUserCreationForm()
     return render(request, 'main/signUp.html', {'formMe_signup': formMe_signup})
 
 
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from .forms import CustomAuthenticationForm
+
 
 def signin(request):
     if request.method == 'POST':
@@ -47,6 +42,10 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                if request.user.is_barber:  # Assuming is_barber is a boolean field in your User model
+                    return redirect('barber_profile')  # Redirect to the barber profile URL
+                else:
+                    return redirect('clientprofile')
     else:
         formMe_signIn = CustomAuthenticationForm()
     return render(request, 'main/signIn.html', {'formMe_signIn': formMe_signIn})

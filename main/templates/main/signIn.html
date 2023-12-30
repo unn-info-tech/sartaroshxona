@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<!-- Created By CodingNepal -->
-<html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title>Дизайн формы входа | КодЛаб</title>
-      {% load static %}
+{% extends 'main/base.html' %}
+{% load static %}
 
-      <link rel="stylesheet" href="{% static 'css/signboth.css' %}">
-   </head>
-   <body>
+<meta charset="utf-8">
+<title>Login Form Design | CodeLab</title>
+
+{% block content %}
+<meta charset="utf-8">
+<title>Login Form Design | CodeLab</title>
+<link rel="stylesheet" href="{% static 'css/signboth.css' %}">
+<link rel="stylesheet" href="{% static 'css/error.css' %}">
+<script src="{% static 'js/error.js' %}"></script>
+
+<!-- Display form errors -->
+<div class="popup-message">
+   {% if formMe_signIn.errors %}
+     <ul>
+       {% for field, error_list in formMe_signIn.errors.items %}
+         {% for error in error_list %}
+           <li>{{ field|title }}: {{ error }}</li>
+         {% endfor %}
+       {% endfor %}
+     </ul>
+   {% endif %}
+ </div>
+
       <div class="wrapper">
          <div class="title">
             Вход
@@ -38,5 +53,5 @@
             </div>
          </form>
       </div>
-   </body>
-</html>
+
+{% endblock %}
