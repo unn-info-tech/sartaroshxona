@@ -14,13 +14,13 @@
     <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
     <button id="editUserButton">Edit</button>
 </div>
-      
+
+<!-- Edit mode -->
 <div id="editUserForm" style="display: none;">
     <form method="post">
         {% csrf_token %}
         <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
         <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
-        
 
         <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
         <button id="cancelUserButton" type="button">Cancel</button>
@@ -46,7 +46,7 @@
 
 
 <h1>Barber Profile</h1>
-
+<!-- Read-only mode -->
 <div id="readOnlyBarberMode">
   <!-- For profile_image -->
   <!-- Profile Image -->
@@ -75,13 +75,12 @@
     
 </div>
 
-<h2>Edit Barber Information</h2>
-
+<!-- Edit mode -->
 <div id="editBarberForm" style="display: none;">
     <form method="post">
         {% csrf_token %}
         
-        <p>User: <input type="text" name="user" value="{{ barber_form.user.value }}" id="user" ></p>
+        <p><input type="hidden" name="user" value="{{ barber_form.user.value }}" id="user" ></p>
 
         <p>Profile Image: 
             {% if barber.profile_image %}
@@ -116,13 +115,13 @@
 <!-- Read-only mode -->
 <div id="readOnlyServiceMode">
     {% if services %}
-        <ul>
+        <ol>
             {% for service in services %}
                 <li>
-                    <span class="readonly-input">{{ service.name }} - {{ service.price }}</span>
+                    <span class="readonly-input">{{ service.title }} - {{ service.price }} {{ service.currency}} - {{ service.duration_minutes}}min</span>
                 </li>
             {% endfor %}
-        </ul>
+        </ol>
     {% else %}
         <p>No services found.</p>
     {% endif %}
@@ -135,22 +134,39 @@
     <form method="post">
         {% csrf_token %}
         {% if services %}
-            <ul>
+            <ol>
                 {% for service in services %}
                     <li>
-                        <p>Name: <input type="text" name="name" value="{{ service.name }}"></p>
+                        <p><input type="hidden" name="id" value="{{ service.id }}"></p>
+                        <p>Title: <input type="text" name="title" value="{{ service.title }}"></p>
                         <p>Price: <input type="number" name="price" value="{{ service.price }}"></p>
+                        <p>Currency: <input type="text" name="currency" value="{{ service.currency }}"></p>
+                        <p>Duration minutes: <input type="number" name="duration_minutes" value="{{ service.duration_minutes }}"></p>
                     </li>
                 {% endfor %}
-            </ul>
+            </ol>
         {% else %}
             <p>No services found to edit.</p>
         {% endif %}
-        <button type="submit" name="service_form">Save Changes</button>
+        <button type="submit" name="service_edit_form">Save Changes</button>
         <button id="cancelServiceButton" type="button">Cancel</button>
     </form>
 </div>
 
+
+<h2>Add New Service</h2>
+<div id="showAddServiceForm">
+    <button>Add New Service</button>
+</div>
+
+<div id="addServiceForm" style="display: none;">
+    <form method="post">
+        {% csrf_token %}
+        {{ service_form.as_p }}
+        <button type="submit" name="service_form">Add Service</button>
+        <button type="button" id="cancelAddService">Cancel</button>
+    </form>
+</div>
 
 
 {% endblock %}

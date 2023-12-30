@@ -3,10 +3,7 @@ $(document).ready(function() {
     $("#editUserButton").click(function() {
         $("#readOnlyUserMode").hide();
         $("#editUserForm").show();
-        // Reset password input fields to read-only
-        $("#old_password").prop('readonly', 'readonly');
-        $("#new_password").prop('readonly', 'readonly');
-        $("#confirm_password").prop('readonly', 'readonly');
+        
     });
 
     $("#cancelUserButton").click(function() {
@@ -47,6 +44,21 @@ $(document).ready(function() {
         $("#readOnlyPasswordMode").show();
     });
 
+     
+    // Show Add Service Form
+    $("#showAddServiceForm").click(function() {
+        $("#showAddServiceForm").hide();
+        $("#addServiceForm").show();
+    });
+
+    // Hide Add Service Form and Reset on Cancel
+    $("#cancelAddService").click(function() {
+        $("#addServiceForm").hide();
+        $("#showAddServiceForm").show();
+        // Additional logic to reset form fields if needed
+    });
+
+    
     // Additional logic for submitting forms via AJAX or other methods
     // ...
 });

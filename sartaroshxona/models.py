@@ -9,7 +9,7 @@ class Service(models.Model):
 
 
     barber = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='services')
-    name = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
     CURRENCY_CHOICES = [
         ('USD', 'US Dollar'),
         ('EUR', 'Euro'),

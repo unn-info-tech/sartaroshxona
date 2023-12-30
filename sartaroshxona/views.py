@@ -51,6 +51,25 @@ def barber_profile(request):
 
                 barber_form.save()
                 return redirect('barber_profile')
+            
+        elif 'service_edit_form' in request.POST:
+            service_ids = request.POST.getlist('id')
+            titles = request.POST.getlist('title')
+            prices = request.POST.getlist('price')
+            currencies = request.POST.getlist('currency')
+            durations = request.POST.getlist('duration_minutes')
+            print(service_ids)
+
+            for i, service_id in enumerate(service_ids):
+                service = Service.objects.get(pk=service_id)
+                service.title = titles[i]
+                service.price = prices[i]
+                service.currency = currencies[i]
+                service.duration_minutes = durations[i]
+                service.save()
+
+            return redirect('barber_profile')
+        
 
         elif 'service_form' in request.POST:  # Add new service
             service_form = ServiceForm(request.POST)
@@ -62,7 +81,8 @@ def barber_profile(request):
 
     else:
         barber_form = BarberForm(instance=barber)
-        service_form = ServiceForm()
+        service_initial = {'barber': barber}
+        service_form = ServiceForm(initial=service_initial)
         user_form = UserProfileForm(instance=request.user)
         password_change_form = PasswordChangeForm(request.user)
 
