@@ -1,18 +1,20 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username, password=None, **extra_fields):
+    def create_user(self, username, email, password=None, **extra_fields):
         if not username:
-            raise ValueError('The username field must be set')
-        username = self.normalize_email(username)
+            raise ValueError("Users must have a username")
+        if not email:
+            raise ValueError("Users must have an email address")
 
-        user = self.model(username=username, **extra_fields)
+        email = self.normalize_email(email)
+        user = self.model(username=username.lower(), email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, password=None, **extra_fields):
+    def create_superuser(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -20,22 +22,16 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-        
-        username = self.normalize_email(username)
 
-        return self.create_user(username, password, **extra_fields)
+        return self.create_user(username, email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
-    username = models.CharField(unique=True, max_length=20)
     is_barber = models.BooleanField(default=False)
-    
-    # Add any additional fields you need
-    groups = models.ManyToManyField(Group, related_name='custom_users')
-    user_permissions = models.ManyToManyField(Permission, related_name='custom_users')
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email']
 
-    objects = CustomUserManager()   
+    objects = CustomUserManager()
 
-    
+    def __str__(self):
+        return self.username
