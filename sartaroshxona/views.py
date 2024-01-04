@@ -48,9 +48,22 @@ def barber_profile(request):
                 if old_profile_image and 'profile_image' in request.FILES:
                     if os.path.isfile(os.path.join(settings.MEDIA_ROOT, str(old_profile_image))):
                         os.remove(os.path.join(settings.MEDIA_ROOT, str(old_profile_image)))
-
+                    
                 barber_form.save()
                 return redirect('barber_profile')
+        
+        elif 'delete_image' in request.POST:
+            barber = Barber.objects.get(user=request.user)
+            old_profile_image = barber.profile_image
+
+            if old_profile_image:  # Check if the image exists
+                # Delete the image file
+                barber.profile_image.delete()
+                # Set profile_image field to null to clear the image field
+                barber.profile_image = None
+                barber.save()
+                return redirect('barber_profile')
+
             
         elif 'service_edit_form' in request.POST:
             service_ids = request.POST.getlist('id[]')

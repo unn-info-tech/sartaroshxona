@@ -29,6 +29,30 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password confirmation'})
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        existing_user = CustomUser.objects.filter(username__iexact=username).exists()
+
+        # Validate username format: allow letters, numbers, periods, and underscores
+        if not username.replace('.', '').replace('_', '').isalnum():
+            raise forms.ValidationError(
+                'Enter a valid username. This value may contain only letters, numbers, periods, and underscores.'
+            )
+
+        # Check if the username already exists
+        if existing_user:
+            raise forms.ValidationError('This username is already taken.')
+
+        return username.lower()  # Ensure username is lowercase
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.username = self.cleaned_data['username'].lower()  # Ensure username is lowercase
+        if commit:
+            user.save()
+        return user
+
+    
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import TextInput, PasswordInput

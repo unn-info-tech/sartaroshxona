@@ -23,10 +23,13 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self.create_user(username, email, password, **extra_fields)
+        return self.create_user(username.lower(), email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
     is_barber = models.BooleanField(default=False)
+
+    
+
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

@@ -50,7 +50,7 @@
 <div id="readOnlyBarberMode">
   <!-- For profile_image -->
   <!-- Profile Image -->
-  <p><input type="hidden" name="user" value="{{ barber.user.username }}" id="user" disabled></p>
+    <p><input type="hidden" name="user" value="{{ barber.user.username }}" id="user" disabled></p>
 
     <p>Profile Image: 
         {% if barber.profile_image %}
@@ -77,18 +77,22 @@
 
 <!-- Edit mode -->
 <div id="editBarberForm" style="display: none;">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
         <p><input type="hidden" name="user" value="{{ barber_form.user.value }}" id="user" ></p>
 
-        <p>Profile Image: 
+        <p>
+            Profile image: 
             {% if barber.profile_image %}
                 <img src="{{ barber.profile_image.url }}" alt="Profile Image" style="width: 200px; height: auto;">
+                <button type="submit" name="delete_image">Delete Image</button>
             {% else %}
-                <span>No image found.</span>
+                <span>No profile image found.</span>
             {% endif %}
+            <input type="file" name="profile_image" id="profile_image">
         </p>
+        
         <p>Phone Number: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" ></p>
     
         <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work"></p>

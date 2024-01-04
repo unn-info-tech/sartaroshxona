@@ -16,6 +16,8 @@ def signup(request):
         formMe_signup = CustomUserCreationForm(request.POST)
         if formMe_signup.is_valid():
             user = formMe_signup.save()
+
+            
             username = formMe_signup.cleaned_data.get('username')
             messages.success(request, f'Welcome, {username}! Your account has been created.')
 
@@ -26,6 +28,7 @@ def signup(request):
                     user=user,
                     
                 )
+            return redirect('signin')
     else:
         formMe_signup = CustomUserCreationForm()
     return render(request, 'main/signUp.html', {'formMe_signup': formMe_signup})
