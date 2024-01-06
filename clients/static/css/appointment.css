@@ -118,6 +118,7 @@ th, td {
 
 
 /* Additional CSS for Services Container */
+/* Additional CSS for Services Container */
 .card.p-4 {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -129,13 +130,12 @@ th, td {
 
 .services-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column; /* Change flex-direction to column */
   gap: 20px;
 }
 
 .service-item {
-  width: calc(33.33% - 20px);
+  width: 100%; /* Set width to 100% to take the full width of the container */
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   border: 2px solid #fff;
@@ -189,4 +189,13 @@ th, td {
   td {
       font-size: 18px; /* Reduced font size for smaller screens */
   }
+}
+
+
+/* Profile */
+/* Embedded CSS within the HTML file or external CSS file */
+#barber-image {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  object-fit: cover; /* Helps control image distortion */
 }

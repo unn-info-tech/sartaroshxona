@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="{% static '/css/appointment.css' %}">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{% static 'js/services.js' %}"></script>
+<script src="{% static 'js/appointment_services.js' %}"></script>
 
 
 <div class="container">
   <div class="card p-4">
     <!-- <h1 class="text-center mb-4">Make an appointment</h1> -->
-    <img src="https://via.placeholder.com/60" class="mx-auto d-block rounded-circle mb-3" alt="Profile Image">
+    <img src="{{ barber.profile_image.url }}" class="mx-auto d-block rounded-circle mb-3" alt="Profile Image" id="barber-image">
     <div class="text-center">
-        <h5>Username{{ barber.user.username }}</h5>
+        <h5>{{ barber.user.username }}</h5>
     </div>
     <div class="row justify-content-center mb-3">
         <div class="col text-center">
@@ -74,19 +74,13 @@
     <div class="card p-4">
       <h5>Select Services</h5>
       <div class="services-list">
-          <div class="service-item selectable" data-duration="10" data-price="1">
-            <p>Service 10 minutes (1$)</p>
+          {% for service in services %}
+          <div class="service-item selectable" data-duration="{{ service.duration_minutes }}" data-price="{{ service.price }}">
+              <p>{{ service.title }} - {{ service.duration_minutes }} minutes (${{ service.price }})</p>
           </div>
-          <div class="service-item selectable" data-duration="10" data-price="1">
-            <p>Service 10 minutes (1$)</p>
-          </div>
-          <div class="service-item selectable" data-duration="10" data-price="1">
-            <p>Service 10 minutes (1$)</p>
-          </div>
-          <!-- Add more service items as needed -->
+          {% endfor %}
       </div>
       <div class="selected-services">
-          
           <p>Total Duration: <span id="total-duration">0</span> minutes</p>
           <p>Total Price: $<span id="total-price">0</span></p>
       </div>
