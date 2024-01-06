@@ -48,7 +48,7 @@ def signin(request):
                 if request.user.is_barber:  # Assuming is_barber is a boolean field in your User model
                     return redirect('barber_profile')  # Redirect to the barber profile URL
                 else:
-                    return redirect('clientprofile')
+                    return redirect('client_profile')
     else:
         formMe_signIn = CustomAuthenticationForm()
     return render(request, 'main/signIn.html', {'formMe_signIn': formMe_signIn})
