@@ -16,6 +16,10 @@ class Service(models.Model):
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='TJS')
     duration_minutes = models.PositiveIntegerField()
 
+    def __str__(self):
+        return str(self.title)
+
+
 class Barber(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='barber_profile')
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
