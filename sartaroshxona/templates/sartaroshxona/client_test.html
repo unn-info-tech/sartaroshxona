@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Barber Appointments</title>
+</head>
+<body>
+    <h1>Appointments for Barber: {{ request.user.username }}</h1>
+
+    <ul>
+        {% for appointment in appointments %}
+            <li>
+                <strong>Client:</strong> {{ appointment.client.username }} |
+                <strong>Appointment Time:</strong> {{ appointment.appointment_time }}
+                <!-- Display other appointment details as needed -->
+
+                <ul>
+                    <strong>Selected Services:</strong>
+                    {% for service in appointment.service.all %}
+                        <li>{{ service.title }} - Duration: {{ service.duration_minutes }} minutes - Price: {{ service.price }}</li>
+                    {% empty %}
+                        <li>No services selected for this appointment.</li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Confirm appointment button -->
+                {% if not appointment.is_confirmed %}
+                    <form method="post" action="{% url 'confirm_appointment' appointment.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Confirm Appointment">
+                    </form>
+                {% else %}
+                    <p>Appointment confirmed</p>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No appointments found for this barber.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

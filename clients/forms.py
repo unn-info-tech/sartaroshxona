@@ -12,7 +12,7 @@ class UserProfileForm(forms.ModelForm):
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = ['service', 'appointment_time']
+        fields = ['appointment_time']
         widgets = {
             'appointment_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }

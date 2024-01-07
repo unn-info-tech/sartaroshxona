@@ -1,14 +1,4 @@
-from django.shortcuts import render
-
-
-
-def sign(request):
-    return render(request, 'sartaroshxona/sign.html')
-
-def test(request):
-    return render(request, 'sartaroshxona/appointment.html')
-
-# views.py
+# Sartaroshxona views.py
 from django.shortcuts import render, redirect
 from .models import Barber, Service
 from .forms import BarberForm, ServiceForm
@@ -116,3 +106,33 @@ def barber_profile(request):
         'services': services,
         'service_form': service_form
     })
+
+
+from django.shortcuts import render
+from clients.models import Appointment  # Import the Appointment model
+
+def barber_appointments(request):
+    logged_in_barber = request.user  # Assuming the logged-in user is the barber
+
+    # Fetch appointments related to the logged-in barber along with associated services
+    appointments = Appointment.objects.filter(barber__user=logged_in_barber).prefetch_related('service')
+
+    return render(request, 'sartaroshxona/client_test.html', {'appointments': appointments})
+
+
+
+
+from django.shortcuts import get_object_or_404, redirect
+
+def confirm_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    # Update the appointment confirmation status
+    appointment.is_confirmed = True
+    appointment.save()
+
+    return redirect('barber_appointments')
+
+
+def test(request):
+    return render(request, 'sartaroshxona/appointment.html')

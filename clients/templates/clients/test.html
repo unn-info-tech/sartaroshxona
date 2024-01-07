@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book an Appointment</title>
+    <style>
+        /* Optional: Add some basic styling to the buttons */
+        .service {
+            cursor: pointer;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .selected {
+            background-color: #cceeff; /* Change the background color for selected services */
+        }
+    </style>
+</head>
+<body>
+    <h1>Book an Appointment with {{ barber.user }}</h1>
+    
+    <form method="post" onsubmit="prepareSelectedServices()">
+        {% csrf_token %}
+        
+        {{ appointment_form.as_p }}
+        
+        <h2>Select Services</h2>
+        <div id="services-container">
+            {% for service in services %}
+                <div class="service" data-service-id="{{ service.id }}" onclick="toggleService(this)">
+                    {{ service.title }} - Duration: {{ service.duration_minutes }} minutes - Price: {{ service.price }}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <input type="hidden" name="selected_services" id="selected-services-input">
+        <input type="submit" value="Book Appointment">
+    </form>
+
+    <script>
+        function toggleService(service) {
+            service.classList.toggle('selected');
+        }
+
+        function prepareSelectedServices() {
+            const selectedServices = document.querySelectorAll('.service.selected');
+            const selectedServiceIds = Array.from(selectedServices).map(service => service.getAttribute('data-service-id'));
+            document.getElementById('selected-services-input').value = JSON.stringify(selectedServiceIds);
+        }
+    </script>
+</body>
+</html>

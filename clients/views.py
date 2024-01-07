@@ -1,10 +1,13 @@
-# Create your views here.
-
-# views.py
-from django.shortcuts import render, redirect
+# Clients views.py
+from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse
 from clients.forms import UserProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from sartaroshxona.models import Barber, Service
+from .forms import AppointmentForm
+from .models import Appointment
+import json
+
 
 def client_profile(request):
     user = request.user
@@ -36,9 +39,6 @@ def client_profile(request):
 
 
 
-from django.shortcuts import render
-from sartaroshxona.models import Barber, Service
-from .forms import AppointmentForm
 
 def barbers_list(request):
     barbers = Barber.objects.all()
@@ -56,24 +56,29 @@ def appointment(request, barber_id):
             appointment.barber = Barber.objects.get(pk=barber_id)
             appointment.client = request.user
 
-            selected_service_ids = request.POST.getlist('selected_services')
+            # Retrieve the selected services IDs from the POST data
+            selected_service_ids_json = request.POST.get('selected_services')
+            # Deserialize the JSON string to a Python list
+            selected_service_ids = json.loads(selected_service_ids_json)
             selected_services = Service.objects.filter(pk__in=selected_service_ids)
             appointment.save()
-            appointment.services.add(*selected_services)
+            appointment.service.add(*selected_services)
 
             # Calculate total duration and price based on selected services
-            total_duration = sum(service.duration_minutes for service in selected_services)
-            total_price = sum(service.price for service in selected_services)
-            appointment.total_duration = total_duration
-            appointment.total_price = total_price
-            appointment.save()
+            # total_duration = sum(service.duration_minutes for service in selected_services)
+            # total_price = sum(service.price for service in selected_services)
+            # appointment.total_duration = total_duration
+            # appointment.total_price = total_price
+            # appointment.save()
 
-            return redirect('success_page')  # Replace 'success_page' with your success URL name
+            return HttpResponse('\success_page')  # Replace 'success_page' with your success URL name
     else:
         appointment_form = AppointmentForm()
 
-    return render(request, 'clients/appointment.html', {
+    return render(request, 'clients/test.html', {
         'barber': barber,
         'services': services,
         'appointment_form': appointment_form
     })
+
+
