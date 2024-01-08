@@ -13,6 +13,18 @@
 <script src="{% static 'js/appointment_services.js' %}"></script>
 
 
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+
+
 <div class="container">
   <div class="card p-4">
     <!-- <h1 class="text-center mb-4">Make an appointment</h1> -->
@@ -102,13 +114,16 @@
       <script>
         function toggleService(service) {
           const isSelected = service.classList.toggle('selected');
+
           if (isSelected) {
-            service.style.pointerEvents = 'none'; // Disable click for selected service
+            prepareSelectedServices(); // Update selected services and calculate total duration and price
           } else {
             service.style.pointerEvents = 'auto'; // Enable click for unselected service
           }
-          updateSelectedServices();
+
+          updateSelectedServices(); // Update selected services list
         }
+        
       
         function updateSelectedServices() {
           const selectedServices = document.querySelectorAll('.service-item.selected');
@@ -129,7 +144,7 @@
           document.getElementById('total-duration').textContent = `${totalDuration} minutes`;
           document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
         }
-      
+        
         function prepareSelectedServices() {
           updateSelectedServices();
         }

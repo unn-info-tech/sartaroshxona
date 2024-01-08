@@ -7,7 +7,8 @@ from sartaroshxona.models import Barber, Service
 from .forms import AppointmentForm
 from .models import Appointment
 import json
-
+from django.contrib import messages
+from django.urls import reverse
 
 def client_profile(request):
     user = request.user
@@ -50,28 +51,27 @@ def appointment(request, barber_id):
     services = Service.objects.filter(barber=barber)
 
     if request.method == 'POST':
+        # Retrieve the selected services IDs from the POST data
+        selected_service_ids_json = request.POST.get('selected_services')
+        # Deserialize the JSON string to a Python list
+        selected_service_ids = json.loads(selected_service_ids_json)
+        selected_services = Service.objects.filter(pk__in=selected_service_ids)
         appointment_form = AppointmentForm(request.POST)
-        if appointment_form.is_valid():
+
+        if selected_services and appointment_form.is_valid():
             appointment = appointment_form.save(commit=False)
             appointment.barber = Barber.objects.get(pk=barber_id)
             appointment.client = request.user
-
-            # Retrieve the selected services IDs from the POST data
-            selected_service_ids_json = request.POST.get('selected_services')
-            # Deserialize the JSON string to a Python list
-            selected_service_ids = json.loads(selected_service_ids_json)
-            selected_services = Service.objects.filter(pk__in=selected_service_ids)
+            
             appointment.save()
             appointment.service.add(*selected_services)
 
-            # Calculate total duration and price based on selected services
-            # total_duration = sum(service.duration_minutes for service in selected_services)
-            # total_price = sum(service.price for service in selected_services)
-            # appointment.total_duration = total_duration
-            # appointment.total_price = total_price
-            # appointment.save()
-
             return HttpResponse('\success_page')  # Replace 'success_page' with your success URL name
+        else:
+            # If no service is selected or form is invalid, redirect with an error message
+           messages.error(request, 'Invalid form or no service selected.')
+           return redirect(reverse('appointment', args=[barber_id]))
+
     else:
         appointment_form = AppointmentForm()
 
