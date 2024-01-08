@@ -14,3 +14,8 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"Appointment for {self.client.username} with {self.barber.user.username} at {self.appointment_time}"
+
+
+
+
+    

@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
+from django.contrib.auth.forms import AuthenticationForm
+from django.forms import TextInput, PasswordInput
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -52,10 +55,6 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
 
-    
-
-from django.contrib.auth.forms import AuthenticationForm
-from django.forms import TextInput, PasswordInput
 
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -68,4 +67,9 @@ class CustomAuthenticationForm(AuthenticationForm):
         fields = ['username', 'password']  # Fields present in the login form
 
 
-        
+
+
+
+
+
+

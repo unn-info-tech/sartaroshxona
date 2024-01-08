@@ -70,35 +70,72 @@
       </table>
     </div>
 
-    <!-- Services -->
+
+
+    <!-- Services  -->
     <div class="card p-4">
-      <h5>Select Services</h5>
-      <div class="services-list">
+      <h1>Book an Appointment with {{ barber.user }}</h1>
+      
+      <form method="post" onsubmit="prepareSelectedServices()">
+        {% csrf_token %}
+        <input type="datetime-local" name="appointment_time" class="form-control mb-4 black-input" value="{{ appointment_form.appointment_time.value }}" id="appointmentDatetime">
+      
+        <h2>Select Services</h2>
+        <div class="services-list" id="services-container">
           {% for service in services %}
-          <div class="service-item selectable" data-duration="{{ service.duration_minutes }}" data-price="{{ service.price }}">
-              <p>{{ service.title }} - {{ service.duration_minutes }} minutes (${{ service.price }})</p>
+          <div class="service-item" data-service-id="{{ service.id }}" onclick="toggleService(this)">
+            {{ service.title }} - Duration: {{ service.duration_minutes }} minutes - Price: {{ service.price }}
           </div>
           {% endfor %}
-      </div>
-      <div class="selected-services">
-          <p>Total Duration: <span id="total-duration">0</span> minutes</p>
-          <p>Total Price: $<span id="total-price">0</span></p>
-      </div>
-    </div>
-  
-  
-
-
-    <div class="card p-4">
-      <h5 class="card-title mb-4">Select a Date</h5>
-      <input type="datetime-local" class="form-control mb-4 black-input" id="appointmentDatetime">
-
+        </div>
       
-      <form action="post">
-        <button type="submit" class="btn btn-outline-primary">Zapisatsya</button>
+        <div class="selected-services">
+          <ul class="selected-list" id="selected-list"></ul>
+          <p>Total Duration: <span id="total-duration"></span></p>
+          <p>Total Price: <span id="total-price"></span></p>
+        </div>
+      
+        <input type="hidden" name="selected_services" id="selected-services-input">
+        <input type="submit" value="Book Appointment">
       </form>
-        <!-- Time Slots -->
-        <!-- Add more time slots here -->
+      
+      <script>
+        function toggleService(service) {
+          const isSelected = service.classList.toggle('selected');
+          if (isSelected) {
+            service.style.pointerEvents = 'none'; // Disable click for selected service
+          } else {
+            service.style.pointerEvents = 'auto'; // Enable click for unselected service
+          }
+          updateSelectedServices();
+        }
+      
+        function updateSelectedServices() {
+          const selectedServices = document.querySelectorAll('.service-item.selected');
+          const selectedServiceIds = Array.from(selectedServices).map(service => service.getAttribute('data-service-id'));
+          document.getElementById('selected-services-input').value = JSON.stringify(selectedServiceIds);
+      
+          let totalDuration = 0;
+          let totalPrice = 0;
+      
+          selectedServices.forEach(service => {
+            const duration = parseInt(service.textContent.match(/Duration: (\d+) minutes/)[1]);
+            const price = parseFloat(service.textContent.match(/Price: (\d+(\.\d+)?)/)[1]);
+      
+            totalDuration += duration;
+            totalPrice += price;
+          });
+      
+          document.getElementById('total-duration').textContent = `${totalDuration} minutes`;
+          document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
+        }
+      
+        function prepareSelectedServices() {
+          updateSelectedServices();
+        }
+      </script>
     </div>
-  </div>
+    
+    
+
 {% endblock %}

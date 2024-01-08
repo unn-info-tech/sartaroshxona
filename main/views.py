@@ -74,7 +74,6 @@ def signin(request):
 
 
 
-
 '''def signup(request):
     if request.method == 'POST':
         username = request.POST.get('username')

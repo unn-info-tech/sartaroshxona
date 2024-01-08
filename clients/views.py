@@ -75,7 +75,7 @@ def appointment(request, barber_id):
     else:
         appointment_form = AppointmentForm()
 
-    return render(request, 'clients/test.html', {
+    return render(request, 'clients/appointment.html', {
         'barber': barber,
         'services': services,
         'appointment_form': appointment_form
