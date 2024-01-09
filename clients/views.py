@@ -66,10 +66,12 @@ def appointment(request, barber_id):
             appointment.save()
             appointment.service.add(*selected_services)
 
-            return HttpResponse('\success_page')  # Replace 'success_page' with your success URL name
+            messages.error(request, 'Congrats, your appoinment is done')
+            return redirect(reverse('appointment', args=[barber_id]))
+
         else:
             # If no service is selected or form is invalid, redirect with an error message
-           messages.error(request, 'Invalid form or no service selected.')
+           messages.error(request, 'Дата и время или служба не выбрана')
            return redirect(reverse('appointment', args=[barber_id]))
 
     else:

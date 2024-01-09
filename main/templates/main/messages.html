@@ -1,0 +1,107 @@
+<style>
+    .popup-message {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        z-index: 9999;
+        max-width: 300px;
+        text-align: center;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .popup-message ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .popup-message li {
+        margin-bottom: 5px;
+    }
+
+    .show {
+        display: block;
+        animation: fadeOut 10s forwards;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            display: none; /* Hide the message container at the end of animation */
+        }
+    }
+</style>
+
+<!-- Script to handle message display -->
+<div id="messageContainer" class="popup-message">
+    {% if formMe_signIn.errors or messages %}
+    {% if formMe_signIn.errors %}
+    <ul>
+        {% for field, error_list in formMe_signIn.errors.items %}
+        {% for error in error_list %}
+            <li>{{ field|title }}: {{ error }}</li>
+        {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+</div>
+
+<script>
+    // Function to display the message for a few seconds and then hide it
+    function showMessage() {
+        let message = document.querySelector('#messageContainer');
+        if (message.querySelector('ul').children.length > 0) {
+            message.classList.add('show');
+            setTimeout(function () {
+                message.classList.remove('show');
+            }, 5000); // Change the duration (in milliseconds) as needed
+        }
+    }
+
+    // Call the showMessage function when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        showMessage();
+    });
+</script>
+
+
+
+<!-- Display form errors -->
+<div class="popup-message">
+    {% if formMe_signIn.errors %}
+    <ul>
+        {% for field, error_list in formMe_signIn.errors.items %}
+        {% for error in error_list %}
+            <li>{{ field|title }}: {{ error }}</li>
+        {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+
