@@ -1,4 +1,4 @@
-{% extends 'sartaroshxona/base.html' %}
+{% extends 'main/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -9,48 +9,82 @@
 <div class="container">
     <div class="header">
         <div class="category">
-            <h2>Canceled Appointments</h2>
-            <p class="count">3</p>
+            <a href="{% url 'appointments_by_category' 'in_queue' %}">
+                <h2>In Queue Appointments</h2>
+                <p class="count">{{ appointment_in_queue_count }}</p>
+            </a>
         </div>
+    
         <div class="category">
-            <h2>Confirmed Appointments</h2>
-            <p class="count">7</p>
+            <a href="{% url 'appointments_by_category' 'confirmed' %}">
+                <h2>Confirmed Appointments</h2>
+                <p class="count">{{ appointment_confirmed_count }}</p>
+            </a>
         </div>
+    
         <div class="category">
-            <h2>Schedule Appointments</h2>
-            <p class="count">10</p>
+            <a href="{% url 'appointments_by_category' 'history' %}">
+                <h2>History of all done appointments</h2>
+                <p class="count">{{ appointment_history_count }}</p>
+            </a>
         </div>
     </div>
+    
+    
 
     <!-- Content from the second HTML -->
     <div class="list-content">
         <h1>Customer Appointment List</h1>
+        <h1>Appointments for Barber: {{ request.user.username }}</h1>
+
         <table>
             <thead>
                 <tr>
                     <th>Customer Name</th>
                     <th>Appointment Date and Time</th>
                     <th>Service</th>
+                    <th>Action</th> <!-- New table header for Action -->
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>2023-10-04</td>
-                    <td>10:00 AM</td>
-                </tr>
-                <tr>
-                    <td>Jane Smith</td>
-                    <td>2023-10-05</td>
-                    <td>2:00 PM</td>
-                </tr>
-                <tr>
-                    <td>Peter Jones</td>
-                    <td>2023-10-06</td>
-                    <td>5:00 PM</td>
-                </tr>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.client.username }}</td>
+                        <td>{{ appointment.appointment_time }}</td>
+                        <td>
+                            <ul>
+                                {% for service in appointment.service.all %}
+                                    <li>{{ service.title }} - Duration: {{ service.duration_minutes }} minutes - Price: {{ service.price }}</li>
+                                {% empty %}
+                                    <li>No services selected for this appointment.</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <!-- This is for accept or cancel-->
+                        <td>
+                            {% if appointment.status == 'in_queue' %}
+                                <form action="{% url 'accept_appointment' appointment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-outline-primary btn-duration" type="submit">Accept</button>
+                                </form>
+                                <form action="{% url 'cancel_appointment' appointment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-outline-primary btn-duration" type="submit">Cancel</button>
+                                </form>
+                            {% else %}
+                                <!-- Your other content or logic here -->
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">No appointments found for this barber.</td>
+                    </tr>
+                {% endfor %} 
             </tbody>
         </table>
+
     </div>
 </div>
   

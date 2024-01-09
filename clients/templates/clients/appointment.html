@@ -1,4 +1,4 @@
-{% extends 'sartaroshxona/base.html' %}
+{% extends 'main/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -19,33 +19,35 @@
 
 
 <div class="container">
-  <div class="card p-4">
-    <!-- <h1 class="text-center mb-4">Make an appointment</h1> -->
-    <img src="{{ barber.profile_image.url }}" class="mx-auto d-block rounded-circle mb-3" alt="Profile Image" id="barber-image">
-    <div class="text-center">
-        <h5>{{ barber.user.username }}</h5>
+
+  
+    <div class="card p-4">
+      <!-- <h1 class="text-center mb-4">Make an appointment</h1> -->
+      <img src="{{ barber.profile_image.url }}" class="mx-auto d-block rounded-circle mb-3" alt="Profile Image" id="barber-image">
+      <div class="text-center">
+          <h5>{{ barber.user.username }}</h5>
+      </div>
+      <div class="row justify-content-center mb-3">
+          <div class="col text-center">
+              <p><strong>Location:</strong></p>
+              <p>{{ barber.location }}</p>
+          </div>
+          <div class="col text-center">
+              <p><strong>Store Name:</strong></p>
+              <p>{{ barber.magazin }}</p>
+          </div>
+      </div>
+      <div class="row justify-content-center">
+          <div class="col text-center">
+              <p><strong>Working Time:</strong></p>
+              <p>{{ barber.start_work }} - {{ barber.end_work }}</p>
+          </div>
+          <div class="col text-center">
+              <p><strong>Launch Time:</strong></p>
+              <p>{{ barber.launch_start_time }} - {{ barber.launch_end_time }}</p>
+          </div>
+      </div>
     </div>
-    <div class="row justify-content-center mb-3">
-        <div class="col text-center">
-            <p><strong>Location:</strong></p>
-            <p>{{ barber.location }}</p>
-        </div>
-        <div class="col text-center">
-            <p><strong>Store Name:</strong></p>
-            <p>{{ barber.magazin }}</p>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col text-center">
-            <p><strong>Working Time:</strong></p>
-            <p>{{ barber.start_work }} - {{ barber.end_work }}</p>
-        </div>
-        <div class="col text-center">
-            <p><strong>Launch Time:</strong></p>
-            <p>{{ barber.launch_start_time }} - {{ barber.launch_end_time }}</p>
-        </div>
-    </div>
-  </div>
 
     
 
@@ -85,7 +87,7 @@
         {% csrf_token %}
         <input type="datetime-local" name="appointment_time" class="form-control mb-4 black-input" value="{{ appointment_form.appointment_time.value }}" id="appointmentDatetime">
       
-        <h2>Select Services</h2>
+        <h5>Select Services bro</h5>
         <div class="services-list" id="services-container">
           {% for service in services %}
           <div class="service-item" data-service-id="{{ service.id }}" onclick="toggleService(this)">
@@ -101,7 +103,7 @@
         </div>
       
         <input type="hidden" name="selected_services" id="selected-services-input">
-        <input type="submit" value="Book Appointment">
+        <input type="submit" class="btn btn-outline-primary" value="Book Appointment">
       </form>
       
       <script>
@@ -143,7 +145,7 @@
         }
       </script>
     </div>
-    
-    
+
+</div>
 
 {% endblock %}

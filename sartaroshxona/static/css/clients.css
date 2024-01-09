@@ -13,9 +13,13 @@ height: 100vh;
 }
 
 .container {
-text-align: center; /* Center align content inside container */
-width: 80%; /* Adjust the width as needed */
-backdrop-filter: blur(5px); /* Apply a blur effect to the container */
+    text-align: center;
+    width: 80%;
+    backdrop-filter: blur(5px);
+    height: 70vh; /* Set a fixed height for the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin: 0 auto; /* Center the container horizontally */
+    border-radius: 10px;
 }
 
 .header {
@@ -68,6 +72,32 @@ th, td {
     padding-top: 20px; /* Adjust the padding as needed */
 }
 
+
+/* Custom styles for the buttons */
+.btn-duration {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff; /* Adjust border thickness */
+    border-radius: 5px; /* Add border radius */
+  }
+  
+  .btn-duration:focus,
+  .btn-duration:active {
+    color: rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+  }
+  
+  .btn-outline-primary {
+    color: #fff; /* Set button text color to white */
+    border: 2px solid #fff; /* Adjust border thickness */
+    border-radius: 5px; /* Add border radius */
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #fff; /* Change button background on hover */
+    color: rgb(0, 0, 0); /* Change text color on hover */
+  }
+  
 
 @media screen and (max-width: 767px) {
     .container {

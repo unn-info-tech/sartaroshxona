@@ -47,14 +47,7 @@ body {
 .table-bordered {
   border-color: #fff; /* Set border color for tables */
 }
-.btn-outline-primary {
-  color: #fff; /* Set button text color to white */
-  border-color: #fff; /* Set button border color to white */
-}
-.btn-outline-primary:hover {
-  background-color: #fff; /* Change button background on hover */
-  color: rgba(0, 0, 0, 0.5); /* Change text color on hover */
-}
+
 select.form-select {
   background-color: rgba(0, 0, 0, 0.5); /* Set select background color to black */
   color: #fff; /* Set select text color to white */
@@ -73,6 +66,7 @@ input[type="date"] {
   border-radius: 4px; /* Add border-radius for a softer look */
   box-sizing: border-box; /* Ensure padding and border are included in width */
 }
+
 /* Custom styles for the buttons */
 .btn-duration {
   color: #fff;
@@ -84,6 +78,15 @@ input[type="date"] {
   color: rgba(0, 0, 0, 0.5);
   background-color: #fff;
 }
+.btn-outline-primary {
+  color: #fff; /* Set button text color to white */
+  border-color: #fff; /* Set button border color to white */
+}
+.btn-outline-primary:hover {
+  background-color: #fff; /* Change button background on hover */
+  color: rgb(0, 0, 0); /* Change text color on hover */
+}
+
 /* Adjust profile image and name alignment */
 .profile-info {
   display: flex;
@@ -109,7 +112,7 @@ th, td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  font-size: 18px; /* Change the font size here */
+  font-size: 14px; /* Change the font size here */
 }
 
 .list-content {
@@ -188,7 +191,7 @@ th, td {
 
   th,
   td {
-      font-size: 18px; /* Reduced font size for smaller screens */
+      font-size: 10px; /* Reduced font size for smaller screens */
   }
 }
 

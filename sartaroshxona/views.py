@@ -107,31 +107,57 @@ def barber_profile(request):
         'service_form': service_form
     })
 
+#--------------------------All done above, don't  make changes--------------------
 
 from django.shortcuts import render
 from clients.models import Appointment  # Import the Appointment model
 
-def barber_appointments(request):
+
+
+def appointments_by_category(request, category):
     logged_in_barber = request.user  # Assuming the logged-in user is the barber
+    appointments = None
+    appointment_in_queue = Appointment.objects.filter(barber__user=logged_in_barber, status='in_queue').prefetch_related('service')
+    appointment_confirmed = Appointment.objects.filter(barber__user=logged_in_barber, status='confirmed').prefetch_related('service')
+    appointment_history = Appointment.objects.filter(barber__user=logged_in_barber, status='done').prefetch_related('service')
 
-    # Fetch appointments related to the logged-in barber along with associated services
-    appointments = Appointment.objects.filter(barber__user=logged_in_barber).prefetch_related('service')
+    if category == 'in_queue':
+        appointments = appointment_in_queue
+    elif category == 'confirmed':
+        appointments = appointment_confirmed
+    elif category == 'history':
+        appointments = appointment_history
 
-    return render(request, 'sartaroshxona/client_test.html', {'appointments': appointments})
+    appointment_in_queue_count = appointment_in_queue.count()
+    appointment_confirmed_count = appointment_confirmed.count()
+    appointment_history_count = appointment_history.count()
 
+    return render(request, 'sartaroshxona/clients.html', {
+        'appointments': appointments,
+        'selected_category': category,
+        'appointment_in_queue_count': appointment_in_queue_count,
+        'appointment_confirmed_count': appointment_confirmed_count,
+        'appointment_history_count': appointment_history_count,
+    })
 
+from django.shortcuts import redirect, get_object_or_404
 
-
-from django.shortcuts import get_object_or_404, redirect
-
-def confirm_appointment(request, appointment_id):
-    appointment = get_object_or_404(Appointment, id=appointment_id)
-
-    # Update the appointment confirmation status
-    appointment.is_confirmed = True
+def accept_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, pk=appointment_id)
+    appointment.status = 'confirmed'  # Assuming you update status field to 'confirmed' when accepted
     appointment.save()
+    # Redirect back to appointments page or any other page
+    return redirect('appointments_by_category', category='in_queue')
 
-    return redirect('barber_appointments')
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, pk=appointment_id)
+    appointment.delete()  # Delete the appointment
+    # Redirect back to appointments page or any other page
+    return redirect('appointments_by_category', category='in_queue')
+
+
+
+
 
 
 def test(request):
