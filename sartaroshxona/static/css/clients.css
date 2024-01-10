@@ -1,56 +1,93 @@
 body {
-background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp'); /* Replace URL with your image URL */
-background-size: cover;
-background-position: center;
-color: #fff; /* Set text color to white */
-font-family: 'Arial', sans-serif; /* Change font for better readability */
-margin: 0; /* Remove default margin */
-padding: 0; /* Remove default padding */
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-}
+    background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp'); /* Replace URL with your image URL */
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Set text color to white */
+    font-family: 'Arial', sans-serif; /* Change font for better readability */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
 
 .container {
     text-align: center;
-    width: 80%;
+    width: 90%; /* Set width as a percentage of the viewport width */
     backdrop-filter: blur(5px);
-    height: 70vh; /* Set a fixed height for the container */
+    height: 80vh; /* Set height as a percentage of the viewport height */
     overflow-y: auto; /* Enable vertical scrolling */
-    margin: 0 auto; /* Center the container horizontally */
+    margin: 5vh auto; /* Center the container vertically and horizontally */
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }
+    
 
 .header {
-background-color: rgba(0, 0, 0, 0.5); /* Set container background color to semi-transparent black */
-padding: 20px 0;
-border-radius: 10px;
-}
+    background-color: rgba(0, 0, 0, 0.5); /* Set container background color to semi-transparent black */
+    padding: 20px 0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    
+    }
 
 .category {
-display: inline-block;
-width: 25%;
-margin: 0 10px;
-border-radius: 10px;
-cursor: pointer;
-}
+    display: inline-block;
+    width: 25%;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    }
 
 .category h2 {
-font-size: 16px;
-font-weight: 600;
-text-transform: uppercase;
-margin-bottom: 10px;
-color: #fff;
-}
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #fff;
+    }
 
 .count {
-font-size: 12px;
-color: #999;
-font-weight: 300;
-color: #fff;
+    font-size: 12px;
+    color: #999;
+    font-weight: 300;
+    color: #fff;
 }
 
+
+/* Button up and down, open and close */
+
+#toggleButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    font-size: 24px;
+}
+
+#toggleButton i {
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.list-content {
+    padding-top: 20px; /* Adjust the padding as needed */
+    flex: 1;
+    overflow-y: auto;
+    
+}
+
+.table-wrapper {
+    max-height: calc(100vh - 300px); /* Adjust the max height as needed */
+    overflow-y: auto;
+    border: 2px solid #fff; /* Optional: Add a border around the table */
+    border-radius: 10px; /* Optional: Add border radius */
+    margin-bottom: 20px; /* Optional: Add space between table and content */
+}
+    
 /* New styles for the table */
 table {
     width: 100%;
@@ -68,9 +105,7 @@ th, td {
 
 
 
-.list-content {
-    padding-top: 20px; /* Adjust the padding as needed */
-}
+
 
 
 /* Custom styles for the buttons */
@@ -99,16 +134,63 @@ th, td {
   }
   
 
-@media screen and (max-width: 767px) {
-    .container {
-        width: 100%; /* Full width on smaller screens */
+
+/* Centering the icon */
+.centered-icon {
+    text-align: center;
+}
+
+/* Styling the hamburger icon */
+.hamburger-icon {
+    width: 40px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* Styling for the hidden header */
+.hidden-header {
+    display: none;
+    /* Additional styling for your header */
+    /* Adjust as needed */
+    background-color: #f1f1f1;
+    padding: 10px;
+    /* ... */
+}
+
+
+  
+  @media screen and (max-width: 767px) {
+    img {
+        width: 100%;
+        height: auto;
+      }
+
+      .container {
+        text-align: center;
+        width: 90%; /* Set width as a percentage of the viewport width */
+        backdrop-filter: blur(5px);
+        height: 80vh; /* Set height as a percentage of the viewport height */
+        overflow-y: auto; /* Enable vertical scrolling */
+        margin: 5vh auto; /* Center the container vertically and horizontally */
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
     }
 
-    .category {
-        width: 100%; /* Full width for smaller screens */
-    }
+    
 
+        
+    
+    
     th, td {
-        font-size: 12px; /* Reduced font size for smaller screens */
+        padding: 7px; /* Decrease padding for a smaller cell size */
+        text-align: left;
+        border-bottom: 1px solid #ddd;
     }
+    
+
+    
+
 }

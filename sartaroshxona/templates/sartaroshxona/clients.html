@@ -4,39 +4,48 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/clients.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="{% static 'js/clients.js' %}"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <div class="container">
-    <div class="header">
-        <div class="category">
+
+    <div class="header" id="header" style="display: none;">
+        <div class="category" id="inQueueCategory" data-category-title="In queue">
             <a href="{% url 'appointments_by_category' 'in_queue' %}">
-                <h2>In Queue Appointments</h2>
+                <h2>In queue</h2>
                 <p class="count">{{ appointment_in_queue_count }}</p>
             </a>
         </div>
     
-        <div class="category">
+        <div class="category" id="confirmedCategory" data-category-title="Confirmed">
             <a href="{% url 'appointments_by_category' 'confirmed' %}">
-                <h2>Confirmed Appointments</h2>
+                <h2>Confirmed</h2>
                 <p class="count">{{ appointment_confirmed_count }}</p>
             </a>
         </div>
     
-        <div class="category">
+        <div class="category" id="historyCategory" data-category-title="History">
             <a href="{% url 'appointments_by_category' 'history' %}">
-                <h2>History of all done appointments</h2>
+                <h2>History</h2>
                 <p class="count">{{ appointment_history_count }}</p>
             </a>
         </div>
     </div>
+
+    <button onclick="toggleHeader()" id="toggleButton">
+        <i id="icon" class="fas fa-chevron-down"></i>
+    </button>
     
     
+    
+
 
     <!-- Content from the second HTML -->
     <div class="list-content">
-        <h1>Customer Appointment List</h1>
-        <h1>Appointments for Barber: {{ request.user.username }}</h1>
-
+        <h1>{{ selected_category.get_status_display_name }}</h1>
         <table>
             <thead>
                 <tr>
@@ -63,16 +72,25 @@
                         <!-- This is for accept or cancel-->
                         <td>
                             {% if appointment.status == 'in_queue' %}
-                                <form action="{% url 'accept_appointment' appointment.id %}" method="post">
+                                <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
                                     {% csrf_token %}
-                                    <button class="btn btn-outline-primary btn-duration" type="submit">Accept</button>
+                                    <button name="accept" class="btn btn-outline-primary btn-duration" type="submit">Accept</button>
                                 </form>
+                                <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
                                 <form action="{% url 'cancel_appointment' appointment.id %}" method="post">
                                     {% csrf_token %}
                                     <button class="btn btn-outline-primary btn-duration" type="submit">Cancel</button>
                                 </form>
-                            {% else %}
-                                <!-- Your other content or logic here -->
+                            {% elif appointment.status == 'confirmed' %}
+                                <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button name="done" class="btn btn-outline-primary btn-duration" type="submit">Service is done</button>
+                                </form>
+                                <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
+                                <form action="{% url 'cancel_appointment' appointment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-outline-primary btn-duration" type="submit">Service is undone</button>
+                                </form>
                             {% endif %}
 
                         </td>
@@ -84,8 +102,8 @@
                 {% endfor %} 
             </tbody>
         </table>
-
     </div>
+
 </div>
   
   

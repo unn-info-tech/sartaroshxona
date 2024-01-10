@@ -17,6 +17,8 @@ class Appointment(models.Model):
     
     # Add more fields as needed for your appointment details
 
+
+   
     def __str__(self):
         return f"Appointment for {self.client.username} with {self.barber.user.username} at {self.appointment_time} - Status: {self.status}"
 

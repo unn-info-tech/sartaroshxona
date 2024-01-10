@@ -115,6 +115,7 @@ from clients.models import Appointment  # Import the Appointment model
 
 
 def appointments_by_category(request, category):
+    selected_category_instance = Appointment.get_status_display('in_queue')
     logged_in_barber = request.user  # Assuming the logged-in user is the barber
     appointments = None
     appointment_in_queue = Appointment.objects.filter(barber__user=logged_in_barber, status='in_queue').prefetch_related('service')
@@ -131,6 +132,7 @@ def appointments_by_category(request, category):
     appointment_in_queue_count = appointment_in_queue.count()
     appointment_confirmed_count = appointment_confirmed.count()
     appointment_history_count = appointment_history.count()
+    print(selected_category_instance)
 
     return render(request, 'sartaroshxona/clients.html', {
         'appointments': appointments,
@@ -142,12 +144,30 @@ def appointments_by_category(request, category):
 
 from django.shortcuts import redirect, get_object_or_404
 
-def accept_appointment(request, appointment_id):
+def accept_and_done_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
     appointment.status = 'confirmed'  # Assuming you update status field to 'confirmed' when accepted
     appointment.save()
     # Redirect back to appointments page or any other page
     return redirect('appointments_by_category', category='in_queue')
+
+def accept_and_done_appointment(request, appointment_id):
+    appointment = Appointment.objects.get(id=appointment_id)
+
+    if 'accept' in request.POST:
+        # Change status to 'confirmed' if 'Accept' button is clicked
+        appointment.status = 'confirmed'
+        appointment.save()
+        # Redirect back to appointments page or any other page
+        return redirect('appointments_by_category', category='in_queue')
+    
+    elif 'done' in request.POST:
+        # Change status to 'done' if 'Service is done' button is clicked
+        appointment.status = 'done'
+        appointment.save()
+        # Redirect back to appointments page or any other page
+        return redirect('appointments_by_category', category='confirmed')
+
 
 def cancel_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
