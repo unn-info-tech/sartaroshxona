@@ -111,36 +111,45 @@ def barber_profile(request):
 
 from django.shortcuts import render
 from clients.models import Appointment  # Import the Appointment model
+from main.models import CustomUser
 
 
 
 def appointments_by_category(request, category):
-    selected_category_instance = Appointment.get_status_display('in_queue')
+    status_choices = dict(Appointment.STATUS_CHOICES)
+    human_readable_category = status_choices.get(category, category)
+
     logged_in_barber = request.user  # Assuming the logged-in user is the barber
     appointments = None
     appointment_in_queue = Appointment.objects.filter(barber__user=logged_in_barber, status='in_queue').prefetch_related('service')
     appointment_confirmed = Appointment.objects.filter(barber__user=logged_in_barber, status='confirmed').prefetch_related('service')
-    appointment_history = Appointment.objects.filter(barber__user=logged_in_barber, status='done').prefetch_related('service')
+    my_clients = logged_in_barber.my_clients.all()
 
     if category == 'in_queue':
         appointments = appointment_in_queue
     elif category == 'confirmed':
         appointments = appointment_confirmed
-    elif category == 'history':
-        appointments = appointment_history
+    elif category == 'done':
+        my_clients_views = my_clients
+    else:
+       return render(request, 'main/404.html')
+
 
     appointment_in_queue_count = appointment_in_queue.count()
     appointment_confirmed_count = appointment_confirmed.count()
-    appointment_history_count = appointment_history.count()
-    print(selected_category_instance)
+    my_clients_views_count = my_clients_views.count()
+    print(human_readable_category)
 
     return render(request, 'sartaroshxona/clients.html', {
         'appointments': appointments,
-        'selected_category': category,
+        'category': category,
+        'human_readable_category': human_readable_category,
         'appointment_in_queue_count': appointment_in_queue_count,
         'appointment_confirmed_count': appointment_confirmed_count,
-        'appointment_history_count': appointment_history_count,
+        'my_clients_views_count': my_clients_views_count,
     })
+
+
 
 from django.shortcuts import redirect, get_object_or_404
 
@@ -162,10 +171,20 @@ def accept_and_done_appointment(request, appointment_id):
         return redirect('appointments_by_category', category='in_queue')
     
     elif 'done' in request.POST:
-        # Change status to 'done' if 'Service is done' button is clicked
-        appointment.status = 'done'
-        appointment.save()
-        # Redirect back to appointments page or any other page
+        appointment = get_object_or_404(Appointment, pk=appointment_id)
+        
+        # Increment times_appointed for the user
+        user = appointment.client  # Assuming client refers to CustomUser
+        user.times_appointed += 1
+        user.save()
+
+        # Check if the client is associated with a barber and add them to the barber's clients
+        barber = appointment.barber  # Assuming barber refers to Barber model
+        if barber and user not in barber.my_clients.all():
+            barber.my_clients.add(user)
+
+        appointment.delete()
+
         return redirect('appointments_by_category', category='confirmed')
 
 

@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" href="{% static 'css/clients.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script src="{% static 'js/clients.js' %}"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,22 +16,22 @@
     <div class="header" id="header" style="display: none;">
         <div class="category" id="inQueueCategory" data-category-title="In queue">
             <a href="{% url 'appointments_by_category' 'in_queue' %}">
-                <h2>In queue</h2>
+                <h2><i class="fas fa-clock"></i></h2>
                 <p class="count">{{ appointment_in_queue_count }}</p>
             </a>
         </div>
     
         <div class="category" id="confirmedCategory" data-category-title="Confirmed">
             <a href="{% url 'appointments_by_category' 'confirmed' %}">
-                <h2>Confirmed</h2>
+                <h2><i class="fas fa-check-circle"></i></h2>
                 <p class="count">{{ appointment_confirmed_count }}</p>
             </a>
         </div>
     
         <div class="category" id="historyCategory" data-category-title="History">
-            <a href="{% url 'appointments_by_category' 'history' %}">
-                <h2>History</h2>
-                <p class="count">{{ appointment_history_count }}</p>
+            <a href="{% url 'appointments_by_category' 'done' %}">
+                <h2><i class="fas fa-history"></i></h2>
+                <p class="count">{{ my_clients_views_count }}</p>
             </a>
         </div>
     </div>
@@ -45,7 +46,7 @@
 
     <!-- Content from the second HTML -->
     <div class="list-content">
-        <h1>{{ selected_category.get_status_display_name }}</h1>
+        <h1>{{ human_readable_category }}</h1>
         <table>
             <thead>
                 <tr>
@@ -56,50 +57,58 @@
                 </tr>
             </thead>
             <tbody>
-                {% for appointment in appointments %}
-                    <tr>
-                        <td>{{ appointment.client.username }}</td>
-                        <td>{{ appointment.appointment_time }}</td>
-                        <td>
-                            <ul>
-                                {% for service in appointment.service.all %}
-                                    <li>{{ service.title }} - Duration: {{ service.duration_minutes }} minutes - Price: {{ service.price }}</li>
-                                {% empty %}
-                                    <li>No services selected for this appointment.</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                        <!-- This is for accept or cancel-->
-                        <td>
-                            {% if appointment.status == 'in_queue' %}
-                                <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button name="accept" class="btn btn-outline-primary btn-duration" type="submit">Accept</button>
-                                </form>
-                                <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
-                                <form action="{% url 'cancel_appointment' appointment.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button class="btn btn-outline-primary btn-duration" type="submit">Cancel</button>
-                                </form>
-                            {% elif appointment.status == 'confirmed' %}
-                                <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button name="done" class="btn btn-outline-primary btn-duration" type="submit">Service is done</button>
-                                </form>
-                                <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
-                                <form action="{% url 'cancel_appointment' appointment.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button class="btn btn-outline-primary btn-duration" type="submit">Service is undone</button>
-                                </form>
-                            {% endif %}
+                {% if category == 'in_queue' or 'confirmed' %}
+                    {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.client.username }}</td>
+                            <td>{{ appointment.appointment_time }}</td>
+                            <td>
+                                <ul>
+                                    {% for service in appointment.service.all %}
+                                        <li>{{ service.title }} - Duration: {{ service.duration_minutes }} minutes - Price: {{ service.price }}</li>
+                                    {% empty %}
+                                        <li>No services selected for this appointment.</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <!-- This is for accept or cancel-->
+                            <td>
+                                {% if category == 'in_queue' %}
+                                    <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button name="accept" class="btn btn-outline-primary btn-duration" type="submit">Accept</button>
+                                    </form>
+                                    <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
+                                    <form action="{% url 'cancel_appointment' appointment.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-primary btn-duration" type="submit">Cancel</button>
+                                    </form>
+                                {% elif category == 'confirmed' %}
+                                    <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button name="done" class="btn btn-outline-primary btn-duration" type="submit">Service is done</button>
+                                    </form>
+                                    <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
+                                    <form action="{% url 'cancel_appointment' appointment.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-primary btn-duration" type="submit">Service is undone</button>
+                                    </form>
+                                {% endif %}
 
-                        </td>
-                    </tr>
-                {% empty %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No appointments found for this barber.</td>
+                        </tr>
+                    {% endfor %} 
+                {% elif category == 'history' %}
                     <tr>
                         <td colspan="3">No appointments found for this barber.</td>
                     </tr>
-                {% endfor %} 
+
+                {% endif  %} 
+
             </tbody>
         </table>
     </div>
