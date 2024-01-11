@@ -1,5 +1,5 @@
 # Sartaroshxona views.py
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Barber, Service
 from .forms import BarberForm, ServiceForm
 from clients.forms import UserProfileForm
@@ -112,7 +112,7 @@ def barber_profile(request):
 from django.shortcuts import render
 from clients.models import Appointment  # Import the Appointment model
 from main.models import CustomUser
-from .models import ClientBarberInteraction
+from .models import ClientBarberInteraction, DailyWorkRecord
 
 
 
@@ -127,6 +127,7 @@ def appointments_by_category(request, category):
     appointment_in_queue = Appointment.objects.filter(barber__user=logged_in_barber, status='in_queue').prefetch_related('service')
     appointment_confirmed = Appointment.objects.filter(barber__user=logged_in_barber, status='confirmed').prefetch_related('service')
     interactions = ClientBarberInteraction.objects.filter(barber=child_barber)
+    daily_work_record = DailyWorkRecord.objects.all()
 
     if category == 'in_queue':
         appointments = appointment_in_queue
@@ -144,7 +145,6 @@ def appointments_by_category(request, category):
     appointment_confirmed_count = appointment_confirmed.count()
     interactions_count = interactions.count()
 
-    # CONTENT FOR HTML
 
     # RETURN 
     return render(request, 'sartaroshxona/clients.html', {
@@ -159,7 +159,6 @@ def appointments_by_category(request, category):
 
 
 
-from django.shortcuts import redirect, get_object_or_404
 
 def accept_and_done_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
