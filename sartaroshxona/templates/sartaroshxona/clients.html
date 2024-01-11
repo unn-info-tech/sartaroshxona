@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="{% static 'css/clients.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="{% static 'js/clients.js' %}"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,26 +14,35 @@
 <div class="container">
 
     <div class="header" id="header" style="display: none;">
-        <div class="category" id="inQueueCategory" data-category-title="In queue">
+        <div class="category" id="inQueueCategory">
             <a href="{% url 'appointments_by_category' 'in_queue' %}">
-                <h2><i class="fas fa-clock"></i></h2>
+                <h2><i class="fas fa-users"></i></h2>
                 <p class="count">{{ appointment_in_queue_count }}</p>
             </a>
         </div>
     
-        <div class="category" id="confirmedCategory" data-category-title="Confirmed">
+        <div class="category" id="confirmedCategory">
             <a href="{% url 'appointments_by_category' 'confirmed' %}">
-                <h2><i class="fas fa-check-circle"></i></h2>
+                <h2><i class="material-icons">how_to_reg</i></h2>
                 <p class="count">{{ appointment_confirmed_count }}</p>
             </a>
         </div>
     
-        <div class="category" id="historyCategory" data-category-title="History">
+        <div class="category" id="historyCategory">
             <a href="{% url 'appointments_by_category' 'done' %}">
                 <h2><i class="fas fa-history"></i></h2>
-                <p class="count">{{ my_clients_views_count }}</p>
+                <p class="count">{{ interactions_count }}</p>
             </a>
         </div>
+
+        <div class="category" id="moneyCategory">
+            <a href="{% url 'appointments_by_category' 'money' %}">
+                <i class="fas fa-dollar-sign"></i>
+                <p class="count">{{ interactions_count }}</p>
+            </a>
+        </div>
+
+
     </div>
 
     <button onclick="toggleHeader()" id="toggleButton">
@@ -51,13 +60,19 @@
             <thead>
                 <tr>
                     <th>Customer Name</th>
-                    <th>Appointment Date and Time</th>
-                    <th>Service</th>
-                    <th>Action</th> <!-- New table header for Action -->
+                    {% if category == 'in_queue' or category == 'confirmed' %}
+                        <th>Appointment Date and Time</th>
+                        <th>Service</th>
+                        <th>Action</th>
+                    {% elif category == 'done' %}
+                        <th>Times Appointed</th>
+                    {% endif %}
+                    
                 </tr>
             </thead>
             <tbody>
-                {% if category == 'in_queue' or 'confirmed' %}
+<!----------------- This is for 'in_queue' or 'confirmed'------------------------------------>
+                {% if category == 'in_queue' or category == 'confirmed' %}
                     {% for appointment in appointments %}
                         <tr>
                             <td>{{ appointment.client.username }}</td>
@@ -102,10 +117,18 @@
                             <td colspan="3">No appointments found for this barber.</td>
                         </tr>
                     {% endfor %} 
-                {% elif category == 'history' %}
-                    <tr>
-                        <td colspan="3">No appointments found for this barber.</td>
-                    </tr>
+<!----------------- This is for 'in_queue' or 'confirmed'------------------------------------>
+                {% elif category == 'done' %}
+                    {% for interaction in interactions %}
+                        <tr>
+                            <td>{{ interaction.client }}</td>
+                            <td>{{ interaction.times_appointed }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">No clients found for this barber.</td>
+                        </tr>
+                    {% endfor %} 
 
                 {% endif  %} 
 

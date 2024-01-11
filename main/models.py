@@ -27,7 +27,6 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     is_barber = models.BooleanField(default=False)
-    times_appointed = models.PositiveIntegerField(null=True, blank=True, default=0)
 
 
     

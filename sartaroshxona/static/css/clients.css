@@ -36,7 +36,8 @@ body {
 .category {
     display: inline-block;
     width: 25%;
-    margin: 0 5px; /* Reduced margin from 10px to 5px */
+    max-width: 200px; /* Set a maximum width for each category */
+    margin: 0 5px;
     border-radius: 10px;
     cursor: pointer;
 }

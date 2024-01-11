@@ -29,7 +29,6 @@ class Barber(models.Model):
     launch_start_time = models.TimeField(null=True, blank=True)
     launch_end_time = models.TimeField(null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True,default="")
-    my_clients = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='my_clients', null=True, blank=True)
    
 
     def get_services(self):
@@ -37,3 +36,9 @@ class Barber(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+
+class ClientBarberInteraction(models.Model):
+    client = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    barber = models.ForeignKey(Barber, on_delete=models.CASCADE)
+    times_appointed = models.PositiveIntegerField(default=0)

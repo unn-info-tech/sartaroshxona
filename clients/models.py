@@ -6,7 +6,7 @@ class Appointment(models.Model):
     STATUS_CHOICES = (
         ('in_queue', 'In Queue'),
         ('confirmed', 'Confirmed'),
-        ('done', 'Done'),
+        ('done', 'History'),
     )
 
     client = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='client_appointments')
