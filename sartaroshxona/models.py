@@ -35,6 +35,15 @@ class Barber(models.Model):
 
     def get_services(self):
         return self.provided_services.all()  # Renamed related name for clarity
+    
+    def get_currency(self):
+        # Assuming you want the currency from the first service associated with the barber
+        first_service = self.provided_services.first()
+        
+        if first_service:
+            return first_service.currency
+        else:
+            return None
 
     def __str__(self):
         return str(self.user)
@@ -49,7 +58,7 @@ class ClientBarberInteraction(models.Model):
 class DailyWorkRecord(models.Model):
     barber = models.ForeignKey(Barber, on_delete=models.CASCADE, related_name='daily_work_records')
     date = models.DateField()
-    amount_worked = models.DecimalField(max_digits=10, decimal_places=2)
+    amount_worked = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return f"{self.barber.user.username} - {self.date} - Amount: {self.amount_worked}"

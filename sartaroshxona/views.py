@@ -122,12 +122,12 @@ def appointments_by_category(request, category):
     human_readable_category = status_choices.get(category, category)
 
     logged_in_barber = request.user  # Assuming the logged-in user is the barber
-    child_barber = Barber.objects.get(user=logged_in_barber)
+    barber_model = Barber.objects.get(user=logged_in_barber)
     appointments = None
     appointment_in_queue = Appointment.objects.filter(barber__user=logged_in_barber, status='in_queue').prefetch_related('service')
     appointment_confirmed = Appointment.objects.filter(barber__user=logged_in_barber, status='confirmed').prefetch_related('service')
-    interactions = ClientBarberInteraction.objects.filter(barber=child_barber)
-    daily_work_record = DailyWorkRecord.objects.all()
+    interactions = ClientBarberInteraction.objects.filter(barber=barber_model)
+    daily_work_records = DailyWorkRecord.objects.filter(barber=barber_model)
 
     if category == 'in_queue':
         appointments = appointment_in_queue
@@ -144,7 +144,10 @@ def appointments_by_category(request, category):
     appointment_in_queue_count = appointment_in_queue.count()
     appointment_confirmed_count = appointment_confirmed.count()
     interactions_count = interactions.count()
+    daily_work_records_count = daily_work_records.count()
 
+    # CONTENT FOR HTML
+    currency = barber_model.get_currency()
 
     # RETURN 
     return render(request, 'sartaroshxona/clients.html', {
@@ -154,11 +157,15 @@ def appointments_by_category(request, category):
         'appointment_in_queue_count': appointment_in_queue_count,
         'appointment_confirmed_count': appointment_confirmed_count,
         'interactions_count': interactions_count,
+        'daily_work_records_count': daily_work_records_count,
+        'currency': currency,
         'interactions': interactions,
+        'daily_work_records': daily_work_records,
     })
 
 
-
+from django.db.models import Sum
+from datetime import date
 
 def accept_and_done_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
@@ -190,6 +197,20 @@ def accept_and_done_appointment(request, appointment_id):
          # Increment times_appointed
         interaction.times_appointed += 1
         interaction.save()
+
+        # Get the services associated with the appointment
+        services = appointment.service.all()
+
+        # Calculate the total price for the services
+        total_price = services.aggregate(Sum('price'))['price__sum']
+
+        # Get or create the DailyWorkRecord instance for the current date
+        today = date.today()
+        daily_work_record, created = DailyWorkRecord.objects.get_or_create(barber=barber, date=today)
+
+        # Update the amount_worked in DailyWorkRecord
+        daily_work_record.amount_worked += total_price
+        daily_work_record.save()
 
         # appointment.delete()
 

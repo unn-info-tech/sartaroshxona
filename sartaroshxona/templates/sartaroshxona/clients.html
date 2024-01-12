@@ -39,7 +39,7 @@
             <a href="{% url 'appointments_by_category' 'money' %}">
                 <h2><i class="fas fa-money-bill-wave"></i></h2>
 
-                <p class="count">{{ interactions_count }}</p>
+                <p class="count">{{ daily_work_records_count }}</p>
             </a>
         </div>
 
@@ -56,17 +56,21 @@
 
     <!-- Content from the second HTML -->
     <div class="list-content">
-        <h1>{{ human_readable_category }}</h1>
+        <h1>{{ category }}</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Customer Name</th>
                     {% if category == 'in_queue' or category == 'confirmed' %}
+                        <th>Customer Name</th>
                         <th>Appointment Date and Time</th>
                         <th>Service</th>
                         <th>Action</th>
                     {% elif category == 'done' %}
+                        <th>Customer Name</th>
                         <th>Times Appointed</th>
+                    {% elif category == 'done' %}
+                        <th>Date</th>
+                        <th>Amount worked</th>
                     {% endif %}
                     
                 </tr>
@@ -118,7 +122,7 @@
                             <td colspan="3">No appointments found for this barber.</td>
                         </tr>
                     {% endfor %} 
-<!----------------- This is for 'in_queue' or 'confirmed'------------------------------------>
+<!----------------- This is for 'done'------------------------------------>
                 {% elif category == 'done' %}
                     {% for interaction in interactions %}
                         <tr>
@@ -128,6 +132,18 @@
                     {% empty %}
                         <tr>
                             <td colspan="2">No clients found for this barber.</td>
+                        </tr>
+                    {% endfor %} 
+<!----------------- This is for 'money'------------------------------------>
+                {% elif category == 'money' %}
+                    {% for daily_work_record in daily_work_records %}
+                        <tr>
+                            <td>{{ daily_work_record.date }}</td>
+                            <td>{{ daily_work_record.amount_worked }}{{ currency }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">No amount_worked found for this barber.</td>
                         </tr>
                     {% endfor %} 
 
