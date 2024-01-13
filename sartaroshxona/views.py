@@ -212,17 +212,17 @@ def accept_and_done_appointment(request, appointment_id):
         daily_work_record.amount_worked += total_price
         daily_work_record.save()
 
-        # appointment.delete()
+        appointment.delete()
 
 
         return redirect('appointments_by_category', category='confirmed')
 
 
-def cancel_appointment(request, appointment_id):
+def cancel_appointment(request, appointment_id, category):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
     appointment.delete()  # Delete the appointment
     # Redirect back to appointments page or any other page
-    return redirect('appointments_by_category', category='in_queue')
+    return redirect('appointments_by_category', category=category)
 
 
 

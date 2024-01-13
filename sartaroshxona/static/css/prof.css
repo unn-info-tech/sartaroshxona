@@ -1,34 +1,189 @@
-/* Style for read-only input fields */
-.readonly-input {
-    display: inline-block;
-    margin: 5px 0;
-    color: #333;
-    border: none;
-    background: none;
+body {
+    background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
     padding: 0;
-    font-family: inherit;
-    font-size: inherit;
-    cursor: default; /* Set cursor to default */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Set background to fixed position */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .container {
+    text-align: left; /* Align text to the left for a cleaner look */
+    width: 80%;
+    backdrop-filter: blur(5px);
+    overflow-y: auto; /* Allow containers to scroll */
+    height: calc(100vh - 40px); /* Adjust height as needed */
+    margin-top: 20px; /* Increase margin top for better separation */
+    /* Ensure the container has a background to see the content */
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .container h1 {
+    text-align: center; /* Center only the h2 within the container */
+    /* Add any other styles you want for the h2 */
 }
 
-/* Style for edit button */
-#editButton {
-    display: inline-block;
-    margin-bottom: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
+.container button {
+  margin: 0 auto; /* Center the button horizontally */
+  display: block; /* Ensure the button takes full width and centers */
+  
 }
 
-/* Style for cancel button */
-#cancelButton {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 5px 10px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
+/* Common styles for profile image container */
+.profile-field {
+  margin-bottom: 20px;
+}
+
+/* Style for profile image */
+.profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ /* Profile image */
+.profile-image-container img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px; /* Add rounded corners to the image */
+}
+
+.profile-image-container button {
+  background-color: ffffff;
+  border: 3px solid #ffffff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+/* Style for the file input button */
+.profile-image-container input[type="file"] {
+  display: none; /* Hide the default file input button */
+}
+
+.profile-image-container label {
+  background-color: rgba(0, 0, 0, 0.5);; /* Change this color to your desired color */
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  font-size: medium;
+}
+
+.profile-image-container label:hover {
+  background-color: #ffffff;
+  color: #000;
+}
+
+
+
+/* ---------------------------------------------------------------------------) */
+
+.card {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+  margin-bottom: 20px;
+  padding: 30px 20px;
+  border-radius: 10px;
+}
+  
+  /* Apply these styles to all elements inside the container */
+  .container * {
+    color: #fff; /* Set text color to white */
+  }
+  
+  .container input[type="text"],
+  .container input[type="password"],
+  .container input[type="email"],
+  .container input[type="date"],
+  .container select,
+  .container input[type="tel"], /* Add phone number field style */
+  .container input[type="time"] {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 10px; /* Adjust padding for better visual */
+    width: 100%; /* Take full width of the container */
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Add margin to separate fields */
+  }
+  
+  .container button {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px; /* Add margin to separate buttons */
+    font-size: small;
+  }
+  
+  .container button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .container table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  .container th,
+  .container td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+
+/* Common styles for service containers */
+.service-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+  margin-bottom: 10px;
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+
+#editServiceForm .price input,
+#editServiceForm .duration input {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+
+}
+
+
+/* Media query for smaller screens */
+@media screen and (max-width: 767px) {
+  .container {
+    width: auto; /* Full width on smaller screens */
+    padding: 10px; /* Adjusted padding for better spacing */
+  }
+
+  
+  
 }

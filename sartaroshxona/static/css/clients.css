@@ -78,6 +78,7 @@ body {
     padding-top: 20px; /* Adjust the padding as needed */
     flex: 1;
     overflow-y: auto;
+    border-radius: 20px;
     
 }
 
@@ -98,8 +99,18 @@ table {
     background-color: rgba(0, 0, 0, 0.5);/* Semi-transparent white background */
 }
 
+td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    max-width: 400px; /* Set your desired max-width value */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 th, td {
-    padding: 10px;
+    padding: 5px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -172,8 +183,9 @@ th, td {
 
       .category {
         display: inline-block;
-        width: 25%;
-        margin: 0 5px; /* Reduced margin from 10px to 5px */
+        width: 20%;
+        max-width: 200px; /* Set a maximum width for each category */
+        margin: 0 5px;
         border-radius: 10px;
         cursor: pointer;
     }
@@ -182,10 +194,10 @@ th, td {
     
 
         
-    
+            
     
     th, td {
-        padding: 7px; /* Decrease padding for a smaller cell size */
+        padding: 10px; /* Decrease padding for a smaller cell size */
         text-align: left;
         border-bottom: 1px solid #ddd;
     }

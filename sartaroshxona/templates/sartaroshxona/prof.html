@@ -3,175 +3,183 @@
 
 {% block content %}
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="{% static '/css/prof.css' %}">
 <script src="{% static 'js/prof.js' %}"></script>
 
-<h1>User Profile</h1>
-<!-- Read-only mode -->
-<div id="readOnlyUserMode">
-    <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
-    <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
-    <button id="editUserButton">Edit</button>
-</div>
+<div class="container">
+    <h1>User Profile</h1>
+    <!-- Read-only mode -->
+    <div id="readOnlyUserMode">
+        <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
+        <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
+        <button id="editUserButton">Edit</button>
+    </div>
 
-<!-- Edit mode -->
-<div id="editUserForm" style="display: none;">
+    <!-- Edit mode -->
+    <div id="editUserForm" style="display: none;">
+        <form method="post">
+            {% csrf_token %}
+            <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
+            <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
+
+            <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
+            <button id="cancelUserButton" type="button">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Read-only mode for Password Change -->
+    <div id="readOnlyPasswordMode">
+    <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
+    <button id="editPasswordButton">Change Password</button>
+    </div>
+
+    <!-- Edit mode for Password Change -->
+    <div id="editPasswordForm" style="display: none;">
     <form method="post">
         {% csrf_token %}
-        <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
-        <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
-
-        <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
-        <button id="cancelUserButton" type="button">Cancel</button>
+        {{ password_change_form.as_p}}
+        <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
+        <button id="cancelPasswordButton" type="button">Cancel</button>
     </form>
-</div>
-
-<!-- Read-only mode for Password Change -->
-<div id="readOnlyPasswordMode">
-  <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
-  <button id="editPasswordButton">Change Password</button>
-</div>
-
-<!-- Edit mode for Password Change -->
-<div id="editPasswordForm" style="display: none;">
-  <form method="post">
-      {% csrf_token %}
-      {{ password_change_form.as_p}}
-      <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
-      <button id="cancelPasswordButton" type="button">Cancel</button>
-  </form>
-</div>
+    </div>
 
 
 
-<h1>Barber Profile</h1>
-<!-- Read-only mode -->
-<div id="readOnlyBarberMode">
-  <!-- For profile_image -->
-  <!-- Profile Image -->
-    <p><input type="hidden" name="user" value="{{ barber.user.username }}" id="user" disabled></p>
+    <h1 class="profile-header">Barber Profile</h1>
+    <!-- Read-only mode -->
+    <div id="readOnlyBarberMode">
+    <!-- For profile_image -->
+    <!-- Profile Image -->
+        <div class="profile-field">
+            <p><input type="hidden" name="user" value="{{ barber.user.username }}" id="user" disabled></p>
 
-    <p>Profile Image: 
-        {% if barber.profile_image %}
-            <img src="{{ barber.profile_image.url }}" alt="Profile Image" style="width: 200px; height: auto;">
-        {% else %}
-            <span>No image found.</span>
-        {% endif %}
-    </p>
-    <p>Phone Number: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" disabled></p>
+            <div class="profile-field">
+                <div class="profile-image-container">
+                    {% if barber.profile_image %}
+                        <img src="{{ barber.profile_image.url }}" alt="Profile Image" style="width: 200px; height: auto;">
+                    {% else %}
+                        <span>No image found.</span>
+                    {% endif %}
+                </div>
+            </div>
+            <p>Phone Number: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" disabled></p>
 
-    <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work" disabled></p>
+            <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work" disabled></p>
 
-    <p>End Work: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" disabled></p>
+            <p>End Work: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" disabled></p>
 
-    <p>Launch Start Time: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" disabled></p>
+            <p>Launch Start Time: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" disabled></p>
 
-    <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" disabled></p>
+            <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" disabled></p>
 
-    <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" disabled></p>
+            <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" disabled></p>
 
-    <button id="editBarberButton">Edit</button>
-    
-</div>
+            <button id="editBarberButton">Edit</button>
+            
+        </div>
+    </div>
 
-<!-- Edit mode -->
-<div id="editBarberForm" style="display: none;">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+    <!-- Edit mode -->
+    <div id="editBarberForm" style="display: none;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <p><input type="hidden" name="user" value="{{ barber_form.user.value }}" id="user" ></p>
+
+            <div class="profile-field">
+                <div class="profile-image-container">
+                    {% if barber.profile_image %}
+                        <img src="{{ barber.profile_image.url }}" alt="Profile Image">
+                        <button type="submit" name="delete_image">Delete Image</button>
+                    {% else %}
+                        <span>No profile image found.</span>
+                    {% endif %}
+                    <input type="file" name="profile_image" id="profile_image_input">
+                    <label for="profile_image_input">Choose File</label>
+                    <span class="file-input-text"></span>
+                </div>
+            </div>
+            
+            <p>Phone Number: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" ></p>
         
-        <p><input type="hidden" name="user" value="{{ barber_form.user.value }}" id="user" ></p>
-
-        <p>
-            Profile image: 
-            {% if barber.profile_image %}
-                <img src="{{ barber.profile_image.url }}" alt="Profile Image" style="width: 200px; height: auto;">
-                <button type="submit" name="delete_image">Delete Image</button>
-            {% else %}
-                <span>No profile image found.</span>
-            {% endif %}
-            <input type="file" name="profile_image" id="profile_image">
-        </p>
+            <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work"></p>
         
-        <p>Phone Number: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" ></p>
-    
-        <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work"></p>
-    
-        <p>End Work: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" ></p>
-    
-        <p>Launch Start Time: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" ></p>
-    
-        <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" ></p>
-    
-        <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
+            <p>End Work: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" ></p>
         
-        <button id="saveBarberButton" type="submit" name="barber_info_form">Save Changes</button>
-        <button id="cancelBarberButton" type="button">Cancel</button>
-    </form>
-</div>
+            <p>Launch Start Time: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" ></p>
+        
+            <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" ></p>
+        
+            <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
+            
+            <button id="saveBarberButton" type="submit" name="barber_info_form">Save Changes</button>
+            <button id="cancelBarberButton" type="button">Cancel</button>
+        </form>
+    </div>
 
 
 
 
 
-<h2>Existing Services</h2>
+    <h1>Existing Services</h1>
 
-<!-- Read-only mode -->
-<div id="readOnlyServiceMode">
-    {% if services %}
-        <ol>
-            {% for service in services %}
-                <li>
-                    <span class="readonly-input">{{ service.title }} - {{ service.price }} {{ service.currency}} - {{ service.duration_minutes}}min</span>
-                </li>
-            {% endfor %}
-        </ol>
-    {% else %}
-        <p>No services found.</p>
-    {% endif %}
-
-    <button id="editServiceButton">Edit</button>
-</div>
-
-<!-- Edit mode -->
-<div id="editServiceForm" style="display: none;">
-    <form method="post">
-        {% csrf_token %}
+    <!-- Read-only mode -->
+    <div id="readOnlyServiceMode">
         {% if services %}
-            <ol>
+            {% for service in services %}
+                <div  class="service-container">
+                    <li>
+                        <span class="readonly-input">{{ service.title }} - {{ service.price }} {{ service.currency}} - {{ service.duration_minutes}}min</span>
+                    </li>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No services found.</p>
+        {% endif %}
+
+        <button id="editServiceButton">Edit</button>
+    </div>
+
+    <!-- Edit mode -->
+    <div id="editServiceForm" style="display: none;">
+        <form method="post">
+            {% csrf_token %}
+            {% if services %}
                 {% for service in services %}
                     <li>
                         <input type="checkbox" name="delete[]" value="{{ service.id }}">
                         <input type="hidden" name="id[]" value="{{ service.id }}">
                         <p>Title: <input type="text" name="title[]" value="{{ service.title }}"></p>
-                        <p>Price: <input type="number" name="price[]" value="{{ service.price }}"></p>
+                        <p class="price" >Price: <input type="number" name="price[]" value="{{ service.price }}"></p>
                         <p>Currency: <input type="text" name="currency[]" value="{{ service.currency }}"></p>
-                        <p>Duration minutes: <input type="number" name="duration_minutes[]" value="{{ service.duration_minutes }}"></p>
+                        <p class="duration" >Duration minutes: <input type="number" name="duration_minutes[]" value="{{ service.duration_minutes }}"></p>
                     </li>
                 {% endfor %}
-            </ol>
-        {% else %}
-            <p>No services found to edit.</p>
-        {% endif %}
-        <button type="submit" name="service_edit_form">Save Changes</button>
-        <button type="submit" name="service_delete_form">Delete Selected</button>
-        <button id="cancelServiceButton" type="button">Cancel</button>
-    </form>
-</div>
+            {% else %}
+                <p>No services found to edit.</p>
+            {% endif %}
+            <button type="submit" name="service_edit_form">Save Changes</button>
+            <button type="submit" name="service_delete_form">Delete Selected</button>
+            <button id="cancelServiceButton" type="button">Cancel</button>
+        </form>
+    </div>
 
 
-<h2>Add New Service</h2>
-<div id="showAddServiceForm">
-    <button>Add New Service</button>
-</div>
+    <h1>Add New Service</h1>
+    <div id="showAddServiceForm">
+        <button>Add New Service</button>
+    </div>
 
-<div id="addServiceForm" style="display: none;">
-    <form method="post">
-        {% csrf_token %}
-        {{ service_form.as_p }}
-        <button type="submit" name="service_form">Add Service</button>
-        <button type="button" id="cancelAddService">Cancel</button>
-    </form>
+    <div id="addServiceForm" style="display: none;">
+        <form method="post">
+            {% csrf_token %}
+            {{ service_form.as_p }}
+            <button type="submit" name="service_form">Add Service</button>
+            <button type="button" id="cancelAddService">Cancel</button>
+        </form>
+    </div>
 </div>
 
 
