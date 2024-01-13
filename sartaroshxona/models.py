@@ -4,16 +4,7 @@ from main.models import CustomUser  # Assuming this is your CustomUser model
 class Service(models.Model):
     barber = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='provided_services')
     title = models.CharField(max_length=50)
-    CURRENCY_CHOICES = [
-        ('USD', 'US Dollar'),
-        ('EUR', 'Euro'),
-        ('RUB', 'Russian Ruble'),
-        ('TJS', 'Tajik Somoni'),
-        ('UZS', 'Uzbekistani Soʻm'),
-        # Add more currency choices here
-    ]
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='TJS')
     duration_minutes = models.PositiveIntegerField()
 
     def __str__(self):
@@ -29,6 +20,16 @@ class Barber(models.Model):
     launch_start_time = models.TimeField(null=True, blank=True)
     launch_end_time = models.TimeField(null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True,default="")
+
+    CURRENCY_CHOICES = [
+        ('USD', 'US Dollar'),
+        ('EUR', 'Euro'),
+        ('RUB', 'Russian Ruble'),
+        ('TJS', 'Tajik Somoni'),
+        ('UZS', 'Uzbekistani Soʻm'),
+        # Add more currency choices here
+    ]
+    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='TJS')
 
    
    

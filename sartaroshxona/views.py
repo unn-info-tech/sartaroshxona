@@ -58,7 +58,6 @@ def barber_profile(request):
             service_ids = request.POST.getlist('id[]')
             titles = request.POST.getlist('title[]')
             prices = request.POST.getlist('price[]')
-            currencies = request.POST.getlist('currency[]')
             durations = request.POST.getlist('duration_minutes[]')
             print(service_ids)
 
@@ -66,7 +65,6 @@ def barber_profile(request):
                 service = Service.objects.get(pk=service_id)
                 service.title = titles[i]
                 service.price = prices[i]
-                service.currency = currencies[i]
                 service.duration_minutes = durations[i]
                 service.save()
 

@@ -76,6 +76,8 @@
 
             <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" disabled></p>
 
+            <p>Currency: <input type="text" name="currency" value="{{ barber_form.currency.value }}" id="currency" disabled></p>
+
             <button id="editBarberButton">Edit</button>
             
         </div>
@@ -96,9 +98,10 @@
                     {% else %}
                         <span>No profile image found.</span>
                     {% endif %}
-                    <input type="file" name="profile_image" id="profile_image_input">
-                    <label for="profile_image_input">Choose File</label>
-                    <span class="file-input-text"></span>
+                    <div id="container_image_button">
+                        <input type="file" name="profile_image" id="profile_image_input">
+                    </div>
+                    
                 </div>
             </div>
             
@@ -113,6 +116,15 @@
             <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" ></p>
         
             <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
+
+            <p>Currency: 
+                <select name="currency" id="currency">
+                  {% for choice in barber_form.currency.field.choices %}
+                    <option value="{{ choice.0 }}" {% if choice.0 == barber_form.currency.value %}selected{% endif %}>{{ choice.1 }}</option>
+                  {% endfor %}
+                </select>
+            </p>
+              
             
             <button id="saveBarberButton" type="submit" name="barber_info_form">Save Changes</button>
             <button id="cancelBarberButton" type="button">Cancel</button>
@@ -131,7 +143,7 @@
             {% for service in services %}
                 <div  class="service-container">
                     <li>
-                        <span class="readonly-input">{{ service.title }} - {{ service.price }} {{ service.currency}} - {{ service.duration_minutes}}min</span>
+                        <span class="readonly-input">{{ service.title }} - {{ service.price }} {{ barber.currency}} - {{ service.duration_minutes}}min</span>
                     </li>
                 </div>
             {% endfor %}
@@ -152,8 +164,7 @@
                         <input type="checkbox" name="delete[]" value="{{ service.id }}">
                         <input type="hidden" name="id[]" value="{{ service.id }}">
                         <p>Title: <input type="text" name="title[]" value="{{ service.title }}"></p>
-                        <p class="price" >Price: <input type="number" name="price[]" value="{{ service.price }}"></p>
-                        <p>Currency: <input type="text" name="currency[]" value="{{ service.currency }}"></p>
+                        <p class="price" >Price: <input type="number" name="price[]" value="{{ service.price }}"> {{ barber.currency}}</p>
                         <p class="duration" >Duration minutes: <input type="number" name="duration_minutes[]" value="{{ service.duration_minutes }}"></p>
                     </li>
                 {% endfor %}
@@ -175,7 +186,10 @@
     <div id="addServiceForm" style="display: none;">
         <form method="post">
             {% csrf_token %}
-            {{ service_form.as_p }}
+            <p><input type="hidden" name="barber" value="{{ service_form.barber.value }}" id="barber" ></p>
+            <p>Title: <input type="text" name="title" value="{{ service_form.title.value|default:'' }}"></p>
+            <p class="price">Price: <input type="number" name="price" value="{{ service_form.price.value }}"> {{ barber.currency }}</p>
+            <p class="duration">Duration minutes: <input type="number" name="duration_minutes" value="{{ service_form.duration_minutes.value }}"> min.</p>
             <button type="submit" name="service_form">Add Service</button>
             <button type="button" id="cancelAddService">Cancel</button>
         </form>
