@@ -6,47 +6,46 @@ from django.forms import TextInput, PasswordInput
 from .models import Country, City, Region, District
 
 
+
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'is_barber', 'country', 'region', 'district', 'city']  # Include the fields you want in the form
+        fields = ['username', 'email', 'password1', 'password2', 'is_barber', 'country', 'region', 'district', 'city']
 
         labels = {
             'username': 'Username',
             'email': 'Email',
             'password1': 'Password',
             'password2': 'Confirm Password',
-            'is_barber': 'Barber',  # Customize labels for other fields if needed
+            'is_barber': 'Barber',
+            # Customize labels for other fields if needed
         }
-        
+
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'Enter yor username'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Enter your username'}),
             'email': forms.TextInput(attrs={'placeholder': 'Email'}),
-            'password1': forms.PasswordInput(attrs={'placeholder': 'Ente your password'}),
-            'password2': forms.PasswordInput(attrs={'placeholder': 'Confirm your password'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password confirmation'}),
             'is_barber': forms.CheckboxInput(attrs={'id': 'is_barber'}),
             # Add other fields' placeholders as needed
         }
 
+    country = forms.ModelChoiceField(queryset=Country.objects.all(), empty_label="Select Country")
+    
+    region = forms.ModelChoiceField(queryset=Region.objects.all(), empty_label="Select Region")
+
+    district = forms.ModelChoiceField(queryset=District.objects.all(), empty_label="Select District")
+
+    city = forms.ModelChoiceField(queryset=City.objects.all(), empty_label="Select City")
+
+
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+
         self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password confirmation'})
 
-    # FOR LOCATIONS:
-    country = forms.ModelChoiceField(queryset=Country.objects.all(), empty_label="Select Country")
-
-    region = forms.ModelChoiceField(queryset=Region.objects.none(), required=False,
-                                    label="Region/State/Province")
-    
-    district = forms.ModelChoiceField(queryset=District.objects.none(), required=False,
-                                    label="District/County")
-
-    city = forms.ModelChoiceField(queryset=City.objects.none(), required=False,
-                                    label="City/Town/Village")
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         self.fields['region'].queryset = Region.objects.none()
         self.fields['district'].queryset = District.objects.none()
         self.fields['city'].queryset = City.objects.none()
@@ -56,7 +55,7 @@ class CustomUserCreationForm(UserCreationForm):
                 country_id = int(self.data.get('country'))
                 self.fields['region'].queryset = Region.objects.filter(country_id=country_id)
             except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty queryset
+                pass
         elif self.instance.pk:
             self.fields['region'].queryset = self.instance.country.region_set.order_by('name')
 
@@ -65,7 +64,7 @@ class CustomUserCreationForm(UserCreationForm):
                 region_id = int(self.data.get('region'))
                 self.fields['district'].queryset = District.objects.filter(region_id=region_id)
             except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty queryset
+                pass
         elif self.instance.pk:
             self.fields['district'].queryset = self.instance.region.district_set.order_by('name')
 
@@ -74,9 +73,7 @@ class CustomUserCreationForm(UserCreationForm):
                 district_id = int(self.data.get('district'))
                 self.fields['city'].queryset = City.objects.filter(district_id=district_id)
             except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty queryset
-
-        
+                pass
         elif self.instance.pk:
             self.fields['city'].queryset = self.instance.district.city_set.order_by('name')
 

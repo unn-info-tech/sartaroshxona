@@ -8,14 +8,6 @@ from .models import City, District, Region
 
 
 
-def person_create_view(request):
-    form = PersonCreationForm()
-    if request.method == 'POST':
-        form = PersonCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('person_add')
-    return render(request, 'ijazah/home.html', {'form': form})
 
 
 

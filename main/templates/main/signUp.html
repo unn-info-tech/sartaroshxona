@@ -7,11 +7,15 @@
 {% block content %}
 <meta charset="utf-8">
 <title>Login Form Design | CodeLab</title>
+<link rel="stylesheet" href="{% static 'css/signboth.css' %}">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="{% static 'js/locations.js' %}"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
       <!-- Display form errors -->
       {% include 'main/messages.html' %}
-
+   <div class="background-image">
       <div class="wrapper">
          <div class="title">
             Sign Up
@@ -61,8 +65,6 @@
                Do you have an account? <a href="/main/signin/">Sign in now</a>
             </div>
          </form>
-
-    
       </div>
+   </div>
 {% endblock %}
-

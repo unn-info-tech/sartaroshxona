@@ -1,29 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-html,body{
+
+html, body {
   display: grid;
   height: 100%;
   width: 100%;
   place-items: center;
-  background: #f2f2f2;
-  /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
+  background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp');
+  background-size: cover;
+  background-position: center;
 }
-::selection{
+
+::selection {
   background: #4158d0;
   color: #fff;
 }
-.wrapper{
+
+.wrapper {
   width: 380px;
-  background: #fff;
+  backdrop-filter: blur(5px);
   border-radius: 15px;
-  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Make the container scrollable */
 }
-.wrapper .title{
+
+.wrapper .title {
   font-size: 35px;
   font-weight: 600;
   text-align: center;
@@ -31,18 +37,22 @@ html,body{
   color: #fff;
   user-select: none;
   border-radius: 15px 15px 0 0;
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  background: rgba(0, 0, 0, 0.623);
 }
-.wrapper form{
+
+.wrapper form {
   padding: 10px 30px 50px 30px;
 }
-.wrapper form .field{
+
+.wrapper form .field {
   height: 50px;
   width: 100%;
   margin-top: 20px;
   position: relative;
 }
-.wrapper form .field input{
+
+.wrapper form .field input,
+.wrapper form .field select {
   height: 100%;
   width: 100%;
   outline: none;
@@ -51,12 +61,17 @@ html,body{
   border: 1px solid lightgrey;
   border-radius: 25px;
   transition: all 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent white background */
+  color: #fff;
 }
+
 .wrapper form .field input:focus,
-form .field input:valid{
-  border-color: #4158d0;
+form .field input:valid,
+.wrapper form .field select:focus {
+  border: 2px solid #fff;
 }
-.wrapper form .field label{
+
+.wrapper form .field label {
   position: absolute;
   top: 50%;
   left: 20px;
@@ -68,16 +83,40 @@ form .field input:valid{
   transition: all 0.3s ease;
 }
 
-
+.wrapper form .field select ~ label,
 form .field input:focus ~ label,
-form .field input:valid ~ label{
+form .field input:valid ~ label {
   top: 0%;
   font-size: 16px;
   color: #4158d0;
   background: #fff;
   transform: translateY(-50%);
 }
-form .content{
+
+
+/* Disable autofill background color and set text color to white */
+.wrapper form .field input:-webkit-autofill,
+.wrapper form .field select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.5) inset; /* Set a box-shadow to maintain background color */
+  -webkit-background-clip: text; /* Clip the background to text */
+  background-color: transparent !important; /* Set the background color to transparent */
+  color: #fff !important; /* Set the text color to white */
+}
+
+/* Additional styling for autofilled inputs in focus */
+.wrapper form .field input:-webkit-autofill:focus,
+.wrapper form .field select:-webkit-autofill:focus {
+  border: 2px solid #fff; /* Set border color when in focus */
+  color: #fff !important; /* Set the text color to white in focus */
+}
+
+
+
+
+
+
+
+form .content {
   display: flex;
   width: 100%;
   height: 50px;
@@ -85,24 +124,29 @@ form .content{
   align-items: center;
   justify-content: space-around;
 }
-form .content .checkbox{
+
+form .content .checkbox {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-form .content input{
+
+form .content input {
   width: 15px;
   height: 15px;
   background: red;
 }
-form .content label{
+
+form .content label {
   color: #262626;
   user-select: none;
   padding-left: 5px;
 }
-form .content .pass-link{
+
+form .content .pass-link {
   color: "";
 }
+
 .wrapper form .field button[type="submit"] {
   color: #fff;
   border: none;
@@ -122,17 +166,51 @@ form .content .pass-link{
   transform: scale(0.95);
 }
 
-form .signup-link{
+form .signup-link {
   color: #262626;
   margin-top: 20px;
   text-align: center;
 }
+
 form .pass-link a,
-form .signup-link a{
+form .signup-link a {
   color: #4158d0;
   text-decoration: none;
 }
+
 form .pass-link a:hover,
-form .signup-link a:hover{
+form .signup-link a:hover {
   text-decoration: underline;
 }
+
+
+/* Add media query for smaller screens (adjust the max-width as needed) */
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    width: 80%; /* Adjust the width for smaller screens */
+  }
+
+  .wrapper .title {
+    font-size: 25px; /* Adjust the font size for smaller screens */
+    line-height: 80px; /* Adjust the line height for smaller screens */
+  }
+
+  .wrapper form {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .wrapper form .field {
+    margin-top: 15px; /* Adjust margin for smaller screens */
+  }
+
+  .wrapper form .field input,
+  .wrapper form .field select {
+    font-size: 16px; /* Adjust the font size for smaller screens */
+  }
+
+  .wrapper form .field button[type="submit"] {
+    font-size: 18px; /* Adjust the font size for smaller screens */
+  }
+}
+
+/* The rest of your CSS remains unchanged */
