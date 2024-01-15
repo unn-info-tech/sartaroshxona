@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Field Choices</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#id_category').change(function() {
+            var category = $(this).val();  // Get the selected category
+            var url = '/get_items/' + category + '/';  // URL to fetch options for the selected category
+
+            // Make an AJAX request to fetch the options
+            $.get(url, function(data) {
+                var options = '';
+                for (var i = 0; i < data.length; i++) {
+                    options += '<option value="' + data[i].value + '">' + data[i].display_name + '</option>';
+                }
+                $('#id_item').html(options);  // Update the options in the "Item" field
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+    <form>
+        <label for="id_category">Category:</label>
+        <select id="id_category">
+            <option value="fruits">Fruits</option>
+            <option value="vegetables">Vegetables</option>
+        </select>
+
+        <br>
+
+        <label for="id_item">Item:</label>
+        <select id="id_item" name="item">
+            <!-- Options will be dynamically added here -->
+        </select>
+    </form>
+</body>
+</html>

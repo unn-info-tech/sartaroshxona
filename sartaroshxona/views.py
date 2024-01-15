@@ -145,7 +145,7 @@ def appointments_by_category(request, category):
     daily_work_records_count = daily_work_records.count()
 
     # CONTENT FOR HTML
-    currency = barber_model.get_currency()
+
 
     # RETURN 
     return render(request, 'sartaroshxona/clients.html', {
@@ -156,7 +156,7 @@ def appointments_by_category(request, category):
         'appointment_confirmed_count': appointment_confirmed_count,
         'interactions_count': interactions_count,
         'daily_work_records_count': daily_work_records_count,
-        'currency': currency,
+        'currency': barber_model.currency,
         'interactions': interactions,
         'daily_work_records': daily_work_records,
     })

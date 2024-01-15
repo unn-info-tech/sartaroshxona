@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependent Dropdown in Django</title>
+</head>
+<body>
+    <h2>Person Form</h2>
+
+    <form method="post" id="personForm" 
+          data-regions-url="{% url 'ajax_load_regions' %}" 
+          data-districts-url="{% url 'ajax_load_districts' %}" 
+          data-cities-url="{% url 'ajax_load_cities' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $("#id_country").change(function () {
+            const url = $("#personForm").data("regions-url");
+            const countryId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'country_id': countryId
+                },
+                success: function (data) {
+                    $("#id_region").html(data);
+                }
+            });
+        });
+
+        $("#id_region").change(function () {
+            const url = $("#personForm").data("districts-url");
+            const regionId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'region_id': regionId
+                },
+                success: function (data) {
+                    $("#id_district").html(data);
+                }
+            });
+        });
+
+        $("#id_district").change(function () {
+            const url = $("#personForm").data("cities-url");
+            const districtId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'district_id': districtId
+                },
+                success: function (data) {
+                    $("#id_city").html(data);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

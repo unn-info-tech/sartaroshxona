@@ -37,14 +37,7 @@ class Barber(models.Model):
     def get_services(self):
         return self.provided_services.all()  # Renamed related name for clarity
     
-    def get_currency(self):
-        # Assuming you want the currency from the first service associated with the barber
-        first_service = self.provided_services.first()
-        
-        if first_service:
-            return first_service.currency
-        else:
-            return None
+    
 
     def __str__(self):
         return str(self.user)

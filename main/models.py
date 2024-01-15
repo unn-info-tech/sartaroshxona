@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from locations.models import Country, Region, District, City
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
@@ -27,6 +28,12 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     is_barber = models.BooleanField(default=False)
+
+    # LOCATIONS
+    country =  models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
+    region = models.ForeignKey(Region, on_delete=models.SET_NULL, blank=True, null=True)
+    district = models.ForeignKey(District, on_delete=models.SET_NULL, blank=True, null=True)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
 
 
     

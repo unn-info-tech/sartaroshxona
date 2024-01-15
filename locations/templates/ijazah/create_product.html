@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Product</title>
+</head>
+<body>
+    <h1>Create Product</h1>
+
+    <form action="{% url 'create_product' %}" method="post">
+        {% csrf_token %}
+        
+        <label for="product_type">Product Type:</label>
+        <select name="product_type" id="product_type">
+            <option value="fruit">Fruit</option>
+            <option value="vegetable">Vegetable</option>
+        </select>
+
+        <label for="product_name">Product Name:</label>
+        <select name="product_name" id="product_name">
+            <!-- Options will be populated dynamically based on the selected product_type -->
+            {% for value, label in form.product_name.field.choices %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Create Product</button>
+    </form>
+</body>
+</html>

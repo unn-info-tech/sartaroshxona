@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'sartaroshxona',
     'clients',
     'main',
+    'locations',
 ]
 
 MIDDLEWARE = [
