@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  color: #fff; /* This sets the default text color to white */
 }
 
 html, body {
@@ -14,19 +16,20 @@ html, body {
   background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp');
   background-size: cover;
   background-position: center;
+  margin: 0;
 }
 
-::selection {
-  background: #4158d0;
-  color: #fff;
-}
+
 
 .wrapper {
+  box-sizing: border-box; /* Include padding and border in the element's total width */
   width: 380px;
   backdrop-filter: blur(5px);
   border-radius: 15px;
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Make the container scrollable */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 80vh; /* Set a maximum height for the container */
+  color: #fff;
 }
 
 .wrapper .title {
@@ -38,6 +41,7 @@ html, body {
   user-select: none;
   border-radius: 15px 15px 0 0;
   background: rgba(0, 0, 0, 0.623);
+  box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
 .wrapper form {
@@ -61,14 +65,20 @@ html, body {
   border: 1px solid lightgrey;
   border-radius: 25px;
   transition: all 0.3s ease;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent white background */
+  background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
 }
 
+.wrapper form .field input::placeholder,
+.wrapper form .field select::placeholder {
+  color: #fff; /* Set the placeholder text color to white */
+}
+
+
 .wrapper form .field input:focus,
-form .field input:valid,
+.wrapper form .field input:valid,
 .wrapper form .field select:focus {
-  border: 2px solid #fff;
+  border: 1px solid lightgrey;
 }
 
 .wrapper form .field label {
@@ -83,40 +93,27 @@ form .field input:valid,
   transition: all 0.3s ease;
 }
 
-.wrapper form .field select ~ label,
-form .field input:focus ~ label,
-form .field input:valid ~ label {
-  top: 0%;
-  font-size: 16px;
-  color: #4158d0;
-  background: #fff;
-  transform: translateY(-50%);
-}
 
 
 /* Disable autofill background color and set text color to white */
 .wrapper form .field input:-webkit-autofill,
 .wrapper form .field select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.5) inset; /* Set a box-shadow to maintain background color */
-  -webkit-background-clip: text; /* Clip the background to text */
-  background-color: transparent !important; /* Set the background color to transparent */
-  color: #fff !important; /* Set the text color to white */
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.5) inset;
+  -webkit-background-clip: text;
+  background-color: transparent !important;
+  color: #fff !important;
 }
 
 /* Additional styling for autofilled inputs in focus */
 .wrapper form .field input:-webkit-autofill:focus,
 .wrapper form .field select:-webkit-autofill:focus {
-  border: 2px solid #fff; /* Set border color when in focus */
-  color: #fff !important; /* Set the text color to white in focus */
+  border: 1px solid lightgrey;
+  color: #fff !important;
 }
 
 
 
-
-
-
-
-form .content {
+.wrapper form .content {
   display: flex;
   width: 100%;
   height: 50px;
@@ -125,92 +122,104 @@ form .content {
   justify-content: space-around;
 }
 
-form .content .checkbox {
+.wrapper form .content .checkbox {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-form .content input {
-  width: 15px;
-  height: 15px;
-  background: red;
-}
 
-form .content label {
-  color: #262626;
+
+.wrapper form .content label {
+  color: #fff; /* Set label text color to white */
   user-select: none;
   padding-left: 5px;
 }
 
-form .content .pass-link {
-  color: "";
+/* Ensure the "I'm a barber" text is white */
+.wrapper form .content .checkbox label {
+  color: #fff;
+}
+
+.wrapper form .content .pass-link {
+  color: ""; /* Not sure about the intended color; set to an empty string */
 }
 
 .wrapper form .field button[type="submit"] {
   color: #fff;
   border: none;
-  padding: 0;
-  margin-top: -10px;
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  padding: 15px 20px; /* Adjust padding for consistency */
   border-radius: 25px;
+  cursor: pointer;
+  font-size: small;
+  margin: 0 auto;
+  display: block;
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.623);
+  border: 2px solid lightgrey;
   width: 100%;
-  height: 100%;
   transition: all 0.3s ease;
+}
+
+.wrapper form .field button[type="submit"]:hover {
+  background-color: #fff;
+  color: #000;
 }
 
 .wrapper form .field button[type="submit"]:active {
   transform: scale(0.95);
 }
 
-form .signup-link {
-  color: #262626;
+.wrapper form .signup-link {
+  color: #fff; /* Set the text color to white */
   margin-top: 20px;
   text-align: center;
 }
 
-form .pass-link a,
-form .signup-link a {
-  color: #4158d0;
+.wrapper form .pass-link a,
+.wrapper form .signup-link a {
+  color: rgb(117, 160, 229);
   text-decoration: none;
 }
 
-form .pass-link a:hover,
-form .signup-link a:hover {
+.wrapper form .pass-link a:hover,
+.wrapper form .signup-link a:hover {
   text-decoration: underline;
 }
+
+
 
 
 /* Add media query for smaller screens (adjust the max-width as needed) */
 @media only screen and (max-width: 600px) {
   .wrapper {
-    width: 80%; /* Adjust the width for smaller screens */
+    width: 90%;
+    max-width: none;
+    padding: 0 5%;
   }
 
   .wrapper .title {
-    font-size: 25px; /* Adjust the font size for smaller screens */
-    line-height: 80px; /* Adjust the line height for smaller screens */
+    width: 100%; /* Set the title width to 100% */
+    font-size: 25px;
+    line-height: 80px;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+  
   }
 
   .wrapper form {
-    padding: 10px; /* Adjust padding for smaller screens */
+    padding: 20px; /* Adjust padding for better spacing */
   }
 
   .wrapper form .field {
-    margin-top: 15px; /* Adjust margin for smaller screens */
+    margin-top: 15px;
   }
 
   .wrapper form .field input,
   .wrapper form .field select {
-    font-size: 16px; /* Adjust the font size for smaller screens */
+    font-size: 16px;
   }
 
   .wrapper form .field button[type="submit"] {
-    font-size: 18px; /* Adjust the font size for smaller screens */
+    font-size: 18px;
   }
 }
-
-/* The rest of your CSS remains unchanged */
