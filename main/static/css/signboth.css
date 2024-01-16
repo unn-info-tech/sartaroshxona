@@ -71,7 +71,7 @@ html, body {
 
 .wrapper form .field input::placeholder,
 .wrapper form .field select::placeholder {
-  color: #fff; /* Set the placeholder text color to white */
+  color: #d7d7d7; /* Set the placeholder text color to white */
 }
 
 
@@ -193,7 +193,7 @@ html, body {
 /* Add media query for smaller screens (adjust the max-width as needed) */
 @media only screen and (max-width: 600px) {
   .wrapper {
-    width: 90%;
+    width: 100%;
     max-width: none;
     padding: 0 5%;
   }
