@@ -103,6 +103,7 @@
         </div>
       
         <input type="hidden" name="selected_services" id="selected-services-input">
+        <input type="hidden" name="total_duration" id="total-duration">
         <input type="submit" class="btn btn-outline-primary" value="Book Appointment">
       </form>
       
@@ -137,6 +138,7 @@
           });
       
           document.getElementById('total-duration').textContent = `${totalDuration} minutes`;
+          document.getElementById('total-duration').value = totalDuration; // Update the hidden input field
           document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
         }
         

@@ -45,6 +45,7 @@ def barbers_list(request):
     barbers = Barber.objects.all()
     return render(request, 'clients/barbers_list.html', {'barbers': barbers})
 
+#from .utils import is_overlapping
 
 def appointment(request, barber_id):
     barber = Barber.objects.get(pk=barber_id)
@@ -57,8 +58,14 @@ def appointment(request, barber_id):
         selected_service_ids = json.loads(selected_service_ids_json)
         selected_services = Service.objects.filter(pk__in=selected_service_ids)
         appointment_form = AppointmentForm(request.POST)
+        total_duration = request.POST.get('total_duration')
+        print('========================================================', total_duration)
 
         if selected_services and appointment_form.is_valid():
+            total_duration = request.POST.get('total_duration')
+            print('========================================================',total_duration)
+
+
             appointment = appointment_form.save(commit=False)
             appointment.barber = Barber.objects.get(pk=barber_id)
             appointment.client = request.user

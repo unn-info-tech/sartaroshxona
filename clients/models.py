@@ -13,6 +13,7 @@ class Appointment(models.Model):
     barber = models.ForeignKey(Barber, on_delete=models.CASCADE, related_name='barber_appointments')
     service = models.ManyToManyField(Service)  # Many-to-Many relationship with Service model
     appointment_time = models.DateTimeField()
+    appointment_end_time = models.DateTimeField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='in_queue')
     
     # Add more fields as needed for your appointment details
