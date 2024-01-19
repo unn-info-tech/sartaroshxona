@@ -10,6 +10,8 @@ import json
 from django.contrib import messages
 from django.urls import reverse
 import datetime
+from django.utils import timezone
+import pytz
 
 def client_profile(request):
     user = request.user
@@ -66,19 +68,33 @@ def appointment(request, barber_id):
             appointment_time = appointment_form.cleaned_data['appointment_time']
             duration = datetime.timedelta(minutes=total_duration)
             end_time = appointment_time + duration
-            if is_overlapping(appointment_time, end_time):
-                appointment = appointment_form.save(commit=False)
-                appointment.barber = Barber.objects.get(pk=barber_id)
-                appointment.client = request.user
-                
-                appointment.save()
-                appointment.service.add(*selected_services)
 
-                messages.error(request, 'Congrats, your appoinment is done')
-                return redirect(reverse('appointment', args=[barber_id]))
+            now = timezone.now()
+            formatted_now = now.astimezone(pytz.utc)
+            print(appointment_time, end_time, formatted_now)
+
+            if formatted_now <= appointment_time: 
+
+                if not is_overlapping(appointment_time, end_time):
+                    appointment = appointment_form.save(commit=False)
+                    appointment.barber = Barber.objects.get(pk=barber_id)
+                    appointment.client = request.user
+                    appointment.appointment_end_time = end_time
+                    
+                    appointment.save()
+                    appointment.service.add(*selected_services)
+
+                    messages.error(request, 'Congrats, your appoinment is done')
+                    return redirect(reverse('appointment', args=[barber_id]))
+                else:
+                    # If no service is selected or form is invalid, redirect with an error message
+                    messages.error(request, 'Дата и время uzhe vibrano')
+                    return redirect(reverse('appointment', args=[barber_id]))
+                
+
             else:
                 # If no service is selected or form is invalid, redirect with an error message
-                messages.error(request, 'Дата и время или служба не выбрана')
+                messages.error(request, 'You cant have an appointment for the past')
                 return redirect(reverse('appointment', args=[barber_id]))
 
         else:
