@@ -83,7 +83,7 @@
     <div class="card p-4">
       <h1>Book an Appointment with {{ barber.user }}</h1>
       
-      <form method="post" onsubmit="prepareSelectedServices()">
+      <form method="post" onsubmit="prepareSelectedServices()" id="appointment-form">
         {% csrf_token %}
         <input type="datetime-local" name="appointment_time" class="form-control mb-4 black-input" value="{{ appointment_form.appointment_time.value }}" id="appointmentDatetime">
       
@@ -101,9 +101,9 @@
           <p>Total Duration: <span id="total-duration"></span></p>
           <p>Total Price: <span id="total-price"></span></p>
         </div>
-      
+        
+        <input type="hidden" name="total_duration" id="total-duration-input">
         <input type="hidden" name="selected_services" id="selected-services-input">
-        <input type="hidden" name="total_duration" id="total-duration">
         <input type="submit" class="btn btn-outline-primary" value="Book Appointment">
       </form>
       
@@ -138,13 +138,17 @@
           });
       
           document.getElementById('total-duration').textContent = `${totalDuration} minutes`;
-          document.getElementById('total-duration').value = totalDuration; // Update the hidden input field
           document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
+
+          document.getElementById('total-duration-input').value = totalDuration;
         }
         
         function prepareSelectedServices() {
           updateSelectedServices();
         }
+
+         
+
       </script>
     </div>
 
