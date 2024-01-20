@@ -53,6 +53,7 @@ from .utils import is_overlapping
 def appointment(request, barber_id):
     barber = Barber.objects.get(pk=barber_id)
     services = Service.objects.filter(barber=barber)
+    appointments = Appointment.objects.filter(barber=barber)
 
     if request.method == 'POST':
         # Retrieve the selected services IDs from the POST data
@@ -70,10 +71,9 @@ def appointment(request, barber_id):
             end_time = appointment_time + duration
 
             now = timezone.now()
-            formatted_now = now.astimezone(pytz.utc)
-            print(appointment_time, end_time, formatted_now)
+            print(appointment_time, end_time, now)
 
-            if formatted_now <= appointment_time: 
+            if now <= appointment_time: 
 
                 if not is_overlapping(appointment_time, end_time):
                     appointment = appointment_form.save(commit=False)
@@ -108,6 +108,7 @@ def appointment(request, barber_id):
     return render(request, 'clients/appointment.html', {
         'barber': barber,
         'services': services,
+        'appointments': appointments,
         'appointment_form': appointment_form
     })
 

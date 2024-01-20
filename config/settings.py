@@ -120,6 +120,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+
+# Set a default time zone (UTC in this case)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
