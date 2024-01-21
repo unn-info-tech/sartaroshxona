@@ -12,6 +12,8 @@ from django.urls import reverse
 import datetime
 from django.utils import timezone
 import pytz
+from .utils import is_overlapping
+
 
 def client_profile(request):
     user = request.user
@@ -44,11 +46,19 @@ def client_profile(request):
 
 
 
+
+
+
+
 def barbers_list(request):
     barbers = Barber.objects.all()
     return render(request, 'clients/barbers_list.html', {'barbers': barbers})
 
-from .utils import is_overlapping
+
+
+
+
+
 
 def appointment(request, barber_id):
     barber = Barber.objects.get(pk=barber_id)
@@ -64,16 +74,18 @@ def appointment(request, barber_id):
         appointment_form = AppointmentForm(request.POST)
 
         if selected_services and appointment_form.is_valid():
-
             total_duration = int(request.POST.get('total_duration'))
             appointment_time = appointment_form.cleaned_data['appointment_time']
             duration = datetime.timedelta(minutes=total_duration)
             end_time = appointment_time + duration
 
-            now = timezone.now()
-            print(appointment_time, end_time, now)
-
-            if now <= appointment_time: 
+            now = barber.get_user_time_zone()
+            appointment_time_naive = appointment_time.replace(tzinfo=None)
+            # print(appointment_time, end_time)
+            print(now, appointment_time_naive)
+            # print(type(appointment_time), type(now))
+            
+            if now <= appointment_time_naive: 
 
                 if not is_overlapping(appointment_time, end_time):
                     appointment = appointment_form.save(commit=False)
@@ -104,6 +116,7 @@ def appointment(request, barber_id):
 
     else:
         appointment_form = AppointmentForm()
+        
 
     return render(request, 'clients/appointment.html', {
         'barber': barber,

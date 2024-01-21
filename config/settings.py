@@ -123,10 +123,10 @@ LANGUAGE_CODE = 'en-us'
 
 # Set a default time zone (UTC in this case)
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

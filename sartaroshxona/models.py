@@ -1,5 +1,8 @@
 from django.db import models
 from main.models import CustomUser  # Assuming this is your CustomUser model
+from django.utils import timezone
+import pytz
+from datetime import timedelta
 
 class Service(models.Model):
     barber = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='provided_services')
@@ -36,6 +39,17 @@ class Barber(models.Model):
 
     def get_services(self):
         return self.provided_services.all()  # Renamed related name for clarity
+    
+    def get_user_time_zone(self):
+        if self.user.country and self.user.country.name == 'Russia':
+            return (timezone.now().astimezone(pytz.timezone('Europe/Moscow')) - timedelta(minutes=1)).replace(tzinfo=None)
+        elif self.user.country and self.user.country.name == 'Tajikistan':
+            return (timezone.now().astimezone(pytz.timezone('Asia/Dushanbe')) - timedelta(minutes=1)).replace(tzinfo=None)
+        else:
+            # Default time zone or handle other countries as needed
+             return (timezone.now() - timedelta(minutes=1)).replace(tzinfo=None)
+        
+    
     
     
 
