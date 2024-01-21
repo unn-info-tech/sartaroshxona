@@ -166,7 +166,7 @@ body {
 /* Media query for smaller screens */
 @media screen and (max-width: 767px) {
   .container {
-    width: auto; /* Full width on smaller screens */
+    width: 100%; /* Full width on smaller screens */
     padding: 10px; /* Adjusted padding for better spacing */
   }
 

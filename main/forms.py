@@ -103,17 +103,17 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget = TextInput(attrs={'placeholder': 'Enter your username'})
-        self.fields['password'].widget = PasswordInput(attrs={'placeholder': 'Enter your password'})
+    
 
     class Meta:
         model = CustomUser  # Replace CustomUser with your user model
         fields = ['username', 'password']  # Fields present in the login form
 
 
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget = TextInput(attrs={'placeholder': 'Enter your username'})
+        self.fields['password'].widget = PasswordInput(attrs={'placeholder': 'Enter your password'})
 
 
 

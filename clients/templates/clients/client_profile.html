@@ -3,44 +3,48 @@
 
 {% block content %}
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="{% static '/css/prof.css' %}">
 <script src="{% static 'js/prof.js' %}"></script>
 
-<h1>User Profile</h1>
-<!-- Read-only mode -->
-<div id="readOnlyUserMode">
-    <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
-    <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
-    <button id="editUserButton">Edit</button>
-</div>
+<div class="container">
+  <h1>User Profile</h1>
+  <!-- Read-only mode -->
+  <div id="readOnlyUserMode">
+      <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
+      <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
+      <button id="editUserButton">Edit</button>
+  </div>
 
-<!-- Edit mode -->
-<div id="editUserForm" style="display: none;">
-    <form method="post">
-        {% csrf_token %}
-        <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
-        <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
+  <!-- Edit mode -->
+  <div id="editUserForm" style="display: none;">
+      <form method="post">
+          {% csrf_token %}
+          <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
+          <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
 
-        <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
-        <button id="cancelUserButton" type="button">Cancel</button>
-    </form>
-</div>
+          <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
+          <button id="cancelUserButton" type="button">Cancel</button>
+      </form>
+  </div>
 
-<!-- Read-only mode for Password Change -->
-<div id="readOnlyPasswordMode">
+  <!-- Read-only mode for Password Change -->
+  <div id="readOnlyPasswordMode">
   <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
   <button id="editPasswordButton">Change Password</button>
-</div>
+  </div>
 
-<!-- Edit mode for Password Change -->
-<div id="editPasswordForm" style="display: none;">
+  <!-- Edit mode for Password Change -->
+  <div id="editPasswordForm" style="display: none;">
   <form method="post">
       {% csrf_token %}
       {{ password_change_form.as_p}}
       <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
       <button id="cancelPasswordButton" type="button">Cancel</button>
   </form>
+  </div>
 </div>
 
 {% endblock %}

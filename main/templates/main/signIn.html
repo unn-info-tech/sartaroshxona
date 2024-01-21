@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{% static 'css/signboth.css' %}">
 <link rel="stylesheet" href="{% static 'css/error.css' %}">
 <script src="{% static 'js/error.js' %}"></script>
+<script src="{% static 'js/show_password.js' %}"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -36,7 +37,8 @@
                 {{ formMe_signIn.username }}
             </div>
             <div class="field">
-                {{ formMe_signIn.password }}
+               <input type="password" name="{{ formMe_signIn.password.name }}" id="{{ formMe_signIn.password.id_for_label }}" placeholder="Password" class="password-input">
+               <span toggle="{{ formMe_signIn.password.id_for_label }}" class="eye field-icon toggle-password"></span>
             </div>
             <div class="content">
                <div class="checkbox">

@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", function() {
+    // Run this code when the DOM is ready
+    toggleHeader(); // Call the function to initially open the container
+});
+
+
 function toggleHeader() {
     var header = document.getElementById('header');
     var icon = document.getElementById('icon');
