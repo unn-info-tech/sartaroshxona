@@ -27,6 +27,8 @@ body {
     /* Ensure the container has a background to see the content */
     border-radius: 10px;
     padding: 20px;
+    margin-bottom: 10%;
+    
   }
 
 
@@ -147,6 +149,8 @@ body {
 }
 
 
+
+
 #editServiceForm .price input,
 #editServiceForm .duration input {
   background-color: rgba(0, 0, 0, 0.5);
@@ -168,6 +172,7 @@ body {
   .container {
     width: 100%; /* Full width on smaller screens */
     padding: 10px; /* Adjusted padding for better spacing */
+    margin-bottom: 20%;
   }
 
   

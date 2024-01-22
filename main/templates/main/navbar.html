@@ -1,0 +1,41 @@
+<!-- navbar.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Include Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Customize your navbar styles here */
+   
+    .navbar {
+      backdrop-filter: blur(5px);
+      background-color: rgba(51, 51, 51, 0.7); /* Semi-transparent black for a blurred effect */
+      color: #fff;
+      padding: 5px;
+      text-align: center;
+      position: fixed; /* Change from fixed to sticky */
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+    .navbar-icon {
+      margin: 0 15px;
+      font-size: 18px; /* Adjust icon size */
+      color: #fff; /* Icon color */
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <!-- Home Icon -->
+    <a href="#" class="navbar-icon"><i class="fas fa-home"></i></a>
+    <!-- Appointment Icon -->
+    <a href="#" class="navbar-icon"><i class="fas fa-calendar-alt"></i></a>
+    <!-- Profile Icon -->
+    <a href="#" class="navbar-icon"><i class="fas fa-user"></i></a>
+  </div>
+</body>
+</html>

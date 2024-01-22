@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% include 'main/navbar.html' %}
 
 <meta charset="UTF-8">
     <title>Barbers</title>
@@ -10,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<body>
+
   <div class="scrollable-cards">
     <div class="row">
       {% for barber in barbers %}
@@ -23,8 +24,6 @@
                 {% else %}
                     <img src="{% static 'images/default.jpg' %}" alt="Default Image">
                 {% endif %}
-
-
             </div>
             <div class="barber_info">
               <h1>{{ barber.user.username }}</h1>
@@ -37,5 +36,6 @@
       {% endfor %}
     </div>
   </div>
-</body>
+
+ 
 {% endblock %}

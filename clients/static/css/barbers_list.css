@@ -68,7 +68,7 @@ body {
 /* Hover effects */
 .barber_profile:hover .barber_image::after,
 .barber_profile:focus .barber_image::after {
-    background-color: #000;
+    background-color: #fff;
 }
 
 .barber_profile:hover .barber_info,
@@ -82,7 +82,7 @@ body {
 .barber_profile:focus .barber_info p,
 .barber_profile:hover .barber_info .reputation,
 .barber_profile:focus .barber_info .reputation {
-    color: #000;
+    color: #ffffff;
 }
 
 /* Scrollable cards */
