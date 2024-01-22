@@ -163,18 +163,18 @@ html, body {
 }
 
 .eye::before {
-  content: '\1F441'; /* Unicode for an eye symbol */
-  font-size: 20px;
+  content: 'show'; /* Unicode for an eye symbol */
+  font-size: 10px;
   position: absolute;
   top: 50%;
   right: 15px;
   transform: translateY(-50%);
-  color: #000; /* Set the color according to your design */
+  color: #fff; /* Set the color according to your design */
 }
 
 .eye.active::before {
-  content: '\1F576'; /* Unicode for an crossed eye symbol (for example) */
-  color: #000; /* Set the color according to your design */
+  content: 'hide'; /* Unicode for an crossed eye symbol (for example) */
+  color: #fff; /* Set the color according to your design */
 }
 
 

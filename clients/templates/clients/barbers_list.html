@@ -1,18 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Choose a Barber</title>
-</head>
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<meta charset="UTF-8">
+    <title>Barbers</title>
+
+<link rel="stylesheet" href="{% static 'css/barbers_list.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 <body>
-    <h1>List of Barbers</h1>
-    <ul>
-        {% for barber in barbers %}
-            <li>
-                <a href="{% url 'appointment' barber.id %}">{{ barber.user.username }}</a>
-                <!-- You can add more details about the barber if needed -->
-            </li>
-        {% endfor %}
-    </ul>
+  <div class="scrollable-cards">
+    <div class="row">
+      {% for barber in barbers %}
+      <div class="ocl-12 clo-sm-6 col-lg-4">
+        <div class="barber_profile">
+          <a href="{% url 'appointment' barber.id %}" class="card-link">
+            <div class="barber_image">
+                {% if barber.profile_image %}
+                    <img src="{{ barber.profile_image.url }}" alt="Profile Image">
+                {% else %}
+                    <img src="{% static 'images/default.jpg' %}" alt="Default Image">
+                {% endif %}
+
+
+            </div>
+            <div class="barber_info">
+              <h1>{{ barber.user.username }}</h1>
+              <p>Address: Gulakandoz{{ barber.location }}</p>
+              <p class="reputation">⭐️⭐️⭐️⭐️⭐️5{{ user.reputation }}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </body>
-</html>
+{% endblock %}
