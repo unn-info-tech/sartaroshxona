@@ -28,6 +28,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     is_barber = models.BooleanField(default=False)
+    favorite_barbers = models.ManyToManyField('sartaroshxona.Barber', related_name='favorited_by')
 
     # LOCATIONS
     country =  models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)

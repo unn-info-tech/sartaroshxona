@@ -4,14 +4,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f1f1f1;
+    background-color: #000;
+    color: #fff;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #fff;
     border-radius: 5px;
     z-index: 9999;
     max-width: 300px;
     text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .popup-message ul {
@@ -26,7 +27,7 @@
 
 .show {
     display: block;
-    animation: fadeOut 10000ms forwards;
+    animation: fadeOut 10s forwards;
 }
 
 @keyframes fadeOut {
@@ -35,5 +36,6 @@
     }
     100% {
         opacity: 0;
+        display: none; /* Hide the message container at the end of animation */
     }
 }

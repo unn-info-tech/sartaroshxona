@@ -5,27 +5,17 @@
 <title>Login Form Design | CodeLab</title>
 
 {% block content %}
+{% include 'main/messages.html' %}
+
+
 <meta charset="utf-8">
 <title>Login Form Design | CodeLab</title>
 <link rel="stylesheet" href="{% static 'css/signboth.css' %}">
-<link rel="stylesheet" href="{% static 'css/error.css' %}">
-<script src="{% static 'js/error.js' %}"></script>
 <script src="{% static 'js/show_password.js' %}"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Display form errors -->
-<div class="popup-message">
-   {% if formMe_signIn.errors %}
-     <ul>
-       {% for field, error_list in formMe_signIn.errors.items %}
-         {% for error in error_list %}
-           <li>{{ field|title }}: {{ error }}</li>
-         {% endfor %}
-       {% endfor %}
-     </ul>
-   {% endif %}
- </div>
+
 
       <div class="wrapper">
          <div class="title">

@@ -22,7 +22,7 @@ body {
     margin: 5px auto; /* Smaller margin */
     border-radius: 15px; /* Smaller border radius */
     box-shadow: 0 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.3); /* Smaller box shadow */
-    border: 1px solid #808080;
+    border: 1px solid #cdcdcd;
     max-width: 300px; /* Smaller max width */
     padding: 5px; /* Smaller padding */
 }

@@ -1,8 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-<meta charset="utf-8">
-<title>Login Form Design | CodeLab</title>
 
 {% block content %}
 <meta charset="utf-8">
@@ -11,12 +9,42 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="{% static 'js/locations.js' %}"></script>
 <script src="{% static 'js/show_password.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <!-- Display form errors -->
-      {% include 'main/messages.html' %}
+<!-- Display form errors -->
+<div class="popup-message">
+   {% if formMe_signup.errors %}
+     <ul>
+       {% for field, error_list in formMe_signup.errors.items %}
+         {% for error in error_list %}
+           <li>{{ field|title }}: {{ error }}</li>
+         {% endfor %}
+       {% endfor %}
+     </ul>
+   {% endif %}
+</div>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+       function showMessage() {
+           let message = document.querySelector('.popup-message');
+           if (message && message.children.length > 0) {
+               message.classList.add('show');
+               setTimeout(function () {
+                  message.classList.remove('show');
+               }, 5000);
+           }
+       }
+
+       showMessage();
+   });
+</script>
+
+
+
    <div class="background-image">
       <div class="wrapper">
          <div class="title">
