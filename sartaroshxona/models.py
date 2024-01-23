@@ -17,12 +17,12 @@ class Service(models.Model):
 class Barber(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='barber_profile')
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True, default='profile_images/default.png')
-    phone_number = models.CharField(max_length=20, null=True, blank=True, default="")
     start_work = models.TimeField(null=True, blank=True)
     end_work = models.TimeField(null=True, blank=True)
     launch_start_time = models.TimeField(null=True, blank=True)
     launch_end_time = models.TimeField(null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True,default="")
+    organization_name = models.CharField(max_length=50, null=True, blank=True,default="")
 
     CURRENCY_CHOICES = [
         ('USD', 'US Dollar'),

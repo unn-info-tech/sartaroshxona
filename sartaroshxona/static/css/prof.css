@@ -95,6 +95,7 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
     margin-bottom: 10px; /* Add margin to separate fields */
+    margin-top: 5px;
   }
 
   .container h1 {

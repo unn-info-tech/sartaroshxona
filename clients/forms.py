@@ -5,7 +5,7 @@ from .models import Appointment
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'email']  # Include fields that you want users to edit
+        fields = ['username', 'email', 'phone_number']  # Include fields that you want users to edit
 
 
 

@@ -9,3 +9,9 @@ if (sliderElement) {
         // Add your options here
     });
 }
+
+
+document.getElementById('heartButton').addEventListener('click', function() {
+    // Toggle the 'clicked' class on the container
+    document.getElementById('container').classList.toggle('clicked');
+});

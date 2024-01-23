@@ -10,11 +10,13 @@
 <script src="{% static 'js/prof.js' %}"></script>
 
 <div class="container">
+    <!-- USER -->
     <h1>User Profile</h1>
     <!-- Read-only mode -->
     <div id="readOnlyUserMode">
         <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
         <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
+        <p>Phone Number: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number" disabled></p>
         <button id="editUserButton">Edit</button>
     </div>
 
@@ -24,7 +26,7 @@
             {% csrf_token %}
             <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
             <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
-
+            <p>Phone Number: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number"></p>
             <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
             <button id="cancelUserButton" type="button">Cancel</button>
         </form>
@@ -47,7 +49,7 @@
     </div>
 
 
-
+    <!-- BARBER -->
     <h1 class="profile-header">Barber Profile</h1>
     <!-- Read-only mode -->
     <div id="readOnlyBarberMode">
@@ -65,7 +67,6 @@
                     {% endif %}
                 </div>
             </div>
-            <p>Phone Number: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" disabled></p>
 
             <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work" disabled></p>
 
@@ -75,9 +76,11 @@
 
             <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" disabled></p>
 
+            <p>Currency: <input type="text" name="currency" value="{{ barber_form.currency.value }}" id="currency" disabled></p>
+
             <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" disabled></p>
 
-            <p>Currency: <input type="text" name="currency" value="{{ barber_form.currency.value }}" id="currency" disabled></p>
+            <p>Organization: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name" disabled></p>
 
             <button id="editBarberButton">Edit</button>
             
@@ -116,8 +119,6 @@
         
             <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" ></p>
         
-            <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
-
             <p>Currency: 
                 <select name="currency" id="currency">
                   {% for choice in barber_form.currency.field.choices %}
@@ -126,7 +127,10 @@
                 </select>
             </p>
               
-            
+            <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
+
+            <p>Organization: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name"></p>
+
             <button id="saveBarberButton" type="submit" name="barber_info_form">Save Changes</button>
             <button id="cancelBarberButton" type="button">Cancel</button>
         </form>
@@ -135,7 +139,7 @@
 
 
 
-
+    <!-- SERVICES -->
     <h1>Existing Services</h1>
 
     <!-- Read-only mode -->
@@ -178,7 +182,7 @@
         </form>
     </div>
 
-
+    <!-- ADD SERVICE -->
     <h1>Add New Service</h1>
     <div id="showAddServiceForm">
         <button>Add New Service</button>
