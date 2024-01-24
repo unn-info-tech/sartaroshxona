@@ -116,13 +116,44 @@ def appointment(request, barber_id):
 
     else:
         appointment_form = AppointmentForm()
+
         
 
     return render(request, 'clients/appointment.html', {
         'barber': barber,
         'services': services,
         'appointments': appointments,
-        'appointment_form': appointment_form
+        'appointment_form': appointment_form,
     })
+
+
+
+
+
+
+def update_favorites(request, barber_id):
+    barber = Barber.objects.get(pk=barber_id)
+    print(barber)
+    user = request.user
+    print(user, user.favorite_barbers.all())
+
+    if request.method == 'POST':
+        if 'favorite' in request.POST:
+            
+            user.favorite_barbers.add(barber)
+            messages.success(request, f'{barber.user.username} added to favorites.')
+        elif 'unfavorite' in request.POST:
+            user.favorite_barbers.remove(barber)
+            messages.success(request, f'{barber.user.username} removed from favorites.')
+
+        print(user, user.favorite_barbers.all())
+        return redirect(reverse('appointment', args=[barber_id]))  # Replace with the appropriate view name or URL pattern
+
+
+
+   
+
+    return render(request, 'clients/appointment.html')
+
 
 
