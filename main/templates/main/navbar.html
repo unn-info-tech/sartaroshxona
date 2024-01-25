@@ -29,17 +29,22 @@
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <!-- Home Icon -->
-    <a href="" class="navbar-icon"><i class="fas fa-home"></i></a>
-    <!-- Appointment Icon -->
-    <a href="#" class="navbar-icon"><i class="fas fa-calendar-alt"></i></a>
-    <!-- Profile Icon -->
-    <a href="#" class="navbar-icon"><i class="fas fa-user"></i></a>
-    <!-- Shopping Cart Icon -->
-    <a href="#" class="navbar-icon"><i class="fas fa-shopping-cart"></i></a>
-    <!-- Favorites Icon -->
-    <a href="#" class="navbar-icon"><i class="fas fa-heart"></i></a>
-  </div>
+    {% if request.user.is_barber %}
+      <!-- Display the barber-specific icons -->
+      <div class="navbar">
+        <a href="#" class="navbar-icon"><i class="fas fa-shopping-cart"></i></a>
+        <a href="#" class="navbar-icon"><i class="fas fa-briefcase"></i></a>
+        <a href="#" class="navbar-icon"><i class="fas fa-user"></i></a>
+      </div>
+    {% else %}
+      <!-- Display the client-specific icons -->
+      <div class="navbar">
+        <a href="#" class="navbar-icon"><i class="fas fa-cut"></i></a>
+        <a href="#" class="navbar-icon"><i class="fas fa-shopping-cart"></i></a>
+        <a href="#" class="navbar-icon"><i class="fas fa-calendar-alt"></i></a>
+        <a href="#" class="navbar-icon"><i class="fas fa-heart"></i></a>
+        <a href="#" class="navbar-icon"><i class="fas fa-user"></i></a>
+      </div>
+    {% endif %}
 </body>
 </html>

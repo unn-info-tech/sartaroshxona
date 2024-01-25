@@ -55,6 +55,10 @@ def barbers_list(request):
     return render(request, 'clients/barbers_list.html', {'barbers': barbers})
 
 
+def favorites(request):
+    user = request.user
+    favorite_barbers = user.favorite_barbers.all()
+    return render(request, 'clients/barbers_list.html', {'barbers': favorite_barbers})
 
 
 

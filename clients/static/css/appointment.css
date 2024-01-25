@@ -27,6 +27,7 @@ body {
   /* Ensure the container has a background to see the content */
   border-radius: 10px;
   padding: 20px;
+  position: fixed;
 }
 
 .card {
