@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp');
+    background: url('../images/backround.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -28,6 +28,8 @@ body {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 10%;
+    position: relative;
+    min-height: 100vh; /* Ensure the container takes at least the full viewport height */
     
   }
 
@@ -167,6 +169,20 @@ body {
   border: 2px solid #fff;
 
 }
+
+
+
+/* delete and logout account buttons */
+
+/* delete and logout account buttons */
+
+.bottom-container {
+  margin-top: 100px;
+  padding: 20px; /* Adjust padding as needed */
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
 
 /* Media query for smaller screens */
 @media screen and (max-width: 767px) {

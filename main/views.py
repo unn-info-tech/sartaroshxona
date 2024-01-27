@@ -9,7 +9,7 @@ from sartaroshxona.models import Barber
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import CustomAuthenticationForm
-
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method == 'POST':
@@ -19,7 +19,7 @@ def signup(request):
 
             
             username = formMe_signup.cleaned_data.get('username')
-            messages.success(request, f'Welcome, {username}! Your account has been created.')
+            messages.success(request, f'Welcome, {username}! Your account has been created. Now log in')
 
             # Check if the user is a barber and create a barber instance
             if user.is_barber:
@@ -55,6 +55,21 @@ def signin(request):
 
 
 
+def log_out(request):
+    logout(request)
+    return redirect('signin')  
+
+
+
+
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        messages.success(request, 'Your account has been deleted successfully.')
+        return redirect('signin')  
 
 
 

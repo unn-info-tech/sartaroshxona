@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" href="{% static 'css/clients.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="{% static 'js/clients.js' %}"></script>
 
@@ -27,7 +28,7 @@
     
         <div class="category" id="confirmedCategory">
             <a href="{% url 'appointments_by_category' 'confirmed' %}">
-                <h2><i class="material-icons">how_to_reg</i></h2>
+                <h2><i class="fas fa-user-check"></i></h2>
                 <p class="count">{{ appointment_confirmed_count }}</p>
             </a>
         </div>

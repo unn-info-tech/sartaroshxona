@@ -1,6 +1,6 @@
 /* Body styles */
 body {
-    background: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp') center/cover;
+    background: url('../images/backround.jpg') center/cover;
     color: #fff;
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -22,8 +22,9 @@ body {
     text-align: center;
     backdrop-filter: blur(5px);
     background-color: rgba(0, 0, 0, 0.5); /* Set card background color with opacity */
-    margin: 0 10px; /* Add 10px margin on both left and right sides */
+    margin: 0 10px 10px 10px; /* Add 10px margin on both left, right, and bottom sides; remove top margin */
     border-radius: 5px;
+    
 }
 
 /* Cards */

@@ -16,7 +16,7 @@ class Service(models.Model):
 
 class Barber(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='barber_profile')
-    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True, default='profile_images/default.png')
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     start_work = models.TimeField(null=True, blank=True)
     end_work = models.TimeField(null=True, blank=True)
     launch_start_time = models.TimeField(null=True, blank=True)

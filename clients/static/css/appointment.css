@@ -1,21 +1,16 @@
 body {
-  background-image: url('https://assets-global.website-files.com/644a9d9ce529ef8812f82a28/647fb85c69e95444243ef9bd_Henley%27s%20Gentlemen%27s%20Grooming%20-%20Barbershop%20and%20Mens%20Grooming.webp');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  /* Set background to fixed position */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat; 
-  background-size: cover;
-}
+    background: url('../images/backround.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Set text color to white */
+    font-family: 'Arial', sans-serif; /* Change font for better readability */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
 
 .container {
   text-align: center;
@@ -36,6 +31,7 @@ body {
   margin-bottom: 20px; /* Add margin between containers */
   padding: 30px 20px; /* Padding for the card */
 }
+
 .table-bordered {
   border-color: #fff; /* Set border color for tables */
 }
@@ -87,6 +83,15 @@ input[type="date"] {
   justify-content: center;
 }
 
+/* Profile */
+/* Embedded CSS within the HTML file or external CSS file */
+#barber-image {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  object-fit: cover; /* Helps control image distortion */
+}
+
+
 .black-input {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -110,6 +115,8 @@ th, td {
 .list-content {
   padding-top: 10px; /* Adjusted padding */
 }
+
+
 
 
 /* Additional CSS for Services Container */
@@ -193,10 +200,3 @@ th, td {
 }
 
 
-/* Profile */
-/* Embedded CSS within the HTML file or external CSS file */
-#barber-image {
-  width: 100px; /* Adjust the width as needed */
-  height: 100px; /* Adjust the height as needed */
-  object-fit: cover; /* Helps control image distortion */
-}

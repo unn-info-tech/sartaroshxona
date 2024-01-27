@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+
+{% block content %}
+{% include 'main/navbar.html' %}
+
+
+<link rel="stylesheet" href="{% static 'css/clients.css' %}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <div class="container">
+
+        <!-- Content from the second HTML -->
+        <div class="list-content">
+            <h1>My Appointments</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Barber Name</th>
+                        <th>Appointment Date and Time</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in my_appointments %}
+                        <tr>
+                            <td>{{ appointment.barber.user.username }}</td>
+                            <td>{{ appointment.appointment_time }}</td>
+                            <td>
+                                {% for service in appointment.service.all %}
+                                    <li>{{ service.title }} - {{ service.duration_minutes}} min.<i class="fas fa-clock fa-inverse"></i> {{ service.price }}{{ service.currency }} <i class="fas fa-money-bill-wave"></i></li>
+                                {% empty %}
+                                    <li>No services selected for this appointment.</li>
+                                {% endfor %}
+
+                                {% if appointment.service.all %}
+                                    <p>
+                                        <span>= <i class="fas fa-money-bill-wave"></i></li> {{ appointment.service.all|sum_attribute:'price' }}</span>
+                                        <span><i class="fas fa-clock fa-inverse"></i> {{ appointment.service.all|sum_attribute:'duration_minutes' }} minutes</span>
+                                    </p>
+                                {% endif %}
+                                
+                            </td>
+                            <!-- This is for accept or cancel-->
+                            <td>
+                                {% if category == 'in_queue' %}
+                                    <div style="margin-top: 10px;">
+                                        <p>Not confirment yet</p>
+                                    </div> <!-- Adjust margin-top as needed -->
+                                    
+                                {% elif category == 'confirmed' %}
+                                    <div style="margin-top: 10px;">
+                                        <p>Confirment yet</p>
+                                    </div> <!-- Adjust margin-top as needed -->
+                                {% endif %}
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+{% endblock %}

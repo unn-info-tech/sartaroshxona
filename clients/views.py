@@ -63,6 +63,14 @@ def favorites(request):
 
 
 
+def my_appointments(request):
+    client = request.user
+    my_appointments = Appointment.objects.filter(client=client).prefetch_related('service')
+
+    return render(request, 'clients/my_appointments.html', {'my_appointments': my_appointments})
+
+
+
 
 def appointment(request, barber_id):
     barber = Barber.objects.get(pk=barber_id)
