@@ -52,13 +52,13 @@ def client_profile(request):
 
 def barbers_list(request):
     barbers = Barber.objects.all()
-    return render(request, 'clients/barbers_list.html', {'barbers': barbers})
+    return render(request, 'clients/barbers_list.html', {'header': "Barber List", 'barbers': barbers})
 
 
 def favorites(request):
     user = request.user
     favorite_barbers = user.favorite_barbers.all()
-    return render(request, 'clients/barbers_list.html', {'barbers': favorite_barbers})
+    return render(request, 'clients/barbers_list.html', {'header': "My favorite Barbers", 'barbers': favorite_barbers})
 
 
 

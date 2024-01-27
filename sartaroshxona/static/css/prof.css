@@ -23,7 +23,7 @@ body {
     backdrop-filter: blur(5px);
     overflow-y: auto; /* Allow containers to scroll */
     height: calc(100vh - 40px); /* Adjust height as needed */
-    margin-top: 20px; /* Increase margin top for better separation */
+    margin-top: 50px; /* Increase margin top for better separation */
     /* Ensure the container has a background to see the content */
     border-radius: 10px;
     padding: 20px;

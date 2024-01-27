@@ -3,48 +3,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Include Font Awesome CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    /* Customize your navbar styles here */
-   
-    .navbar {
-      backdrop-filter: blur(5px);
-      background-color: rgba(51, 51, 51, 0.7); /* Semi-transparent black for a blurred effect */
-      color: #fff;
-      padding: 5px;
-      text-align: center;
-      position: fixed; /* Change from fixed to sticky */
-      bottom: 0;
-      left: 0;
-      width: 100%;
-    }
-    .navbar-icon {
-      margin: 0 15px;
-      font-size: 18px; /* Adjust icon size */
-      color: #fff; /* Icon color */
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Include Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+  /* Customize your navbar styles here */
+  
+  .navbar {
+    backdrop-filter: blur(5px);
+    background-color: rgba(51, 51, 51, 0.7); /* Semi-transparent black for a blurred effect */
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    position: fixed; /* */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Add z-index to ensure it's above other elements */
+  }
+  .navbar-icon {
+    margin: 0 15px;
+    font-size: 18px; /* Adjust icon size */
+    color: #fff; /* Icon color */
+  }
+</style>
 </head>
 <body>
-    {% if request.user.is_barber %}
-      <!-- Display the barber-specific icons -->
-      <div class="navbar">
-        <a href="#" class="navbar-icon"><i class="fas fa-shopping-cart"></i></a>
-        <a href="#" class="navbar-icon"><i class="fas fa-briefcase"></i></a>
-        <a href="#" class="navbar-icon"><i class="fas fa-user"></i></a>
-      </div>
-    {% else %}
-      <!-- Display the client-specific icons -->
-      <div class="navbar">
-        <a href="#" class="navbar-icon"><i class="fas fa-cut"></i></a>
-        <a href="#" class="navbar-icon"><i class="fas fa-shopping-cart"></i></a>
-        <a href="#" class="navbar-icon"><i class="fas fa-calendar-alt"></i></a>
-        <a href="#" class="navbar-icon"><i class="fas fa-heart"></i></a>
-        <a href="#" class="navbar-icon"><i class="fas fa-user"></i></a>
-      </div>
-    {% endif %}
+  {% if request.user.is_barber %}
+    <!-- Display the barber-specific icons -->
+    <div class="navbar">
+      <a href="/sar/in_queue/" class="navbar-icon"><i class="fas fa-briefcase"></i></a>
+      <a href="#" class="navbar-icon"><i class="fas fa-ad"></i></a>
+      <a href="/sar/barber_profile/" class="navbar-icon"><i class="fas fa-user"></i></a>
+    </div>
+  {% else %}
+    <!-- Display the client-specific icons -->
+    <div class="navbar">
+      <a href="/cl/barbers_list/" class="navbar-icon"><i class="fas fa-cut"></i></a>
+      <a href="#" class="navbar-icon"><i class="fas fa-ad"></i></a>
+      <a href="#" class="navbar-icon"><i class="fas fa-calendar-alt"></i></a>
+      <a href="/cl/favorites/" class="navbar-icon"><i class="fas fa-heart"></i></a>
+      <a href="/cl/client_profile/" class="navbar-icon"><i class="fas fa-user"></i></a>
+    </div>
+  {% endif %}
 </body>
 </html>
