@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib import messages
-from .models import CustomUser  # Import your CustomUser model
+from .models import CustomUser, Ads  # Import your CustomUser model
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError  
 from sartaroshxona.models import Barber
@@ -76,7 +76,22 @@ def delete_account(request):
 
 
 
+#-----------------------------------Ads------------------------------------------------
+    
+def ads_list(request):
+    # Get all Ads objects from the database
+    ads = Ads.objects.all()
 
+    # Iterate through the Ads objects and render their associated images
+    for ad in ads:
+        # Get the image path for the current Ad
+        image_path = ad.image_path
+
+        # Render the image using an HTML img tag
+        return render(request, 'main/ads.html', {
+            'ads': ads,
+            'image_path': image_path,
+        })
 
 
 

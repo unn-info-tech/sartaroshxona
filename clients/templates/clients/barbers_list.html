@@ -29,12 +29,12 @@
                     <img src="{% static 'images/default.jpg' %}" alt="Default Image">
                 {% endif %}
             </div>
+          </a>
             <div class="barber_info">
               <h1>{{ barber.user.username }}</h1>
               <p>Address: Gulakandoz{{ barber.location }}</p>
               <p class="reputation">⭐️⭐️⭐️⭐️⭐️5{{ user.reputation }}</p>
             </div>
-          </a>
         </div>
       </div>
       {% endfor %}

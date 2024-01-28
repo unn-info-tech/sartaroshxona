@@ -48,17 +48,11 @@
                             </td>
                             <!-- This is for accept or cancel-->
                             <td>
-                                {% if category == 'in_queue' %}
-                                    <div style="margin-top: 10px;">
-                                        <p>Not confirment yet</p>
-                                    </div> <!-- Adjust margin-top as needed -->
-                                    
-                                {% elif category == 'confirmed' %}
-                                    <div style="margin-top: 10px;">
-                                        <p>Confirment yet</p>
-                                    </div> <!-- Adjust margin-top as needed -->
+                                {% if  appointment.status == 'in_queue' %}
+                                    <p>Not confirment yet ❌</p>
+                                {% elif  appointment.status == 'confirmed' %}
+                                    <p>Confirment ✅</p>
                                 {% endif %}
-
                             </td>
                         </tr>
                     {% endfor %}

@@ -35,19 +35,34 @@
 
   <!-- Read-only mode for Password Change -->
   <div id="readOnlyPasswordMode">
-  <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
-  <button id="editPasswordButton">Change Password</button>
+    <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
+    <button id="editPasswordButton">Change Password</button>
   </div>
 
   <!-- Edit mode for Password Change -->
   <div id="editPasswordForm" style="display: none;">
-  <form method="post">
-      {% csrf_token %}
-      {{ password_change_form.as_p}}
-      <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
-      <button id="cancelPasswordButton" type="button">Cancel</button>
-  </form>
+    <form method="post">
+        {% csrf_token %}
+        {{ password_change_form.as_p}}
+        <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
+        <button id="cancelPasswordButton" type="button">Cancel</button>
+    </form>
   </div>
+
+   <!-- Add a new container at the bottom -->
+   <div class="bottom-container">
+        <!-- Add Logout and Delete Account Buttons within the new container -->
+        <form method="post" action="{% url 'logout' %}" class="logout-form">
+            {% csrf_token %}
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to log out?')" class=class="logout-form">Log Out</button>
+        </form>
+
+        <form method="post" action="{% url 'delete_account' %}" class="delete-account-form">
+            {% csrf_token %}
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')" class="delete-account-button">Delete Account</button>
+        </form>
+    </div>
+
 </div>
 
 {% endblock %}

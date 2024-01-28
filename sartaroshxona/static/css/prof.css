@@ -27,7 +27,6 @@ body {
     /* Ensure the container has a background to see the content */
     border-radius: 10px;
     padding: 20px;
-    margin-bottom: 10%;
     position: relative;
     min-height: 100vh; /* Ensure the container takes at least the full viewport height */
     
@@ -182,6 +181,8 @@ body {
   display: flex;
   justify-content: flex-end; /* Align buttons to the right */
 }
+
+
 
 
 /* Media query for smaller screens */

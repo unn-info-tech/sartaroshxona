@@ -1,0 +1,18 @@
+<!-- ads_list.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ads List</title>
+</head>
+<body>
+    <h1>Ads List</h1>
+    {% for ad in ads %}
+    <div class="ad">
+        <img src="{{ ad.image_path }}" alt="{{ ad.title }}">
+        <h2>{{ ad.title }}</h2>
+        <p>{{ ad.description }}</p>
+    </div>
+    {% endfor %}
+</body>
+</html>
