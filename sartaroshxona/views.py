@@ -233,3 +233,5 @@ def cancel_appointment(request, appointment_id, category):
 
 def test(request):
     return render(request, 'sartaroshxona/appointment.html')
+
+

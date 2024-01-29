@@ -78,21 +78,11 @@ def delete_account(request):
 
 #-----------------------------------Ads------------------------------------------------
     
+
 def ads_list(request):
-    # Get all Ads objects from the database
     ads = Ads.objects.all()
-
-    # Iterate through the Ads objects and render their associated images
-    for ad in ads:
-        # Get the image path for the current Ad
-        image_path = ad.image_path
-
-        # Render the image using an HTML img tag
-        return render(request, 'main/ads.html', {
-            'ads': ads,
-            'image_path': image_path,
-        })
-
+    print(ads)
+    return render(request, 'main/ads.html', {'ads': ads})
 
 
 

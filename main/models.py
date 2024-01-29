@@ -55,5 +55,7 @@ class CustomUser(AbstractUser):
 
 #---------------------------------------Ads---------------------------------------------
 class Ads(models.Model):
-    ad = models.ImageField(upload_to='ads/', null=True, blank=True)
+    ad = models.ImageField(upload_to='images_of_ads/')
 
+    def __str__(self):
+        return self.ad.name if self.ad.name else "No name"  # Use the image name or provide a default string

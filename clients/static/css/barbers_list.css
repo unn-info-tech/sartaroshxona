@@ -47,6 +47,16 @@ body {
     margin-bottom: 3px; /* Smaller margin */
 }
 
+/* Barber image img */
+.barber_profile .ads img {
+    display: block;
+    width: 100%; /* Adjusted width */
+    height: 180px; /* Adjusted width */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 3px; /* Smaller margin */
+}
+
 /* Barber info */
 .barber_profile .barber_info {
     margin-top: 0;
@@ -117,6 +127,16 @@ body {
         height: auto; /* Maintain aspect ratio */
         object-fit: cover;
         border-radius: 50%;
+        margin-bottom: 3px; /* Smaller margin */
+    }
+
+    /* Barber image img */
+    .barber_profile .ads img {
+        display: block;
+        width: 100%; /* Adjusted width */
+        height: 180px; /* Adjusted height */
+        object-fit: cover;
+        border-radius: 10px;
         margin-bottom: 3px; /* Smaller margin */
     }
 
