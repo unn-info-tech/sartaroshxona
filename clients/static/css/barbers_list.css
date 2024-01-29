@@ -134,7 +134,7 @@ body {
     .barber_profile .ads img {
         display: block;
         width: 100%; /* Adjusted width */
-        height: 180px; /* Adjusted height */
+        height: 200px; /* Adjusted height */
         object-fit: cover;
         border-radius: 10px;
         margin-bottom: 3px; /* Smaller margin */

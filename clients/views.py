@@ -13,6 +13,7 @@ import datetime
 from django.utils import timezone
 import pytz
 from .utils import is_overlapping
+from django.db.models import Q
 
 
 def client_profile(request):
@@ -51,7 +52,23 @@ def client_profile(request):
 
 
 def barbers_list(request):
-    barbers = Barber.objects.all()
+    user = request.user
+
+    country = user.country
+    region = user.region
+    district = user.district
+    city = user.city
+
+    # Use Q objects to construct the AND conditions for filtering
+    q_filter = (
+        Q(user__country=country) &
+        Q(user__region=region) &
+        Q(user__district=district) &
+        Q(user__city=city)
+    )
+    # Filter barbers based on the user's address
+    barbers = Barber.objects.filter(q_filter)
+
     return render(request, 'clients/barbers_list.html', {'header': "Barber List", 'barbers': barbers})
 
 
@@ -59,7 +76,6 @@ def favorites(request):
     user = request.user
     favorite_barbers = user.favorite_barbers.all()
     return render(request, 'clients/barbers_list.html', {'header': "My favorite Barbers", 'barbers': favorite_barbers})
-
 
 
 
