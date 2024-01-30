@@ -3,6 +3,7 @@ from main.models import CustomUser  # Assuming this is your CustomUser model
 from django.utils import timezone
 import pytz
 from datetime import timedelta
+import uuid
 
 class Service(models.Model):
     barber = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='provided_services')
@@ -15,6 +16,7 @@ class Service(models.Model):
 
 
 class Barber(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='barber_profile')
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     start_work = models.TimeField(null=True, blank=True)

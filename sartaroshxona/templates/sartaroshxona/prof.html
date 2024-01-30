@@ -5,10 +5,13 @@
 {% include 'main/navbar.html' %}
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <link rel="stylesheet" href="{% static '/css/prof.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/prof.js' %}"></script>
 <script src="{% static 'js/confirmation.js' %}"></script>
+
 
 
 <div class="container">
@@ -207,17 +210,20 @@
         <!-- Add Logout and Delete Account Buttons within the new container -->
         <form method="post" action="{% url 'logout' %}" class="logout-form">
             {% csrf_token %}
-            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to log out?')" class=class="logout-form">Log Out</button>
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to log out?')">Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
         </form>
 
         <form method="post" action="{% url 'delete_account' %}" class="delete-account-form">
             {% csrf_token %}
-            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')" class="delete-account-button">Delete Account</button>
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account <i class="fa-solid fa-trash"></i></button>
         </form>
 
-        <input type="text" value="m" readonly>
-        <a href="{% url 'share_profile' slug=barber.slug %}">Share Button</a>
 
+
+        <button style="border-color: rgb(255, 153, 0); padding: 10px; margin-left: 10px;" id="shareButton" data-barber-id="{{ barber.id }}">Share profile <i class="fa-solid fa-share-nodes"></i></button>
+        <script src="{% static 'js/share_link.js' %}"></script>
+
+        
     </div>
 
 </div>

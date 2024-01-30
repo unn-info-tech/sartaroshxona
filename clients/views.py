@@ -1,5 +1,5 @@
 # Clients views.py
-from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse, get_object_or_404
 from clients.forms import UserProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -89,17 +89,19 @@ def my_appointments(request):
 
 
 def appointment(request, barber_id):
-    barber = Barber.objects.get(pk=barber_id)
+    barber = get_object_or_404(Barber, id=barber_id)
     services = Service.objects.filter(barber=barber)
     appointments = Appointment.objects.filter(barber=barber)
 
     if request.method == 'POST':
+        print('post')
         # Retrieve the selected services IDs from the POST data
         selected_service_ids_json = request.POST.get('selected_services')
         # Deserialize the JSON string to a Python list
         selected_service_ids = json.loads(selected_service_ids_json)
         selected_services = Service.objects.filter(pk__in=selected_service_ids)
         appointment_form = AppointmentForm(request.POST)
+
 
         if selected_services and appointment_form.is_valid():
             total_duration = int(request.POST.get('total_duration'))
@@ -117,7 +119,7 @@ def appointment(request, barber_id):
 
                 if not is_overlapping(appointment_time, end_time):
                     appointment = appointment_form.save(commit=False)
-                    appointment.barber = Barber.objects.get(pk=barber_id)
+                    appointment.barber = Barber.objects.get(id=barber_id)
                     appointment.client = request.user
                     appointment.appointment_end_time = end_time
                     
