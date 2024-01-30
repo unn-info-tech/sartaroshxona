@@ -218,11 +218,46 @@
             <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account <i class="fa-solid fa-trash"></i></button>
         </form>
 
-
-
         <button style="border-color: rgb(255, 153, 0); padding: 10px; margin-left: 10px;" id="shareButton" data-barber-id="{{ barber.id }}">Share profile <i class="fa-solid fa-share-nodes"></i></button>
         <script src="{% static 'js/share_link.js' %}"></script>
 
+
+
+        <!-- Toggle button -->
+        <label class="switch">
+            <input type="checkbox" id="toggleBarberStatus" {% if barber.active_barber %}checked{% endif %}>
+            <span class="slider"></span>
+        </label>
+
+        <!-- Displayed status -->
+        <p id="barberStatus">Status: {% if barber.active_barber %}Active{% else %}Inactive{% endif %}</p>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#toggleBarberStatus').change(function() {
+                    var isActive = $(this).is(':checked');
+                    var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();  // Get CSRF token
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "toggle_barber_status" %}',
+                        data: {
+                            'is_active': isActive,
+                            'csrfmiddlewaretoken': csrf_token  // Include CSRF token in data
+                        },
+                        success: function(response) {
+                            console.log('Toggle success:', response);
+                            // Update the displayed status
+                            $('#barberStatus').text('Status: ' + (isActive ? 'Active' : 'Inactive'));
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Toggle error:', xhr.responseText);  // Print the full error message
+                        }
+                    });
+                });
+            });
+        </script>
+        
         
     </div>
 

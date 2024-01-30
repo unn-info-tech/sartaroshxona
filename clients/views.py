@@ -163,9 +163,7 @@ def appointment(request, barber_id):
 
 def update_favorites(request, barber_id):
     barber = Barber.objects.get(pk=barber_id)
-    print(barber)
     user = request.user
-    print(user, user.favorite_barbers.all())
 
     if request.method == 'POST':
         if 'favorite' in request.POST:

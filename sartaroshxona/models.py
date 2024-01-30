@@ -36,8 +36,29 @@ class Barber(models.Model):
     ]
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='TJS')
 
-   
-   
+    active_barber = models.BooleanField(default=False)
+
+    payment = models.BooleanField(default=False)
+    payment_expiration_date = models.DateTimeField(null=True, blank=True)
+    def activate_premium(self, duration_days=30):
+        # Set is_premium to True
+        self.payment = True
+        # Calculate the expiration date
+        current_time = self.get_user_time_zone()
+        expiration_date = current_time + timedelta(days=duration_days)
+        self.payment_expiration_date = expiration_date
+        # Save the user instance
+        self.save()
+
+    def check_premium_status(self):
+        # Check if user is currently premium
+        current_time = self.get_user_time_zone()
+        if self.payment and self.payment_expiration_date and self.payment_expiration_date <= current_time:
+            # Premium subscription has expired, set is_premium to False
+            self.is_premium = False
+            self.save()
+
+
 
     def get_services(self):
         return self.provided_services.all()  # Renamed related name for clarity

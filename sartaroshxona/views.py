@@ -223,10 +223,32 @@ def cancel_appointment(request, appointment_id, category):
     return redirect('appointments_by_category', category=category)
 
 
+#---------------------------------Work place above------------------------------
+# views.py
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Barber
 
+@csrf_exempt
+def toggle_barber_status(request):
+    if request.method == 'POST' and request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        try:
+            is_active = request.POST.get('is_active') == 'true'
+            print('Received is_active:', is_active)  # Print for debugging purposes
 
+            barber = Barber.objects.first()  # Replace with your actual logic to get the barber instance
+            barber.active_barber = is_active
+            barber.save()
+            return JsonResponse({'status': 'success'})
 
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            import traceback
+            traceback.print_exc()  # Print the full exception traceback
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 
 
