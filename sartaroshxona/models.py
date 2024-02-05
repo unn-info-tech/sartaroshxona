@@ -56,6 +56,7 @@ class Barber(models.Model):
         if self.payment and self.payment_expiration_date and self.payment_expiration_date <= current_time:
             # Premium subscription has expired, set is_premium to False
             self.is_premium = False
+            self.active_barber = False
             self.save()
 
 

@@ -7,7 +7,11 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.conf import settings
 import os
+from django.contrib.auth.decorators import login_required
+from main.decorators import is_barber_required
 
+@login_required
+@is_barber_required
 def barber_profile(request):
     user = request.user
     barber = Barber.objects.get(user=user)  # Fetch the logged-in barber's data
@@ -88,9 +92,16 @@ def barber_profile(request):
                 return redirect('barber_profile')
             
         elif 'active_barber' in request.POST:
-            barber.active_barber = not barber.active_barber
-            barber.save()
-            return redirect('barber_profile')
+            if barber.payment:
+                barber.active_barber = not barber.active_barber
+                barber.save()
+                return redirect('barber_profile')
+
+            return render(request, 'sartaroshxona/payment_info.html', {
+                'barber': barber
+                })
+            
+
         
 
     else:
@@ -119,7 +130,8 @@ from .models import ClientBarberInteraction, DailyWorkRecord
 
 
 
-
+@login_required
+@is_barber_required
 def appointments_by_category(request, category):
     status_choices = dict(Appointment.STATUS_CHOICES)
     human_readable_category = status_choices.get(category, category)
@@ -170,6 +182,8 @@ def appointments_by_category(request, category):
 from django.db.models import Sum
 from datetime import date
 
+@login_required
+@is_barber_required
 def accept_and_done_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
     appointment.status = 'confirmed'  # Assuming you update status field to 'confirmed' when accepted
@@ -220,7 +234,8 @@ def accept_and_done_appointment(request, appointment_id):
 
         return redirect('appointments_by_category', category='confirmed')
 
-
+@login_required
+@is_barber_required
 def cancel_appointment(request, appointment_id, category):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
     appointment.delete()  # Delete the appointment

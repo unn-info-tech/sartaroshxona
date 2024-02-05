@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'main/navbar.html' %}
+<meta charset="utf-8">
+<title>Payment info</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static '/css/clients.css' %}">
+
+
+<div class="container" style="background-color: rgba(0, 0, 0, 0.5);">
+    <h1>User Profile</h1>
+    <p>Please make a payment to make your profile to go puclic</p>
+
+    <div style="margin-top: 10px;">
+        <input type="text" id="copyInput1" value="0000 0000 0000 0000">
+        <input type="text" id="copyInput2" value="{{ barber.id }}">
+        <button onclick="copyToClipboard('copyInput1')" class="btn btn-outline-primary btn-duration">Copy card number</button>
+        <button onclick="copyToClipboard('copyInput2')" class="btn btn-outline-primary btn-duration">Copy my id</button>
+    </div>
+    
+    <script>
+        function copyToClipboard(inputId) {
+            var copyText = document.getElementById(inputId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+        }
+    </script>
+    
+
+
+  
+
+</div>
+
+{% endblock %}

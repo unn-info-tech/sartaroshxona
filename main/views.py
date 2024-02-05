@@ -26,6 +26,7 @@ def signup(request):
                 # Creating a Barber object with required fields
                 Barber.objects.create(
                     user=user,
+                    payment=True,
                     
                 )
             return redirect('signin')
@@ -54,13 +55,10 @@ def signin(request):
     return render(request, 'main/signIn.html', {'formMe_signIn': formMe_signIn})
 
 
-
+@login_required
 def log_out(request):
     logout(request)
     return redirect('signin')  
-
-
-
 
 
 @login_required
@@ -78,9 +76,25 @@ def delete_account(request):
 
 #-----------------------------------Ads------------------------------------------------
     
+from django.db.models import Q
 
 def ads_list(request):
-    ads = Ads.objects.all()
+    user = request.user
+
+    country = user.country
+    region = user.region
+    district = user.district
+    city = user.city
+
+    # Use Q objects to construct the AND conditions for filtering
+    q_filter = (
+        Q(user__country=country) &
+        Q(user__region=region) &
+        Q(user__district=district) &
+        Q(user__city=city)
+    )
+
+    ads = Ads.objects.all(q_filter)
     print(ads)
     return render(request, 'main/ads.html', {'ads': ads})
 

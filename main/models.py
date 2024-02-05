@@ -59,5 +59,11 @@ class CustomUser(AbstractUser):
 class Ads(models.Model):
     ad = models.ImageField(upload_to='images_of_ads/')
 
+     # LOCATIONS
+    country =  models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
+    region = models.ForeignKey(Region, on_delete=models.SET_NULL, blank=True, null=True)
+    district = models.ForeignKey(District, on_delete=models.SET_NULL, blank=True, null=True)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
+
     def __str__(self):
         return self.ad.name if self.ad.name else "No name"  # Use the image name or provide a default string

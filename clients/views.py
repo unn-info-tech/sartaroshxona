@@ -14,8 +14,9 @@ from django.utils import timezone
 import pytz
 from .utils import is_overlapping
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def client_profile(request):
     user = request.user
 
@@ -50,7 +51,7 @@ def client_profile(request):
 
 
 
-
+@login_required
 def barbers_list(request):
     user = request.user
 
@@ -67,18 +68,18 @@ def barbers_list(request):
         Q(user__city=city)
     )
     # Filter barbers based on the user's address
-    barbers = Barber.objects.filter(q_filter)
+    barbers = Barber.objects.filter(q_filter, active_barber=True)
 
     return render(request, 'clients/barbers_list.html', {'header': "Barber List", 'barbers': barbers})
 
-
+@login_required
 def favorites(request):
     user = request.user
     favorite_barbers = user.favorite_barbers.all()
     return render(request, 'clients/barbers_list.html', {'header': "My favorite Barbers", 'barbers': favorite_barbers})
 
 
-
+@login_required
 def my_appointments(request):
     client = request.user
     my_appointments = Appointment.objects.filter(client=client).prefetch_related('service')
@@ -87,7 +88,7 @@ def my_appointments(request):
 
 
 
-
+@login_required
 def appointment(request, barber_id):
     barber = get_object_or_404(Barber, id=barber_id)
     services = Service.objects.filter(barber=barber)
@@ -160,7 +161,7 @@ def appointment(request, barber_id):
 
 
 
-
+@login_required
 def update_favorites(request, barber_id):
     barber = Barber.objects.get(pk=barber_id)
     user = request.user

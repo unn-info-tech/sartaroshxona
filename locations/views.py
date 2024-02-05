@@ -8,13 +8,6 @@ from .models import City, District, Region
 
 
 
-
-
-
-
-
-
-
 # AJAX
 def load_regions(request):
     country_id = request.GET.get('country_id')
