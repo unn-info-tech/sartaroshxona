@@ -86,6 +86,12 @@ def barber_profile(request):
                 service.master = barber  # Associate the service with the logged-in barber
                 service.save()
                 return redirect('barber_profile')
+            
+        elif 'active_barber' in request.POST:
+            barber.active_barber = not barber.active_barber
+            barber.save()
+            return redirect('barber_profile')
+        
 
     else:
         barber_form = BarberForm(instance=barber)
@@ -107,7 +113,6 @@ def barber_profile(request):
 
 #--------------------------All done above, don't  make changes--------------------
 
-from django.shortcuts import render
 from clients.models import Appointment  # Import the Appointment model
 from main.models import CustomUser
 from .models import ClientBarberInteraction, DailyWorkRecord
@@ -224,31 +229,9 @@ def cancel_appointment(request, appointment_id, category):
 
 
 #---------------------------------Work place above------------------------------
-# views.py
 
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import Barber
 
-@csrf_exempt
-def toggle_barber_status(request):
-    if request.method == 'POST' and request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        try:
-            is_active = request.POST.get('is_active') == 'true'
-            print('Received is_active:', is_active)  # Print for debugging purposes
 
-            barber = Barber.objects.first()  # Replace with your actual logic to get the barber instance
-            barber.active_barber = is_active
-            barber.save()
-            return JsonResponse({'status': 'success'})
-
-            return JsonResponse({'status': 'success'})
-        except Exception as e:
-            import traceback
-            traceback.print_exc()  # Print the full exception traceback
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
-
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 
 

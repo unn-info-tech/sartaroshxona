@@ -8,7 +8,6 @@ urlpatterns = [
     path('accept_and_done_appointment/<int:appointment_id>/', views.accept_and_done_appointment, name='accept_and_done_appointment'),
     path('cancel_appointment/<int:appointment_id>/<str:category>/', views.cancel_appointment, name='cancel_appointment'),
 
-    path('toggle_barber_status/', views.toggle_barber_status, name='toggle_barber_status'),
 
     path('test/', views.test, name='testsar'),
         
