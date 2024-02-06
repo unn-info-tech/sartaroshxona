@@ -258,9 +258,20 @@ def cancel_appointment(request, appointment_id, category):
 #---------------------------------Work place above------------------------------
 
 
-
-
-
+def client_or_barber(request):
+    user = request.user
+    user_in_barber_list = Barber.objects.filter(user=user).exists()
+    if request.method == 'POST' and user_in_barber_list:
+        user.is_barber = not user.is_barber
+        user.save()
+        # Redirect the user to the appropriate profile page
+        if user.is_barber:
+            return redirect('barber_profile')
+        else:
+            return redirect('client_profile')
+    else:
+        # Render the form for GET requests
+        return render(request, 'main/404.html')
 
 
 def test(request):

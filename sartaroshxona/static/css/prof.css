@@ -177,10 +177,18 @@ body {
 
 .bottom-container {
   margin-top: 100px;
-  padding: 20px; /* Adjust padding as needed */
+  padding: 5px; /* Adjust padding as needed */
   display: flex;
-  justify-content: flex-end; /* Align buttons to the right */
+  flex-wrap: wrap; /* Allow buttons to wrap to the next line if necessary */
+  justify-content: center; /* Align buttons to the right */
+  margin-bottom: 10px;
 }
+
+.bottom-container form {
+  margin-bottom: 10px; /* Add some space between buttons */
+}
+
+
 
 
 
@@ -193,5 +201,9 @@ body {
     margin-bottom: 20%;
   }
 
+  .bottom-container form button {
+    min-width: 120px; /* Adjust minimum width for smaller screens */
+  }
+  
   
 }

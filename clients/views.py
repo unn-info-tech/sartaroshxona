@@ -15,8 +15,10 @@ import pytz
 from .utils import is_overlapping
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from main.decorators import is_client_required
 
 @login_required
+@is_client_required
 def client_profile(request):
     user = request.user
 
@@ -38,11 +40,14 @@ def client_profile(request):
     else:
         user_form = UserProfileForm(instance=request.user)
         password_change_form = PasswordChangeForm(request.user)
+        user_in_barber_list = Barber.objects.filter(user=user).exists()
 
 
     return render(request, 'clients/client_profile.html', {
         'user_form': user_form,
         'password_change_form': password_change_form,
+        'user_in_barber_list': user_in_barber_list,
+
     })
 
 
@@ -52,6 +57,7 @@ def client_profile(request):
 
 
 @login_required
+@is_client_required
 def barbers_list(request):
     user = request.user
 
@@ -73,6 +79,7 @@ def barbers_list(request):
     return render(request, 'clients/barbers_list.html', {'header': "Barber List", 'barbers': barbers})
 
 @login_required
+@is_client_required
 def favorites(request):
     user = request.user
     favorite_barbers = user.favorite_barbers.all()
@@ -80,6 +87,7 @@ def favorites(request):
 
 
 @login_required
+@is_client_required
 def my_appointments(request):
     client = request.user
     my_appointments = Appointment.objects.filter(client=client).prefetch_related('service')
@@ -89,13 +97,17 @@ def my_appointments(request):
 
 
 @login_required
+@is_client_required
 def appointment(request, barber_id):
     barber = get_object_or_404(Barber, id=barber_id)
     services = Service.objects.filter(barber=barber)
     appointments = Appointment.objects.filter(barber=barber)
 
     if request.method == 'POST':
-        print('post')
+        if barber.user == request.user:
+            messages.error(request, 'You cannot have an appointment for yourself')
+            return redirect(reverse('appointment', args=[barber_id]))
+        
         # Retrieve the selected services IDs from the POST data
         selected_service_ids_json = request.POST.get('selected_services')
         # Deserialize the JSON string to a Python list
@@ -162,6 +174,7 @@ def appointment(request, barber_id):
 
 
 @login_required
+@is_client_required
 def update_favorites(request, barber_id):
     barber = Barber.objects.get(pk=barber_id)
     user = request.user

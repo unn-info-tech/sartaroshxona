@@ -211,13 +211,15 @@
         <form method="post" action="{% url 'logout' %}" class="logout-form">
             {% csrf_token %}
             <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to log out?')">
-                Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
         </form>
 
         <form method="post" action="{% url 'delete_account' %}" class="delete-account-form">
             {% csrf_token %}
             <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')">
-                Delete Account <i class="fa-solid fa-trash"></i></button>
+                Delete Account <i class="fa-solid fa-trash"></i>
+            </button>
         </form>
         
         <form method="post">
@@ -230,15 +232,27 @@
                 {% endif %}
             </button>
         </form>
+        
+        <form method="post"  action="{% url 'client_or_barber' %}">
+            {% csrf_token %}
+            <button style="border-color: rgb(242, 255, 0); padding: 10px; margin-left: 10px;" type="submit">
+                {% if request.user.is_barber %}
+                    Into client profile 
+                {% else %}
+                    Into barber profile 
+                {% endif %}
+            </button>
+        </form>
 
-        <button style="border-color: rgb(255, 153, 0); padding: 10px; margin-left: 10px;" id="shareButton" data-barber-id="{{ barber.id }}">
-            Share profile <i class="fa-solid fa-share-nodes"></i></button>
+
+        <button style="border-color: rgb(255, 174, 0);" class="bottom-container-button" id="shareButton" data-barber-id="{{ barber.id }}">
+            Share profile <i class="fa-solid fa-share-nodes"></i>
+        </button>
+        
         <script src="{% static 'js/share_link.js' %}"></script>
+        
 
         <p>Left days: {{left_days}}</p>
-        
-
-        
         
         
     </div>
