@@ -10,12 +10,13 @@ import os
 from django.contrib.auth.decorators import login_required
 from main.decorators import is_barber_required
 
+
 @login_required
 @is_barber_required
 def barber_profile(request):
     user = request.user
     barber = Barber.objects.get(user=user)  # Fetch the logged-in barber's data
-
+    
     if request.method == 'POST':
         if 'user_info_form' in request.POST:
             user_form = UserProfileForm(request.POST, instance=request.user)
@@ -110,6 +111,15 @@ def barber_profile(request):
         service_form = ServiceForm(initial=service_initial)
         user_form = UserProfileForm(instance=request.user)
         password_change_form = PasswordChangeForm(request.user)
+        if barber.payment:
+            payment_expiration_date_naive = barber.payment_expiration_date.replace(tzinfo=None)
+            # Perform the subtraction operation
+            left_days = (payment_expiration_date_naive - barber.get_user_time_zone()).days
+            left_days = max(left_days, 0)  # Ensure left_days is non-negative
+            if left_days <= 0:
+                barber.deactivate_premium()
+        else:
+            left_days = 0
 
     services = barber.get_services()  # Fetch services associated with the barber
 
@@ -119,7 +129,9 @@ def barber_profile(request):
         'barber': barber,
         'barber_form': barber_form,
         'services': services,
-        'service_form': service_form
+        'service_form': service_form,
+        'left_days': left_days
+
     })
 
 #--------------------------All done above, don't  make changes--------------------

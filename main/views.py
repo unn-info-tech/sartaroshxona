@@ -24,11 +24,10 @@ def signup(request):
             # Check if the user is a barber and create a barber instance
             if user.is_barber:
                 # Creating a Barber object with required fields
-                Barber.objects.create(
+                barber = Barber.objects.create(
                     user=user,
-                    payment=True,
-                    
                 )
+                barber.activate_premium()
             return redirect('signin')
     else:
         formMe_signup = CustomUserCreationForm()

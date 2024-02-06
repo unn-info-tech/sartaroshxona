@@ -40,7 +40,7 @@ class Barber(models.Model):
 
     payment = models.BooleanField(default=False)
     payment_expiration_date = models.DateTimeField(null=True, blank=True)
-    def activate_premium(self, duration_days=30):
+    def activate_premium(self, duration_days=31):
         # Set is_premium to True
         self.payment = True
         # Calculate the expiration date
@@ -50,14 +50,11 @@ class Barber(models.Model):
         # Save the user instance
         self.save()
 
-    def check_premium_status(self):
-        # Check if user is currently premium
-        current_time = self.get_user_time_zone()
-        if self.payment and self.payment_expiration_date and self.payment_expiration_date <= current_time:
-            # Premium subscription has expired, set is_premium to False
-            self.is_premium = False
-            self.active_barber = False
-            self.save()
+    def deactivate_premium(self):
+        self.payment = False
+        self.active_barber = False
+        self.payment_expiration_date = None  # Reset the expiration date
+        self.save()
 
 
 
