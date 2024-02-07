@@ -6,165 +6,159 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="{% static '/css/prof.css' %}">
+<link rel="stylesheet" href="{% static 'css/prof.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/prof.js' %}"></script>
 <script src="{% static 'js/confirmation.js' %}"></script>
 
-
-
 <div class="container">
-    <!-- USER -->
-    <h1>User Profile</h1>
-    <!-- Read-only mode -->
+    <!-- ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ -->
+    <h1>Профиль пользователя</h1>
+    <!-- Режим только для чтения -->
     <div id="readOnlyUserMode">
-        <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
-        <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
-        <p>Phone Number: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number" disabled></p>
-        <button id="editUserButton">Edit</button>
+        <p>Имя пользователя: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
+        <p>Электронная почта: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
+        <p>Номер телефона: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number" disabled></p>
+        <button id="editUserButton">Редактировать</button>
     </div>
 
-    <!-- Edit mode -->
+    <!-- Режим редактирования -->
     <div id="editUserForm" style="display: none;">
         <form method="post">
             {% csrf_token %}
-            <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
-            <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
-            <p>Phone Number: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number"></p>
-            <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
-            <button id="cancelUserButton" type="button">Cancel</button>
+            <p>Имя пользователя: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
+            <p>Электронная почта: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
+            <p>Номер телефона: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number"></p>
+            <button id="saveUserButton" type="submit" name="user_info_form">Сохранить изменения</button>
+            <button id="cancelUserButton" type="button">Отмена</button>
         </form>
     </div>
 
-    <!-- Read-only mode for Password Change -->
+    <!-- Режим только для чтения для смены пароля -->
     <div id="readOnlyPasswordMode">
-    <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
-    <button id="editPasswordButton">Change Password</button>
+        <p>Пароль: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
+        <button id="editPasswordButton">Изменить пароль</button>
     </div>
 
-    <!-- Edit mode for Password Change -->
+    <!-- Режим редактирования для смены пароля -->
     <div id="editPasswordForm" style="display: none;">
-    <form method="post">
-        {% csrf_token %}
-        {{ password_change_form.as_p}}
-        <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
-        <button id="cancelPasswordButton" type="button">Cancel</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            {{ password_change_form.as_p}}
+            <button id="savePasswordButton" type="submit" name="password_change_form">Сохранить пароль</button>
+            <button id="cancelPasswordButton" type="button">Отмена</button>
+        </form>
     </div>
 
-
-    <!-- BARBER -->
-    <h1 class="profile-header">Barber Profile</h1>
-    <!-- Read-only mode -->
+    <!-- ПРОФИЛЬ ПАРИКМАХЕРА -->
+    <h1 class="profile-header">Профиль парикмахера</h1>
+    <!-- Режим только для чтения -->
     <div id="readOnlyBarberMode">
-    <!-- For profile_image -->
-    <!-- Profile Image -->
+        <!-- Для изображения профиля -->
+        <!-- Изображение профиля -->
         <div class="profile-field">
             <p><input type="hidden" name="user" value="{{ barber.user.username }}" id="user" disabled></p>
 
             <div class="profile-field">
                 <div class="profile-image-container">
                     {% if barber.profile_image %}
-                        <img src="{{ barber.profile_image.url }}" alt="Profile Image">
+                        <img src="{{ barber.profile_image.url }}" alt="Изображение профиля">
                     {% else %}
-                        <img src="{% static 'images/default.jpg' %}" alt="Default Image">
+                        <img src="{% static 'images/default.jpg' %}" alt="Изображение по умолчанию">
                     {% endif %}
                 </div>
             </div>
 
-            <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work" disabled></p>
+            <p>Начало рабочего дня: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work" disabled></p>
 
-            <p>End Work: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" disabled></p>
+            <p>Конец рабочего дня: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" disabled></p>
 
-            <p>Launch Start Time: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" disabled></p>
+            <p>Начало обеда: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" disabled></p>
 
-            <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" disabled></p>
+            <p>Конец обеда: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" disabled></p>
 
-            <p>Currency: <input type="text" name="currency" value="{{ barber_form.currency.value }}" id="currency" disabled></p>
+            <p>Валюта: <input type="text" name="currency" value="{{ barber_form.currency.value }}" id="currency" disabled></p>
 
-            <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" disabled></p>
+            <p>Местоположение: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" disabled></p>
 
-            <p>Organization: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name" disabled></p>
+            <p>Организация: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name" disabled></p>
 
-            <button id="editBarberButton">Edit</button>
-            
+            <button id="editBarberButton">Редактировать</button>
+
         </div>
     </div>
 
-    <!-- Edit mode -->
+    <!-- Режим редактирования -->
     <div id="editBarberForm" style="display: none;">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <p><input type="hidden" name="user" value="{{ barber_form.user.value }}" id="user" ></p>
 
             <div class="profile-field">
                 <div class="profile-image-container">
                     {% if barber.profile_image %}
-                        <img src="{{ barber.profile_image.url }}" alt="Profile Image">
-                        <button type="submit" name="delete_image">Delete Image</button>
+                        <img src="{{ barber.profile_image.url }}" alt="Изображение профиля">
+                        <button type="submit" name="delete_image">Удалить изображение</button>
                     {% else %}
-                        <img src="{% static 'images/default.jpg' %}" alt="Default Image">
+                        <img src="{% static 'images/default.jpg' %}" alt="Изображение по умолчанию">
                     {% endif %}
                     <div id="container_image_button">
                         <input type="file" name="profile_image" id="profile_image_input">
                     </div>
-                    
+
                 </div>
             </div>
-            
-            <p>Phone Number: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" ></p>
-        
-            <p>Start Work: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work"></p>
-        
-            <p>End Work: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" ></p>
-        
-            <p>Launch Start Time: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" ></p>
-        
-            <p>Launch End Time: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" ></p>
-        
-            <p>Currency: 
+
+            <p>Номер телефона: <input type="text" name="phone_number" value="{{ barber_form.phone_number.value }}" id="phone_number" ></p>
+
+            <p>Начало рабочего дня: <input type="time" name="start_work" value="{% if barber_form.start_work.value %}{{ barber_form.start_work.value|time:'H:i' }}{% endif %}" id="start_work"></p>
+
+            <p>Конец рабочего дня: <input type="time" name="end_work" value="{% if barber_form.end_work.value %}{{ barber_form.end_work.value|time:'H:i' }}{% endif %}" id="end_work" ></p>
+
+            <p>Начало обеда: <input type="time" name="launch_start_time" value="{% if barber_form.launch_start_time.value %}{{ barber_form.launch_start_time.value|time:'H:i' }}{% endif %}" id="launch_start_time" ></p>
+
+            <p>Конец обеда: <input type="time" name="launch_end_time" value="{% if barber_form.launch_end_time.value %}{{ barber_form.launch_end_time.value|time:'H:i' }}{% endif %}" id="launch_end_time" ></p>
+
+            <p>Валюта: 
                 <select name="currency" id="currency">
                   {% for choice in barber_form.currency.field.choices %}
                     <option value="{{ choice.0 }}" {% if choice.0 == barber_form.currency.value %}selected{% endif %}>{{ choice.1 }}</option>
                   {% endfor %}
                 </select>
             </p>
-              
-            <p>Location: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
 
-            <p>Organization: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name"></p>
+            <p>Местоположение: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
 
-            <button id="saveBarberButton" type="submit" name="barber_info_form">Save Changes</button>
-            <button id="cancelBarberButton" type="button">Cancel</button>
+            <p>Организация: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name"></p>
+
+            <button id="saveBarberButton" type="submit" name="barber_info_form">Сохранить изменения</button>
+            <button id="cancelBarberButton" type="button">Отмена</button>
         </form>
     </div>
 
+    <!-- УСЛУГИ -->
+    <h1>Существующие услуги</h1>
 
-
-
-    <!-- SERVICES -->
-    <h1>Existing Services</h1>
-
-    <!-- Read-only mode -->
+    <!-- Режим только для чтения -->
     <div id="readOnlyServiceMode">
         {% if services %}
             {% for service in services %}
                 <div  class="service-container">
                     <li>
-                        <span class="readonly-input">{{ service.title }} - {{ service.price }} {{ barber.currency}} - {{ service.duration_minutes}}min</span>
+                        <span class="readonly-input">{{ service.title }} - {{ service.price }} {{ barber.currency}} - {{ service.duration_minutes}} мин</span>
                     </li>
                 </div>
             {% endfor %}
         {% else %}
-            <p>No services found.</p>
+            <p>Услуги не найдены.</p>
         {% endif %}
 
-        <button id="editServiceButton">Edit</button>
+        <button id="editServiceButton">Редактировать</button>
     </div>
 
-    <!-- Edit mode -->
+    <!-- Режим редактирования -->
     <div id="editServiceForm" style="display: none;">
         <form method="post">
             {% csrf_token %}
@@ -173,52 +167,52 @@
                     <li>
                         <input type="checkbox" name="delete[]" value="{{ service.id }}">
                         <input type="hidden" name="id[]" value="{{ service.id }}">
-                        <p>Title: <input type="text" name="title[]" value="{{ service.title }}"></p>
-                        <p class="price" >Price: <input type="number" name="price[]" value="{{ service.price }}"> {{ barber.currency}}</p>
-                        <p class="duration" >Duration minutes: <input type="number" name="duration_minutes[]" value="{{ service.duration_minutes }}"></p>
+                        <p>Название: <input type="text" name="title[]" value="{{ service.title }}"></p>
+                        <p class="price" >Цена: <input type="number" name="price[]" value="{{ service.price }}"> {{ barber.currency}}</p>
+                        <p class="duration" >Продолжительность: <input type="number" name="duration_minutes[]" value="{{ service.duration_minutes }}"></p>
                     </li>
                 {% endfor %}
             {% else %}
-                <p>No services found to edit.</p>
+                <p>Не найдены услуги для редактирования.</p>
             {% endif %}
-            <button type="submit" name="service_edit_form">Save Changes</button>
-            <button type="submit" name="service_delete_form">Delete Selected</button>
-            <button id="cancelServiceButton" type="button">Cancel</button>
+            <button type="submit" name="service_edit_form">Сохранить изменения</button>
+            <button type="submit" name="service_delete_form">Удалить выбранные</button>
+            <button id="cancelServiceButton" type="button">Отмена</button>
         </form>
     </div>
 
-    <!-- ADD SERVICE -->
-    <h1>Add New Service</h1>
+    <!-- ДОБАВИТЬ УСЛУГУ -->
+    <h1>Добавить новую услугу</h1>
     <div id="showAddServiceForm">
-        <button>Add New Service</button>
+        <button>Добавить новую услугу</button>
     </div>
 
     <div id="addServiceForm" style="display: none;">
         <form method="post">
             {% csrf_token %}
             <p><input type="hidden" name="barber" value="{{ service_form.barber.value }}" id="barber" ></p>
-            <p>Title: <input type="text" name="title" value="{{ service_form.title.value|default:'' }}"></p>
-            <p class="price">Price: <input type="number" name="price" value="{{ service_form.price.value }}"> {{ barber.currency }}</p>
-            <p class="duration">Duration minutes: <input type="number" name="duration_minutes" value="{{ service_form.duration_minutes.value }}"> min.</p>
-            <button type="submit" name="service_form">Add Service</button>
-            <button type="button" id="cancelAddService">Cancel</button>
+            <p>Название: <input type="text" name="title" value="{{ service_form.title.value|default:'' }}"></p>
+            <p class="price">Цена: <input type="number" name="price" value="{{ service_form.price.value }}"> {{ barber.currency }}</p>
+            <p class="duration">Продолжительность: <input type="number" name="duration_minutes" value="{{ service_form.duration_minutes.value }}"> мин.</p>
+            <button type="submit" name="service_form">Добавить услугу</button>
+            <button type="button" id="cancelAddService">Отмена</button>
         </form>
     </div>
 
-    <!-- Add a new container at the bottom -->
+    <!-- Добавить новый контейнер внизу -->
     <div class="bottom-container">
-        <!-- Add Logout and Delete Account Buttons within the new container -->
+        <!-- Добавить кнопки Выход и Удалить аккаунт в новый контейнер -->
         <form method="post" action="{% url 'logout' %}" class="logout-form">
             {% csrf_token %}
-            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to log out?')">
-                Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Вы уверены, что хотите выйти?')">
+                Выйти <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </button>
         </form>
 
         <form method="post" action="{% url 'delete_account' %}" class="delete-account-form">
             {% csrf_token %}
-            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')">
-                Delete Account <i class="fa-solid fa-trash"></i>
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Вы уверены, что хотите удалить свой аккаунт?')">
+                Удалить аккаунт <i class="fa-solid fa-trash"></i>
             </button>
         </form>
         
@@ -226,9 +220,9 @@
             {% csrf_token %}
             <button style="border-color: rgb(145, 255, 0); padding: 10px; margin-left: 10px;" type="submit" name="active_barber">
                 {% if barber.active_barber %}
-                    Hide my profile <i class="fa-solid fa-eye-slash"></i>
+                    Скрыть мой профиль <i class="fa-solid fa-eye-slash"></i>
                 {% else %}
-                    Show my profile publicly <i class="fa-solid fa-eye"></i> 
+                    Показать мой профиль публично <i class="fa-solid fa-eye"></i> 
                 {% endif %}
             </button>
         </form>
@@ -237,24 +231,24 @@
             {% csrf_token %}
             <button style="border-color: rgb(242, 255, 0); padding: 10px; margin-left: 10px;" type="submit">
                 {% if request.user.is_barber %}
-                    Into client profile 
+                    В профиль клиента 
                 {% else %}
-                    Into barber profile 
+                    В профиль парикмахера 
                 {% endif %}
             </button>
         </form>
 
 
         <button style="border-color: rgb(255, 174, 0);" class="bottom-container-button" id="shareButton" data-barber-id="{{ barber.id }}">
-            Share profile <i class="fa-solid fa-share-nodes"></i>
+            Поделиться профилем <i class="fa-solid fa-share-nodes"></i>
         </button>
         
         <script src="{% static 'js/share_link.js' %}"></script>
         
 
-        <p>Left days: {{left_days}}</p>
-        
-        
+        <p>Оставшиеся дни: {{left_days}}</p>
+
+
     </div>
 
 </div>

@@ -4,20 +4,20 @@
 {% block content %}
 {% include 'main/navbar.html' %}
 <meta charset="utf-8">
-<title>Payment info</title>
+<title>Информация об оплате</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static '/css/clients.css' %}">
 
 
 <div class="container" style="background-color: rgba(0, 0, 0, 0.5);">
-    <h1>User Profile</h1>
-    <p>Please make a payment to make your profile to go puclic</p>
+    <h1>Профиль пользователя</h1>
+    <p>Пожалуйста, сделайте оплату, чтобы ваш профиль стал общедоступным</p>
 
     <div style="margin-top: 10px;">
         <input type="text" id="copyInput1" value="0000 0000 0000 0000">
         <input type="text" id="copyInput2" value="{{ barber.id }}">
-        <button onclick="copyToClipboard('copyInput1')" class="btn btn-outline-primary btn-duration">Copy card number</button>
-        <button onclick="copyToClipboard('copyInput2')" class="btn btn-outline-primary btn-duration">Copy Barber</button>
+        <button onclick="copyToClipboard('copyInput1')" class="btn btn-outline-primary btn-duration">Скопировать номер карты</button>
+        <button onclick="copyToClipboard('copyInput2')" class="btn btn-outline-primary btn-duration">Скопировать парикмахера</button>
     </div>
     
     <script>
@@ -28,10 +28,6 @@
             document.execCommand("copy");
         }
     </script>
-    
-
-
-  
 
 </div>
 

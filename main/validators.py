@@ -5,11 +5,11 @@ import re
 
 class NoRepeatingSequencesValidator:
     def validate(self, password, user=None):
-        if re.match(r'(\d)\1{2,}', password):  # Checks for repeating sequences of numbers
+        if re.match(r'(\d)\1{2,}', password):  # Проверка на повторяющиеся последовательности цифр
             raise ValidationError(
-                "Password contains a sequence of repeating characters (e.g., '111', '222', etc.).",
+                "Пароль содержит последовательность повторяющихся символов (например, '111', '222' и т. д.).",
                 code='password_no_repeating_sequences',
             )
 
     def get_help_text(self):
-        return "Your password cannot contain sequences of repeating characters (e.g., '111', '222', etc.)."
+        return "Ваш пароль не может содержать последовательности повторяющихся символов (например, '111', '222' и т. д.)."

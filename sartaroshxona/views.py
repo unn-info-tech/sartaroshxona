@@ -146,7 +146,13 @@ from .models import ClientBarberInteraction, DailyWorkRecord
 @is_barber_required
 def appointments_by_category(request, category):
     status_choices = dict(Appointment.STATUS_CHOICES)
-    human_readable_category = status_choices.get(category, category)
+    category_labels = {
+        'in_queue': 'В очереди',
+        'confirmed': 'Подтверждено',
+        'done': 'История',
+        'money': 'Заработанные деньги'
+        }
+    human_readable_category = category_labels.get(category)
 
     logged_in_barber = request.user  # Assuming the logged-in user is the barber
     barber_model = Barber.objects.get(user=logged_in_barber)

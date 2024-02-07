@@ -61,21 +61,21 @@
 
     <!-- Content from the second HTML -->
     <div class="list-content">
-        <h1>{{ category }}</h1>
+        <h1>{{ human_readable_category }}</h1>
         <table>
             <thead>
                 <tr>
                     {% if category == 'in_queue' or category == 'confirmed' %}
-                        <th>Customer Name</th>
-                        <th>Appointment Date and Time</th>
-                        <th>Service</th>
-                        <th>Action</th>
+                        <th>Имя клиента</th>
+                        <th>Дата и время записи</th>
+                        <th>Услуга</th>
+                        <th>Действие</th>
                     {% elif category == 'done' %}
-                        <th>Customer Name</th>
-                        <th>Times Appointed</th>
+                        <th>Имя клиента</th>
+                        <th>Количество записей</th>
                     {% elif category == 'money' %}
-                        <th>Date</th>
-                        <th>Amount worked</th>
+                        <th>Дата</th>
+                        <th>Сумма</th>
                     
                     {% endif %}
                     
@@ -90,15 +90,15 @@
                             <td>{{ appointment.appointment_time }}</td>
                             <td>
                                 {% for service in appointment.service.all %}
-                                    <li>{{ service.title }} - {{ service.duration_minutes}} min.<i class="fas fa-clock fa-inverse"></i> {{ service.price }}{{ service.currency }} <i class="fas fa-money-bill-wave"></i></li>
+                                    <li>{{ service.title }} - {{ service.duration_minutes}} мин. {{ service.price }} {{currency}}</li>
                                 {% empty %}
-                                    <li>No services selected for this appointment.</li>
+                                    <li>На этот прием не выбраны услуги.</li>
                                 {% endfor %}
 
                                 {% if appointment.service.all %}
                                 <p>
-                                    <span>= <i class="fas fa-money-bill-wave"></i></li> {{ appointment.service.all|sum_attribute:'price' }}</span>
-                                    <span><i class="fas fa-clock fa-inverse"></i> {{ appointment.service.all|sum_attribute:'duration_minutes' }} minutes</span>
+                                    <span>= <i class="fas fa-money-bill-wave"></i></li> {{ appointment.service.all|sum_attribute:'price' }} {{currency}}</span>
+                                    <span><i class="fas fa-clock fa-inverse"></i> {{ appointment.service.all|sum_attribute:'duration_minutes' }} мин.</span>
                                 </p>
                                 {% endif %}
                                 
@@ -108,22 +108,22 @@
                                 {% if category == 'in_queue' %}
                                     <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
                                         {% csrf_token %}
-                                        <button name="accept" class="btn btn-outline-primary btn-duration" type="submit">Accept</button>
+                                        <button name="accept" class="btn btn-outline-primary btn-duration" type="submit">Принять</button>
                                     </form>
                                     <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
                                     <form action="{% url 'cancel_appointment' appointment.id category %}" method="post">
                                         {% csrf_token %}
-                                        <button class="btn btn-outline-primary btn-duration" type="submit">Cancel</button>
+                                        <button class="btn btn-outline-primary btn-duration" type="submit">Отменить</button>
                                     </form>
                                 {% elif category == 'confirmed' %}
                                     <form action="{% url 'accept_and_done_appointment' appointment.id %}" method="post">
                                         {% csrf_token %}
-                                        <button name="done" class="btn btn-outline-primary btn-duration" type="submit">Service is done</button>
+                                        <button name="done" class="btn btn-outline-primary btn-duration" type="submit">Услуга выполнена</button>
                                     </form>
                                     <div style="margin-top: 10px;"></div> <!-- Adjust margin-top as needed -->
                                     <form action="{% url 'cancel_appointment' appointment.id category%}" method="post">
                                         {% csrf_token %}
-                                        <button class="btn btn-outline-primary btn-duration" type="submit">Service is undone</button>
+                                        <button class="btn btn-outline-primary btn-duration" type="submit">Услуга не выполнена</button>
                                     </form>
                                 {% endif %}
 
@@ -131,7 +131,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="3">No appointments found for this barber.</td>
+                            <td colspan="3">Для этого парикмахера записей не найдено.</td>
                         </tr>
                     {% endfor %} 
 <!----------------- This is for 'done'------------------------------------>
@@ -143,7 +143,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="2">No clients found for this barber.</td>
+                            <td colspan="2">Для этого парикмахера клиенты не найдены.</td>
                         </tr>
                     {% endfor %} 
 <!----------------- This is for 'money'------------------------------------>
@@ -155,7 +155,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="2">No amount_worked found for this barber.</td>
+                            <td colspan="2">Для этого парикмахера Сумма заработанных денег не найдено.</td>
                         </tr>
                     {% endfor %} 
 

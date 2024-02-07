@@ -76,14 +76,14 @@ def barbers_list(request):
     # Filter barbers based on the user's address
     barbers = Barber.objects.filter(q_filter, active_barber=True)
 
-    return render(request, 'clients/barbers_list.html', {'header': "Barber List", 'barbers': barbers})
+    return render(request, 'clients/barbers_list.html', {'header': "Список парикмахеров", 'barbers': barbers})
 
 @login_required
 @is_client_required
 def favorites(request):
     user = request.user
     favorite_barbers = user.favorite_barbers.all()
-    return render(request, 'clients/barbers_list.html', {'header': "My favorite Barbers", 'barbers': favorite_barbers})
+    return render(request, 'clients/barbers_list.html', {'header': "Мои любимые парикмахеры", 'barbers': favorite_barbers})
 
 
 @login_required
@@ -105,16 +105,15 @@ def appointment(request, barber_id):
 
     if request.method == 'POST':
         if barber.user == request.user:
-            messages.error(request, 'You cannot have an appointment for yourself')
+            messages.error(request, 'Вы не можете записаться на прием к самому себе')
             return redirect(reverse('appointment', args=[barber_id]))
         
-        # Retrieve the selected services IDs from the POST data
+        # Получение выбранных идентификаторов услуг из данных POST
         selected_service_ids_json = request.POST.get('selected_services')
-        # Deserialize the JSON string to a Python list
+        # Десериализация строки JSON в список Python
         selected_service_ids = json.loads(selected_service_ids_json)
         selected_services = Service.objects.filter(pk__in=selected_service_ids)
         appointment_form = AppointmentForm(request.POST)
-
 
         if selected_services and appointment_form.is_valid():
             total_duration = int(request.POST.get('total_duration'))
@@ -124,9 +123,6 @@ def appointment(request, barber_id):
 
             now = barber.get_user_time_zone()
             appointment_time_naive = appointment_time.replace(tzinfo=None)
-            # print(appointment_time, end_time)
-            print(now, appointment_time_naive)
-            # print(type(appointment_time), type(now))
             
             if now <= appointment_time_naive: 
 
@@ -139,28 +135,21 @@ def appointment(request, barber_id):
                     appointment.save()
                     appointment.service.add(*selected_services)
 
-                    messages.error(request, 'Congrats, your appoinment is done')
+                    messages.success(request, 'Поздравляем, ваша запись создана')
                     return redirect(reverse('appointment', args=[barber_id]))
                 else:
-                    # If no service is selected or form is invalid, redirect with an error message
-                    messages.error(request, 'Дата и время uzhe vibrano')
+                    messages.error(request, 'Дата и время уже выбраны')
                     return redirect(reverse('appointment', args=[barber_id]))
-                
-
             else:
-                # If no service is selected or form is invalid, redirect with an error message
-                messages.error(request, 'You cant have an appointment for the past')
+                messages.error(request, 'Вы не можете записаться на прием в прошлом')
                 return redirect(reverse('appointment', args=[barber_id]))
 
         else:
-            # If no service is selected or form is invalid, redirect with an error message
-           messages.error(request, 'Дата и время или служба не выбрана')
-           return redirect(reverse('appointment', args=[barber_id]))
+            messages.error(request, 'Дата и время или услуга не выбраны')
+            return redirect(reverse('appointment', args=[barber_id]))
 
     else:
         appointment_form = AppointmentForm()
-
-        
 
     return render(request, 'clients/appointment.html', {
         'barber': barber,
@@ -168,6 +157,7 @@ def appointment(request, barber_id):
         'appointments': appointments,
         'appointment_form': appointment_form,
     })
+
 
 
 
@@ -181,12 +171,13 @@ def update_favorites(request, barber_id):
 
     if request.method == 'POST':
         if 'favorite' in request.POST:
-            
             user.favorite_barbers.add(barber)
-            messages.success(request, f'{barber.user.username} added to favorites.')
+            messages.success(request, f'{barber.user.username} добавлен в избранное.')
+
         elif 'unfavorite' in request.POST:
             user.favorite_barbers.remove(barber)
-            messages.success(request, f'{barber.user.username} removed from favorites.')
+            messages.success(request, f'{barber.user.username} удален из избранного.')
+
 
         print(user, user.favorite_barbers.all())
         return redirect(reverse('appointment', args=[barber_id]))  # Replace with the appropriate view name or URL pattern

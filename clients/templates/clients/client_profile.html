@@ -10,56 +10,60 @@
 <script src="{% static 'js/prof.js' %}"></script>
 
 <div class="container">
-  <h1>User Profile</h1>
-  <!-- Read-only mode -->
+  <h1>Профиль пользователя</h1>
+  <!-- Режим только для чтения -->
   <div id="readOnlyUserMode">
-      <p>Username: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
-      <p>Email: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
-      <p>Phone Number: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number" disabled></p>
+      <p>Имя пользователя: <input type="text" id="username" value="{{ user_form.username.value }}" disabled></p>
+      <p>Электронная почта: <input type="email" id="email" value="{{ user_form.email.value }}" disabled></p>
+      <p>Номер телефона: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number" disabled></p>
 
-      <button id="editUserButton">Edit</button>
+      <button id="editUserButton">Редактировать</button>
   </div>
 
-  <!-- Edit mode -->
+  <!-- Режим редактирования -->
   <div id="editUserForm" style="display: none;">
       <form method="post">
           {% csrf_token %}
-          <p>Username: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
-          <p>Email: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
-          <p>Phone Number: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number"></p>
+          <p>Имя пользователя: <input type="text" name="username" value="{{ user_form.username.value }}" id="username"></p>
+          <p>Электронная почта: <input type="email" name="email" value="{{ user_form.email.value }}" id="email"></p>
+          <p>Номер телефона: <input type="text" name="phone_number" value="{{ user_form.phone_number.value }}" id="phone_number"></p>
 
-          <button id="saveUserButton" type="submit" name="user_info_form">Save Changes</button>
-          <button id="cancelUserButton" type="button">Cancel</button>
+          <button id="saveUserButton" type="submit" name="user_info_form">Сохранить изменения</button>
+          <button id="cancelUserButton" type="button">Отмена</button>
       </form>
   </div>
 
-  <!-- Read-only mode for Password Change -->
+  <!-- Режим только для чтения для изменения пароля -->
   <div id="readOnlyPasswordMode">
-    <p>Password: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
-    <button id="editPasswordButton">Change Password</button>
+    <p>Пароль: <input type="password" name="old_password" value="********" id="old_password" disabled></p>
+    <button id="editPasswordButton">Изменить пароль</button>
   </div>
 
-  <!-- Edit mode for Password Change -->
+  <!-- Режим редактирования для изменения пароля -->
   <div id="editPasswordForm" style="display: none;">
     <form method="post">
         {% csrf_token %}
         {{ password_change_form.as_p}}
-        <button id="savePasswordButton" type="submit" name="password_change_form">Save Password</button>
-        <button id="cancelPasswordButton" type="button">Cancel</button>
+        <button id="savePasswordButton" type="submit" name="password_change_form">Сохранить пароль</button>
+        <button id="cancelPasswordButton" type="button">Отмена</button>
     </form>
   </div>
 
-   <!-- Add a new container at the bottom -->
+   <!-- Добавление нового контейнера внизу -->
    <div class="bottom-container">
-        <!-- Add Logout and Delete Account Buttons within the new container -->
+        <!-- Добавление кнопок "Выйти" и "Удалить аккаунт" в новый контейнер -->
         <form method="post" action="{% url 'logout' %}" class="logout-form">
             {% csrf_token %}
-            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to log out?')" class=class="logout-form">Log Out</button>
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Вы уверены, что хотите выйти?')">
+                Выйти <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
         </form>
 
         <form method="post" action="{% url 'delete_account' %}" class="delete-account-form">
             {% csrf_token %}
-            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')" class="delete-account-button">Delete Account</button>
+            <button style="border-color: red; padding: 10px; margin-left: 10px;" type="submit" onclick="return confirm('Вы уверены, что хотите удалить свой аккаунт?')">
+                Удалить аккаунт <i class="fa-solid fa-trash"></i>
+            </button>
         </form>
 
         {% if user_in_barber_list %}
@@ -67,9 +71,9 @@
                 {% csrf_token %}
                 <button style="border-color: rgb(242, 255, 0); padding: 10px; margin-left: 10px;" type="submit">
                     {% if request.user.is_barber %}
-                        Into client profile 
+                        В профиль клиента
                     {% else %}
-                        Into barber profile 
+                        В профиль парикмахера
                     {% endif %}
                 </button>
             </form>
