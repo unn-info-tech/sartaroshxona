@@ -19,7 +19,8 @@ def signup(request):
 
             
             username = formMe_signup.cleaned_data.get('username')
-            messages.success(request, f'Welcome, {username}! Your account has been created. Now log in')
+            messages.success(request, f'Добро пожаловать, {username}! Ваш аккаунт был успешно создан. Теперь выполните вход')
+
 
             # Check if the user is a barber and create a barber instance
             if user.is_barber:
@@ -75,7 +76,7 @@ def delete_account(request):
 
 #-----------------------------------Ads------------------------------------------------
     
-from django.db.models import Q
+from django.db.models import Q  # Import the Q object
 
 def ads_list(request):
     user = request.user
@@ -87,15 +88,15 @@ def ads_list(request):
 
     # Use Q objects to construct the AND conditions for filtering
     q_filter = (
-        Q(user__country=country) &
-        Q(user__region=region) &
-        Q(user__district=district) &
-        Q(user__city=city)
+        Q(country=country) &  # Apply filter condition for country
+        Q(region=region) &    # Apply filter condition for region
+        Q(district=district) &  # Apply filter condition for district
+        Q(city=city)          # Apply filter condition for city
     )
 
-    ads = Ads.objects.all(q_filter)
-    print(ads)
+    ads = Ads.objects.filter(q_filter)  # Use filter() instead of all()
     return render(request, 'main/ads.html', {'ads': ads})
+
 
 
 

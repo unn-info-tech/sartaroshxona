@@ -74,28 +74,29 @@
                {{ formMe_signup.city }}
             </div>
             <div class="field">
-               <input type="password" name="{{ formMe_signup.password1.name }}" id="{{ formMe_signup.password1.id_for_label }}" placeholder="Password" class="password-input">
+               <input type="password" name="{{ formMe_signup.password1.name }}" id="{{ formMe_signup.password1.id_for_label }}" placeholder="Пароль" class="password-input">
                <span toggle="{{ formMe_signup.password1.id_for_label }}" class="eye field-icon toggle-password"></span>
             </div>
             <div class="field">
-                  <input type="password" name="{{ formMe_signup.password2.name }}" id="{{ formMe_signup.password2.id_for_label }}" placeholder="Confirm Password" class="password-input">
+                  <input type="password" name="{{ formMe_signup.password2.name }}" id="{{ formMe_signup.password2.id_for_label }}" placeholder="Подтверждение пароля" class="password-input">
                   <span toggle="{{ formMe_signup.password2.id_for_label }}" class="eye field-icon toggle-password"></span>
             </div>
            
             <div class="content">
                <div class="checkbox">
                   {{ formMe_signup.is_barber }}
-                  <label for="is_barber">I'm a barber</label>
+                  <label for="is_barber">Я - парикмахер</label>
+
                </div>
             <!--<div class="pass-link">
                   <a href="#">Forgot password?</a>
                </div>-->
             </div>
             <div class="field">
-               <button type="submit">Sign Up</button>
+               <button type="submit">Регистрация</button>
             </div>
             <div class="signup-link">
-               Do you have an account? <a href="/main/signin/">Sign in now</a>
+                  У вас есть аккаунт? <a href="/main/signin/">Войти</a>
             </div>
          </form>
       </div>
