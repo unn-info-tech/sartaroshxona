@@ -14,7 +14,7 @@ body {
 .row {
     backdrop-filter: blur(5px);
     background-color: rgba(0, 0, 0, 0.5); /* Set card background color with opacity */
-    margin: 0 10px; /* Add 10px margin on both left and right sides */
+    margin: 0 80px; /* Add 10px margin on both left and right sides */
     border-radius: 10px;
 }
 
@@ -120,6 +120,11 @@ body {
         margin-bottom: 15px ; /* Smaller margin */
         border-radius: 15px;
     }
+
+    .row {
+        margin: 0 10px; /* Add 10px margin on both left and right sides */
+    }
+    
     /* Barber image img */
     .barber_profile .barber_image img {
         display: block;

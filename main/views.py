@@ -98,6 +98,17 @@ def ads_list(request):
     return render(request, 'main/ads.html', {'ads': ads})
 
 
+def others(request):
+    return render(request, 'main/others.html', {'display': 'others',})
+
+
+def tospp(request):
+    return render(request, 'main/others.html', {'display': 'tospp',})
+
+
+def contact_dev(request):
+    return render(request, 'main/others.html', {'display': 'contact_dev',})
+
 
 
 

@@ -10,6 +10,12 @@ urlpatterns = [
     
 
     path('ads_list/', views.ads_list, name='ads_list'),
+    path('others/', views.others, name='others'),
+    path('tospp/', views.tospp, name='tospp'),
+    path('contact_dev/', views.contact_dev, name='contact_dev'),
+
+
+
 
 
     

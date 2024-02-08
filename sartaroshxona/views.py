@@ -98,8 +98,10 @@ def barber_profile(request):
                 barber.save()
                 return redirect('barber_profile')
 
-            return render(request, 'sartaroshxona/payment_info.html', {
-                'barber': barber
+            return render(request, 'main/others.html', {
+                'barber': barber,
+                'display': 'payment_info',
+                
                 })
             
 
@@ -116,13 +118,13 @@ def barber_profile(request):
             # Perform the subtraction operation
             left_days = (payment_expiration_date_naive - barber.get_user_time_zone()).days
             left_days = max(left_days, 0)  # Ensure left_days is non-negative
-            if left_days <= 0:
+            if left_days == 0:
                 barber.deactivate_premium()
         else:
             left_days = 0
 
     services = barber.get_services()  # Fetch services associated with the barber
-
+    
     return render(request, 'sartaroshxona/prof.html', {
         'user_form': user_form,
         'password_change_form': password_change_form,

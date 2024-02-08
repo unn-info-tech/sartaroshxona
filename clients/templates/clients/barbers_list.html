@@ -19,24 +19,26 @@
     
     <div class="row">
       {% for barber in barbers %}
-      <div class="ocl-12 clo-sm-6 col-lg-4">
-        <div class="barber_profile">
-          <a href="{% url 'appointment' barber.id %}" class="card-link">
-            <div class="barber_image">
-                {% if barber.profile_image %}
-                    <img src="{{ barber.profile_image.url }}" alt="Profile Image">
-                {% else %}
-                    <img src="{% static 'images/default.jpg' %}" alt="Default Image">
-                {% endif %}
+        {% if barber.payment %}
+          <div class="ocl-12 clo-sm-6 col-lg-4">
+            <div class="barber_profile">
+              <a href="{% url 'appointment' barber.id %}" class="card-link">
+                <div class="barber_image">
+                    {% if barber.profile_image %}
+                        <img src="{{ barber.profile_image.url }}" alt="Profile Image">
+                    {% else %}
+                        <img src="{% static 'images/default.jpg' %}" alt="Default Image">
+                    {% endif %}
+                </div>
+              </a>
+                <div class="barber_info">
+                  <h1>{{ barber.user.username }}</h1>
+                  <p>Местоположение: {{ barber.location }}</p>
+                  <p class="reputation">⭐️⭐️⭐️⭐️⭐️5{{ user.reputation }}</p>
+                </div>
             </div>
-          </a>
-            <div class="barber_info">
-              <h1>{{ barber.user.username }}</h1>
-              <p>Местоположение: {{ barber.location }}</p>
-              <p class="reputation">⭐️⭐️⭐️⭐️⭐️5{{ user.reputation }}</p>
-            </div>
-        </div>
-      </div>
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>

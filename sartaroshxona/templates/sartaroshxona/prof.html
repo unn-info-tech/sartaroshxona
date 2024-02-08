@@ -84,6 +84,8 @@
 
             <p>Организация: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name" disabled></p>
 
+            <p>Бонус: <input type="text" name="bonus" value="{{ barber_form.bonus.value }}" id="bonus" placeholder="Например: 1 бесплатное обслуживание за 5 записей" disabled></p>
+
             <button id="editBarberButton">Редактировать</button>
 
         </div>
@@ -132,6 +134,9 @@
             <p>Местоположение: <input type="text" name="location" value="{{ barber_form.location.value }}" id="location" ></p>
 
             <p>Организация: <input type="text" name="organization_name" value="{{ barber_form.organization_name.value }}" id="organization_name"></p>
+
+            <p>Бонус: <input type="text" name="bonus" value="{{ barber_form.bonus.value }}" id="bonus" placeholder="Например: 1 бесплатное обслуживание за 5 записей"></p>
+
 
             <button id="saveBarberButton" type="submit" name="barber_info_form">Сохранить изменения</button>
             <button id="cancelBarberButton" type="button">Отмена</button>

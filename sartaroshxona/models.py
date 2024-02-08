@@ -25,7 +25,7 @@ class Barber(models.Model):
     launch_end_time = models.TimeField(null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True,default="")
     organization_name = models.CharField(max_length=50, null=True, blank=True,default="")
-    bonus = models.CharField(max_length=100, null=True, blank=True, default="")  # Add the bonus field
+    bonus = models.CharField(max_length=150, null=True, blank=True, default="")  # Add the bonus field
 
     CURRENCY_CHOICES = [
         ('USD', 'US Dollar'),
