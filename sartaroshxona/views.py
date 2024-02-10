@@ -124,7 +124,7 @@ def barber_profile(request):
         else:
             left_days = 0
 
-    services = barber.get_services()  # Fetch services associated with the barber
+    services = barber.get_services()  # Fetch services associated with the current barber
 
     return render(request, 'sartaroshxona/prof.html', {
         'user_form': user_form,
