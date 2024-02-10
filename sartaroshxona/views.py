@@ -116,15 +116,16 @@ def barber_profile(request):
         if barber.payment:
             payment_expiration_date_naive = barber.payment_expiration_date.replace(tzinfo=None)
             # Perform the subtraction operation
+            print(barber.get_user_time_zone())
             left_days = (payment_expiration_date_naive - barber.get_user_time_zone()).days
             left_days = max(left_days, 0)  # Ensure left_days is non-negative
-            if left_days == 0:
+            if int(left_days) == 0:
                 barber.deactivate_premium()
         else:
             left_days = 0
 
     services = barber.get_services()  # Fetch services associated with the barber
-    
+
     return render(request, 'sartaroshxona/prof.html', {
         'user_form': user_form,
         'password_change_form': password_change_form,
