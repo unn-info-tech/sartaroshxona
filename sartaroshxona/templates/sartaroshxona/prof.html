@@ -3,6 +3,8 @@
 
 {% block content %}
 {% include 'main/navbar.html' %}
+{% include 'main/messages.html' %}
+
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -67,6 +69,7 @@
                     {% else %}
                         <img src="{% static 'images/default.jpg' %}" alt="Изображение по умолчанию">
                     {% endif %}
+                    
                 </div>
             </div>
 
@@ -109,7 +112,7 @@
                     <div id="container_image_button">
                         <input type="file" name="profile_image" id="profile_image_input">
                     </div>
-
+                    <a style="color: white;" href="https://www.reduceimages.com/">Image resizer</a>
                 </div>
             </div>
 

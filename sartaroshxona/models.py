@@ -5,6 +5,7 @@ import pytz
 from datetime import timedelta
 import uuid
 
+
 class Service(models.Model):
     barber = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='provided_services')
     title = models.CharField(max_length=50)

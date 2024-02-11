@@ -9,6 +9,8 @@ from django.conf import settings
 import os
 from django.contrib.auth.decorators import login_required
 from main.decorators import is_barber_required
+from django.contrib import messages
+from django.urls import reverse
 
 
 @login_required
@@ -40,8 +42,13 @@ def barber_profile(request):
             if barber_form.is_valid():
                 # Check if a new image was uploaded and delete the old one
                 if old_profile_image and 'profile_image' in request.FILES:
-                    if os.path.isfile(os.path.join(settings.MEDIA_ROOT, str(old_profile_image))):
-                        os.remove(os.path.join(settings.MEDIA_ROOT, str(old_profile_image)))
+                    profile_image = request.FILES['profile_image']
+                    if profile_image.size <= 500 * 1024:  # 500 KB in bytes
+                        if os.path.isfile(os.path.join(settings.MEDIA_ROOT, str(old_profile_image))):
+                            os.remove(os.path.join(settings.MEDIA_ROOT, str(old_profile_image)))
+                    else:
+                        messages.error(request, 'Image size is not lower than 500kb. For making the size small press the link image resizer below the photo field or just send it through telegram to someone it will automaticlly resized')
+                        return redirect(reverse('barber_profile'))
                     
                 barber_form.save()
                 return redirect('barber_profile')
