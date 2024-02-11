@@ -8,7 +8,7 @@ import uuid
 class Service(models.Model):
     barber = models.ForeignKey('Barber', on_delete=models.CASCADE, related_name='provided_services')
     title = models.CharField(max_length=50)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.IntegerField()
     duration_minutes = models.PositiveIntegerField()
 
     def __str__(self):

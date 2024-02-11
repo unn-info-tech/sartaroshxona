@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xk@1j*)qdjuu&d4u**nba6a4k#_t9&wxl$blqdo9@p92+ka7h)'
+SECRET_KEY = 'e5b9fa9fe9f88552a75ca9278bbeddbaa6e81403f7187d5980aceedc1d39d74507f8d90b9c73c4ac6f40e9dfcce55784334f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -141,6 +141,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main/static'),
 ]
 
+
 # Define the URL that will serve the uploaded files
 MEDIA_URL = '/media/'
 # Define the base directory where uploaded media will be stored
@@ -161,3 +162,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #----------------------------------------------
 
 AUTH_USER_MODEL = 'main.CustomUser'
+
+# SECURE_HSTS_SECONDS = 3600  # 1 hour
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

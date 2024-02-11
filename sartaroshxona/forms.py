@@ -14,7 +14,7 @@ class ServiceForm(forms.ModelForm):
 class BarberForm(forms.ModelForm):
     class Meta:
         model = Barber
-        fields = '__all__'  # Use all fields from the Barber model
+        fields = ['user', 'profile_image', 'start_work', 'end_work', 'launch_start_time', 'launch_end_time', 'location', 'organization_name', 'bonus', 'currency']  # Use all fields from the Barber model
 
         
         
