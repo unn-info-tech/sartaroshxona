@@ -29,7 +29,7 @@ body {
     padding: 20px;
     position: relative;
     min-height: 100vh; /* Ensure the container takes at least the full viewport height */
-    
+    background-color: rgba(0, 0, 0, 0.419);
   }
 
 

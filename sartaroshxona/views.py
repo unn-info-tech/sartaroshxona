@@ -47,7 +47,7 @@ def barber_profile(request):
                         if os.path.isfile(os.path.join(settings.MEDIA_ROOT, str(old_profile_image))):
                             os.remove(os.path.join(settings.MEDIA_ROOT, str(old_profile_image)))
                     else:
-                        messages.error(request, 'Image size is not lower than 500kb. For making the size small press the link image resizer below the photo field or just send it through telegram to someone it will automaticlly resized')
+                        messages.error(request, 'Изображение должно быть не более 500 КБ. Переформатируйте его с помощью ссылки "Изменить размер изображения" ниже или отправьте свою фотографию через Telegram и загрузите ее оттуда для автоматического изменения размера.')
                         return redirect(reverse('barber_profile'))
                     
                 barber_form.save()
