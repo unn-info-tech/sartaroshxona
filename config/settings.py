@@ -12,20 +12,23 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from .env file
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'e5b9fa9fe9f88552a75ca9278bbeddbaa6e81403f7187d5980aceedc1d39d74507f8d90b9c73c4ac6f40e9dfcce55784334f'
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['192.168.43.184',  '127.0.0.1' ]
+
+ALLOWED_HOSTS = ['192.168.43.184',  '127.0.0.1', 'unn.pythonanywhere.com', 'sartaroshxona.pythonanywhere.com' ]
 
 
 # Application definition
@@ -140,7 +143,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'clients/static'),
     os.path.join(BASE_DIR, 'main/static'),
 ]
-
+STATIC_ROOT = BASE_DIR / 'static_root/'
 
 # Define the URL that will serve the uploaded files
 MEDIA_URL = '/media/'
