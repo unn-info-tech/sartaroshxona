@@ -161,6 +161,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #----------------------------------------------
+LOGIN_URL = '/main/signin/'  # Example URL
 
 AUTH_USER_MODEL = 'main.CustomUser'
 

@@ -86,7 +86,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget = TextInput(attrs={'placeholder': 'Введите ваше имя пользователя'})
+        self.fields['username'].widget = TextInput(attrs={'placeholder': 'Имя пользователя с малой буквы'})
         self.fields['password'].widget = PasswordInput(attrs={'placeholder': 'Введите ваш пароль'})
 
 

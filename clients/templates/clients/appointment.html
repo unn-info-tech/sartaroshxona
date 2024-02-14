@@ -21,66 +21,66 @@
 <div class="container">
 
     
-    <div class="card p-4">
-      <!-- <h1 class="text-center mb-4">Запись на прием</h1> -->
-      <div class="text-center mb-3">
-          {% if barber.profile_image %}
-              <img src="{{ barber.profile_image.url }}" class="rounded-circle" alt="Изображение профиля" id="barber-image">
-          {% else %}
-              <img src="{% static 'images/default.jpg' %}" class="rounded-circle" alt="Изображение по умолчанию" id="barber-image">
-          {% endif %}
-          <h5 class="mt-3">{{ barber.user.username }}</h5>
-      </div>
-      <div class="row mb-3">
-          <div class="col text-center">
-              <h5><strong>Местоположение</strong></h5>
-              <p>{{ barber.location }}</p>
-          </div>
-          <div class="col text-center">
-              <h5><strong>Организация</strong></h5>
-              <p>{{ barber.organization_name }}</p>
-          </div>
-      </div>
-      <div class="row mb-3">
-          <div class="col text-center">
-              <h5><strong>Время работы</strong></h5>
-              <p>{{ barber.start_work }} - {{ barber.end_work }}</p>
-          </div>
-          <div class="col text-center">
-              <h5><strong>Время обеда</strong></h5>
-              <p>{{ barber.launch_start_time }} - {{ barber.launch_end_time }}</p>
-          </div>
-      </div>
+  <div class="card p-4">
+    <!-- <h1 class="text-center mb-4">Запись на прием</h1> -->
+    <div class="text-center mb-3">
+        {% if barber.profile_image %}
+            <img src="{{ barber.profile_image.url }}" class="rounded-circle" alt="Изображение профиля" id="barber-image">
+        {% else %}
+            <img src="{% static 'images/default.jpg' %}" class="rounded-circle" alt="Изображение по умолчанию" id="barber-image">
+        {% endif %}
+        <h5 class="mt-3">{{ barber.user.username }}</h5>
+    </div>
+    <div class="row mb-3">
+        <div class="col text-center">
+            <h5><strong><i class="fas fa-map-marker-alt"></i></strong></h5> <!-- Icon for location -->
+            <p>{{ barber.location }}</p>
+        </div>
+        <div class="col text-center">
+            <h5><strong><i class="fas fa-building"></i></strong></h5> <!-- Icon for organization -->
+            <p>{{ barber.organization_name }}</p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col text-center">
+            <h5><strong><i class="far fa-clock"></i></strong></h5> <!-- Icon for work hours -->
+            <p>{{ barber.start_work }} - {{ barber.end_work }}</p>
+        </div>
+        <div class="col text-center">
+            <h5><strong><i class="fas fa-utensils"></i></strong></h5> <!-- Icon for lunch hours -->
+            <p>{{ barber.launch_start_time }} - {{ barber.launch_end_time }}</p>
+        </div>
+    </div>
 
-      <div class="row">
-          <div class="col text-center">
-              <h5><strong>Номер телефона</strong></h5>
-              <p>{{ barber.user.phone_number }}</p>
-          </div>
+    <div class="row">
+        <div class="col text-center">
+            <h5><strong><i class="fas fa-phone-alt"></i></strong></h5> <!-- Icon for phone number -->
+            <p>{{ barber.user.phone_number }}</p>
+        </div>
 
-          <div class="col text-center">
-            <h5><strong>Бонус</strong></h5>
+        <div class="col text-center">
+            <h5><strong><i class="fas fa-gift"></i></strong></h5> <!-- Icon for bonus -->
             <p>{{ barber.bonus }}</p>
-          </div>
+        </div>
 
-          <div class="col text-center">
-              <h5><strong>Отзывы</strong></h5>
-              <p><a href="{{ barber.feedback_link }}">⭐️⭐️⭐️⭐️⭐️</a>5</p>
-          </div>
+        <div class="col text-center">
+            <h5><strong><i class="fas fa-star"></i></strong></h5> <!-- Icon for feedback -->
+            <p><a href="{{ barber.feedback_link }}">⭐️⭐️⭐️⭐️⭐️</a>5</p>
+        </div>
 
-          <form method="post" action="{% url 'update_favorites' barber.id %}">
+        <form method="post" action="{% url 'update_favorites' barber.id %}">
             {% csrf_token %}
             <div class="col text-center">
                 {% if barber in request.user.favorite_barbers.all %}
                     <button type="submit" name="unfavorite" class="btn btn-danger" id="favorite-btn"><i class="fas fa-heart"></i></button>
                 {% else %}
-                    <button type="submit" name="favorite" class="btn btn-outline-danger" id="favorite-btn"><i class="fas fa-heart"></i></button>
+                    <button type="submit" name="favorite" class="btn btn-outline-danger" id="favorite-btn"><i class="far fa-heart"></i></button>
                 {% endif %}
             </div>
-          </form>
-      </div>
-
+        </form>
     </div>
+  </div>
+
 
 
 
