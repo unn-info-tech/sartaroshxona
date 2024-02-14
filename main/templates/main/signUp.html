@@ -82,16 +82,15 @@
                   <span toggle="{{ formMe_signup.password2.id_for_label }}" class="eye field-icon toggle-password"></span>
             </div>
            
-            <div class="content">
                <div class="checkbox">
                   {{ formMe_signup.is_barber }}
                   <label for="is_barber">Я - парикмахер</label>
 
                </div>
-            <!--<div class="pass-link">
-                  <a href="#">Forgot password?</a>
-               </div>-->
-            </div>
+               <div class="checkbox">
+                  <p>Регистрируясь, вы соглашаетесь с <a href="{% url 'tospp' %}">условиями использования (ToS) и политикой конфиденциальности (P.P)</a>.</p>
+               </div>
+         
             <div class="field">
                <button type="submit">Регистрация</button>
             </div>

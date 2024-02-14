@@ -11,7 +11,7 @@ from .models import Country, City, Region, District
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'is_barber', 'country', 'region', 'district', 'city']
+        fields = ['username', 'email', 'password1', 'password2', 'is_barber', 'agreement', 'country', 'region', 'district', 'city']
 
         labels = {
             'username': 'Username',
@@ -23,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
         }
 
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'Введите ваше имя пользователя'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Имя пользователя с малой буквы'}),
             'email': forms.TextInput(attrs={'placeholder': 'Электронная почта'}),
             'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}),
             'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Подтверждение пароля'}),

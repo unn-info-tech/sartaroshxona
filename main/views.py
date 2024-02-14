@@ -17,7 +17,6 @@ def signup(request):
         if formMe_signup.is_valid():
             user = formMe_signup.save()
 
-            
             username = formMe_signup.cleaned_data.get('username')
             messages.success(request, f'Добро пожаловать, {username}! Ваш аккаунт был успешно создан. Теперь выполните вход')
 

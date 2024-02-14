@@ -179,4 +179,11 @@ html, body {
 
 
 
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-left: 15px; /* Adjust margin-left */
+}
+
 

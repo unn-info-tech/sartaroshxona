@@ -32,6 +32,7 @@ class CustomUser(AbstractUser):
     is_barber = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=20, null=True, blank=True, default="")
     favorite_barbers = models.ManyToManyField('sartaroshxona.Barber', blank=True, related_name='favorited_by')
+    agreement = models.BooleanField(default=False)
 
     # LOCATIONS
     country =  models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
