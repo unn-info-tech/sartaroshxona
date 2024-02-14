@@ -179,34 +179,4 @@ html, body {
 
 
 
-@media only screen and (max-width: 600px) {
-  .wrapper {
-    width: 100%;
-    max-width: none;
-    padding: 0 5%;
-  }
 
-  .wrapper .title {
-    width: 100%;
-    font-size: 25px;
-    line-height: 80px;
-    box-sizing: border-box;
-  }
-
-  .wrapper form {
-    padding: 20px;
-  }
-
-  .wrapper form .field {
-    margin-top: 15px;
-  }
-
-  .wrapper form .field input,
-  .wrapper form .field select {
-    font-size: 16px;
-  }
-
-  .wrapper form .field button[type="submit"] {
-    font-size: 18px;
-  }
-}
