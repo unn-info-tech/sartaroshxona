@@ -1,0 +1,21 @@
+# Ignore compiled Python files
+*.pyc
+
+# Ignore the virtual environment directory
+sarenv/
+
+# Ignore database files
+db.sqlite3
+
+# Ignore media files
+sartaroshxona/media/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln
+
+# Ignore logs
+logs/
