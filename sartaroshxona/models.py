@@ -29,11 +29,11 @@ class Barber(models.Model):
     bonus = models.CharField(max_length=150, null=True, blank=True, default="")  # Add the bonus field
 
     CURRENCY_CHOICES = [
-        ('USD', 'US Dollar'),
-        ('EUR', 'Euro'),
-        ('RUB', 'Russian Ruble'),
+        # ('USD', 'US Dollar'),
+        # ('EUR', 'Euro'),
+        # ('RUB', 'Russian Ruble'),
+        # ('UZS', 'Uzbekistani Soʻm'),
         ('TJS', 'Tajik Somoni'),
-        ('UZS', 'Uzbekistani Soʻm'),
         # Add more currency choices here
     ]
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='TJS')
