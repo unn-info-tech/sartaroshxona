@@ -65,7 +65,7 @@
 
         <div class="col text-center">
             <h5><strong><i class="fas fa-star"></i></strong></h5> <!-- Icon for feedback -->
-            <p><a href="{{ barber.feedback_link }}">⭐️⭐️⭐️⭐️⭐️</a>5</p>
+            <p><a href="{% url 'feedback' %}">⭐️⭐️⭐️⭐️⭐️</a></p>
         </div>
 
         <form method="post" action="{% url 'update_favorites' barber.id %}">
