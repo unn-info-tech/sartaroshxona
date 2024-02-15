@@ -25,7 +25,7 @@ urlpatterns = [
     path('sar/', include('sartaroshxona.urls')),
     path('cl/', include('clients.urls')),
     path('main/', include('main.urls')),
-     path('loc/', include('locations.urls')),
+    path('loc/', include('locations.urls')),
 
 ] 
 

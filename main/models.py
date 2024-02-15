@@ -31,7 +31,7 @@ class CustomUser(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_barber = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=20, null=True, blank=True, default="")
-    favorite_barbers = models.ManyToManyField('sartaroshxona.Barber', blank=True, related_name='favorited_by')
+    mfavorite_barbers = models.ManyToManyField('sartaroshxona.Barber', blank=True, related_name='favorited_by')
     agreement = models.BooleanField(default=False)
 
     # LOCATIONS
@@ -61,10 +61,10 @@ class Ads(models.Model):
     ad = models.ImageField(upload_to='images_of_ads/')
 
      # LOCATIONS
-    country =  models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
-    region = models.ForeignKey(Region, on_delete=models.SET_NULL, blank=True, null=True)
-    district = models.ForeignKey(District, on_delete=models.SET_NULL, blank=True, null=True)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
+    ad_country  =  models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
+    ad_region = models.ForeignKey(Region, on_delete=models.SET_NULL, blank=True, null=True)
+    ad_district = models.ForeignKey(District, on_delete=models.SET_NULL, blank=True, null=True)
+    ad_city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.ad.name if self.ad.name else "No name"  # Use the image name or provide a default string

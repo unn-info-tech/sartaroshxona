@@ -5,10 +5,8 @@
 sarenv/
 
 # Ignore database files
-db.sqlite3
 
-# Ignore media files
-sartaroshxona/media/
+
 
 # Ignore IDE and editor files
 .vscode/

@@ -87,10 +87,10 @@ def ads_list(request):
 
     # Use Q objects to construct the AND conditions for filtering
     q_filter = (
-        Q(country=country) &  # Apply filter condition for country
-        Q(region=region) &    # Apply filter condition for region
-        Q(district=district) &  # Apply filter condition for district
-        Q(city=city)          # Apply filter condition for city
+        Q(ad_country=country) &  # Apply filter condition for country
+        Q(ad_region=region) &    # Apply filter condition for region
+        Q(ad_district=district) &  # Apply filter condition for district
+        Q(ad_city=city)          # Apply filter condition for city
     )
 
     ads = Ads.objects.filter(q_filter)  # Use filter() instead of all()
