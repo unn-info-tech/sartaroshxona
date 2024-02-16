@@ -114,7 +114,7 @@
 
     <!-- Services  -->
     <div class="card p-4">
-      <h1>Записаться на прием к {{ barber.user }}</h1>
+      <!-- <h1>Записаться на прием к {{ barber.user }}</h1> -->
       
       <form method="post" onsubmit="prepareSelectedServices()" id="appointment-form">
         {% csrf_token %}
@@ -124,7 +124,7 @@
         <div class="services-list" id="services-container">
           {% for service in services %}
           <div class="service-item" data-service-id="{{ service.id }}" onclick="toggleService(this)">
-            {{ service.title }} - Продолжительность: {{ service.duration_minutes }} минут - Цена: {{ service.price }}
+            {{ service.title }} - Продолжительность: {{ service.duration_minutes }} минут - Цена: {{ service.price }} {{ service.barber.currency }}
           </div>
           {% endfor %}
         </div>
@@ -141,18 +141,20 @@
       </form>
       
       <script>
+        // Global variable to hold the currency value
+        const currency = "{{ barber.currency }}";
+      
         function toggleService(service) {
           const isSelected = service.classList.toggle('selected');
-
+      
           if (isSelected) {
-            prepareSelectedServices(); // Обновление выбранных услуг и расчет общей продолжительности и стоимости
+            prepareSelectedServices(); // Update selected services and calculate total duration and price
           } else {
-            service.style.pointerEvents = 'auto'; // Включение клика для невыбранной услуги
+            service.style.pointerEvents = 'auto'; // Enable click for unselected service
           }
-
-          updateSelectedServices(); // Обновление списка выбранных услуг
+      
+          updateSelectedServices(); // Update the list of selected services
         }
-        
       
         function updateSelectedServices() {
           const selectedServices = document.querySelectorAll('.service-item.selected');
@@ -170,17 +172,19 @@
             totalPrice += price;
           });
       
-          document.getElementById('total-duration').textContent = `${totalDuration} минут`;
-          document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
-
+          document.getElementById('total-duration').textContent = `${totalDuration} мин.`;
+          document.getElementById('total-price').textContent = `${totalPrice.toFixed(2)} ${currency}`;
+      
           document.getElementById('total-duration-input').value = totalDuration;
         }
-        
+      
         function prepareSelectedServices() {
           updateSelectedServices();
         }
       </script>
+      
     </div>
+
 
 </div>
 

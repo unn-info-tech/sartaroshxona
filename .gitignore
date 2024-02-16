@@ -5,7 +5,7 @@
 sarenv/
 
 # Ignore database files
-
+db.sqlite3
 
 
 # Ignore IDE and editor files
