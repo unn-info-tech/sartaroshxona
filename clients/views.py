@@ -92,7 +92,7 @@ def my_appointments(request):
     client = request.user
     my_appointments = Appointment.objects.filter(client=client).prefetch_related('service')
 
-    return render(request, 'clients/my_appointments.html', {'my_appointments': my_appointments})
+    return render(request, 'clients/my_appointments.html', {'my_appointments': my_appointments.order_by('appointment_time')})
 
 
 
@@ -101,7 +101,7 @@ def my_appointments(request):
 def appointment(request, barber_id):
     barber = get_object_or_404(Barber, id=barber_id)
     services = Service.objects.filter(barber=barber)
-    appointments = Appointment.objects.filter(barber=barber)
+    appointments = Appointment.objects.filter(barber=barber).order_by('appointment_time')
 
     if request.method == 'POST':
         if barber.user == request.user:

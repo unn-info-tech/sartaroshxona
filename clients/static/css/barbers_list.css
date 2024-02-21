@@ -40,10 +40,9 @@ body {
 /* Barber image img */
 .barber_profile .barber_image img {
     display: block;
-    width: 200px; /* Adjusted width */
-    height: 200px; /* Adjusted height */
-    object-fit: cover;
-    border-radius: 50%;
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* or object-fit: contain; */
     margin-bottom: 3px; /* Smaller margin */
 }
 
@@ -131,7 +130,6 @@ body {
         width: 100%;
         height: auto; /* Maintain aspect ratio */
         object-fit: cover;
-        border-radius: 50%;
         margin-bottom: 3px; /* Smaller margin */
     }
 

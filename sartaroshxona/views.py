@@ -194,7 +194,7 @@ def appointments_by_category(request, category):
 
     # RETURN 
     return render(request, 'sartaroshxona/clients.html', {
-        'appointments': appointments,
+        'appointments': appointments.order_by('appointment_time'),
         'category': category,
         'human_readable_category': human_readable_category,
         'appointment_in_queue_count': appointment_in_queue_count,
