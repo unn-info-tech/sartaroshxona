@@ -1,0 +1,152 @@
+/* Body styles */
+body {
+    background: url('../images/backround.jpg') center/cover;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.row {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5); /* Set card background color with opacity */
+    margin: 0 80px; /* Add 10px margin on both left and right sides */
+    border-radius: 10px;
+}
+
+.header {
+    text-align: center;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5); /* Set card background color with opacity */
+    margin: 0 10px 10px 10px; /* Add 10px margin on both left, right, and bottom sides; remove top margin */
+    border-radius: 5px;
+    
+}
+
+/* Cards */
+.barber_profile {
+    margin: 5px auto; /* Smaller margin */
+    border-radius: 10px; /* Smaller border radius */
+    box-shadow: 0 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.5); /* Smaller box shadow */
+    border: 1px solid #ffffff;
+    max-width: 300px; /* Smaller max width */
+    padding: 5px; /* Smaller padding */
+}
+
+/* Barber image img */
+.barber_profile .barber_image img {
+    display: block;
+    width: 200px; /* Adjusted width */
+    height: 200px; /* Adjusted height */
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 3px; /* Smaller margin */
+}
+
+/* Barber image img */
+.barber_profile .ads img {
+    display: block;
+    width: 100%; /* Adjusted width */
+    height: 180px; /* Adjusted width */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 3px; /* Smaller margin */
+}
+
+/* Barber info */
+.barber_profile .barber_info {
+    margin-top: 0;
+    padding: 10px; /* Increased padding for greater height */
+    text-align: center;
+    border-radius: 10px; /* Smaller border radius */
+    backdrop-filter: blur(3px); /* Smaller blur */
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Text styles */
+.barber_profile .barber_info h1 {
+    margin-bottom: 0.2rem;
+    font-size: 18px; /* Smaller font size */
+    color: #fff;
+}
+
+.barber_profile .barber_info p {
+    margin: 0;
+    font-size: 12px; /* Smaller font size */
+    color: #fff;
+}
+
+.barber_profile .barber_info .reputation {
+    font-size: 14px; /* Smaller font size */
+    color: #ffffff;
+}
+
+/* Hover effects */
+.barber_profile:hover .barber_image::after,
+.barber_profile:focus .barber_image::after {
+    background-color: #fff;
+}
+
+.barber_profile:hover .barber_info,
+.barber_profile:focus .barber_info {
+    background-color: #ffffffae;
+}
+
+.barber_profile:hover .barber_info h1,
+.barber_profile:focus .barber_info h1,
+.barber_profile:hover .barber_info p,
+.barber_profile:focus .barber_info p,
+.barber_profile:hover .barber_info .reputation,
+.barber_profile:focus .barber_info .reputation {
+    color: #ffffff;
+}
+
+/* Scrollable cards */
+.scrollable-cards {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Smaller screens (up to 600px) */
+@media only screen and (max-width: 600px) {
+    .barber_profile {
+        width: calc(100% - 20px); /* Full width with 10px gaps on each side */
+        max-width: none;
+        margin-bottom: 15px ; /* Smaller margin */
+        border-radius: 15px;
+    }
+
+    .row {
+        margin: 0 10px; /* Add 10px margin on both left and right sides */
+    }
+    
+    /* Barber image img */
+    .barber_profile .barber_image img {
+        display: block;
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 3px; /* Smaller margin */
+    }
+
+    /* Barber image img */
+    .barber_profile .ads img {
+        display: block;
+        width: 100%; /* Adjusted width */
+        height: 200px; /* Adjusted height */
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 3px; /* Smaller margin */
+    }
+
+    .barber_profile .barber_info {
+        padding: 20px; /* Increased padding for greater height */
+    }
+}
+

@@ -1,0 +1,120 @@
+body {
+    background-color: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formGroup {
+    height: 600px;
+    display: flex;
+    position: relative;
+    width: 500px;
+    flex-direction: column;
+    background-color: #5ad3d3;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.formGroup .formHeading {
+    font-size: 50px;
+    position: relative;
+    justify-content: center;
+    display: flex;
+    color: #fcfcfc;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formGroup .formHeading .fa {
+    font-size: 150px;
+    margin-bottom: 20px;
+}
+
+.formGroup .formContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    align-items: center;
+    transition: all ease 0.5s;
+    border-radius: 500px;
+    background-color: #fcfcfc;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.formGroup .formContainer .form {
+    width: 60%;
+    margin-bottom: 30px;
+}
+
+.formGroup .formContainer .form .inputGroup {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup .formContainer .form .inputGroup input {
+    margin: 4px 0px 8px;
+    padding: 3px;
+    border: none;
+    border-bottom: 1px solid #5ad3d3;
+    outline: 0;
+    padding: 4px;
+}
+
+.formGroup .formContainer .form .inputGroup input::placeholder {
+    font-size: 12px;
+    color: #5ad3d3;
+}
+
+.formGroup .formContainer .form .submitAction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.formGroup .formContainer .form .submitAction a {
+    text-decoration: none;
+    color: #5ad3d3;
+    font-size: 14px;
+}
+
+.formGroup .formContainer .form .submitAction button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 2px;
+    background-color: #5ad3d3;
+    color: #fcfcfc;
+    box-shadow: 0px 2px 2px rgba(90, 211, 211, 0.2);
+    outline: 0;
+    text-transform: uppercase;
+}
+
+.formGroup .formContainer .form.signinForm {
+    transform: rotate(180deg);
+}
+
+.formGroup .formContainer.active {
+    transform: rotate(180deg);
+}
+
+
+

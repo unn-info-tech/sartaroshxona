@@ -1,0 +1,204 @@
+body {
+    background: url('../images/backround.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Set text color to white */
+    font-family: 'Arial', sans-serif; /* Change font for better readability */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+
+.container {
+  text-align: center;
+  width: 80%;
+  backdrop-filter: blur(5px);
+  overflow-y: auto; /* Allow containers to scroll */
+  height: calc(100vh - 40px); /* Adjust height as needed */
+  margin-top: 20px; /* Increase margin top for better separation */
+  /* Ensure the container has a background to see the content */
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.419);
+
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.5); /* Set card background color with opacity */
+  color: #fff; /* Set text color inside cards to white */
+  border: 2px solid #fff; /* Add white border */
+  margin-bottom: 20px; /* Add margin between containers */
+  padding: 30px 20px; /* Padding for the card */
+}
+
+.table-bordered {
+  border-color: #fff; /* Set border color for tables */
+}
+
+select.form-select {
+  background-color: rgba(0, 0, 0, 0.5); /* Set select background color to black */
+  color: #fff; /* Set select text color to white */
+  border: 2px solid #fff; /* Add white border */
+}
+select.form-select option {
+  background-color: rgba(0, 0, 0, 0.5); /* Set select option background color to black */
+  color: #fff; /* Set select option text color to white */
+}
+input[type="date"] {
+  background-color: rgba(0, 0, 0, 0.5); /* Set date field background color to black */
+  color: #fff; /* Set date field text color to white */
+  border: 2px solid #fff; /* Add white border */
+  padding: 8px 12px; /* Adjust padding as needed */
+  width: calc(100% - 4px); /* Adjust width */
+  border-radius: 4px; /* Add border-radius for a softer look */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Custom styles for the buttons */
+.btn-duration {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: #fff;
+}
+.btn-duration:focus,
+.btn-duration:active {
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+}
+.btn-outline-primary {
+  color: #fff; /* Set button text color to white */
+  border-color: #fff; /* Set button border color to white */
+}
+.btn-outline-primary:hover {
+  background-color: #fff; /* Change button background on hover */
+  color: rgb(0, 0, 0); /* Change text color on hover */
+}
+
+/* Adjust profile image and name alignment */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+}
+
+/* Profile */
+/* Embedded CSS within the HTML file or external CSS file */
+#barber-image {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  object-fit: cover; /* Helps control image distortion */
+}
+
+
+.black-input {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+/* New styles for the table Appointment */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px; /* Change the font size here */
+}
+
+.list-content {
+  padding-top: 10px; /* Adjusted padding */
+}
+
+
+
+
+/* Additional CSS for Services Container */
+/* Additional CSS for Services Container */
+/* Additional CSS for Services Container */
+.card.p-4 {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+  margin-bottom: 20px;
+  padding: 30px 20px;
+  border-radius: 10px;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column; /* Change flex-direction to column */
+  gap: 20px;
+}
+
+.service-item {
+  width: 100%; /* Set width to 100% to take the full width of the container */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  cursor: pointer; /* Add cursor pointer to indicate clickability */
+}
+
+.service-item:hover {
+  background-color: rgba(70, 57, 57, 0.2); /* Change background color on hover */
+}
+
+.service-item.selected {
+  background-color: whitesmoke; /* Change background color when selected (slightly lighter) */
+  color: black;
+}
+
+.selected-services {
+  margin-top: 20px;
+}
+
+.selected-list {
+  list-style: none;
+  padding: 0;
+}
+
+.selected-list li {
+  margin-bottom: 5px;
+}
+
+#total-duration,
+#total-price {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+/* Add any additional styling as needed */
+
+/* Media query for smaller screens */
+@media screen and (max-width: 767px) {
+  .container {
+      width: 100%; /* Full width on smaller screens */
+  }
+
+  .btn-duration {
+      width: 100%; /* Full width for smaller screens */
+  }
+
+  th,
+  td {
+      font-size: 10px; /* Reduced font size for smaller screens */
+  }
+}
+
+

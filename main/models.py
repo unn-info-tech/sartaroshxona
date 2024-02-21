@@ -31,7 +31,7 @@ class CustomUser(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_barber = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=20, null=True, blank=True, default="")
-    mfavorite_barbers = models.ManyToManyField('sartaroshxona.Barber', blank=True, related_name='favorited_by')
+    favorite_barbers = models.ManyToManyField('sartaroshxona.Barber', blank=True, related_name='favorited_by')
     agreement = models.BooleanField(default=False)
 
     # LOCATIONS

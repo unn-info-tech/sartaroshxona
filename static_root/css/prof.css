@@ -1,0 +1,209 @@
+body {
+    background: url('../images/backround.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Set background to fixed position */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .container {
+    text-align: left; /* Align text to the left for a cleaner look */
+    width: 80%;
+    backdrop-filter: blur(5px);
+    overflow-y: auto; /* Allow containers to scroll */
+    height: calc(100vh - 40px); /* Adjust height as needed */
+    margin-top: 50px; /* Increase margin top for better separation */
+    /* Ensure the container has a background to see the content */
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+    background-color: rgba(0, 0, 0, 0.419);
+  }
+
+
+/* Common styles for profile image container */
+.profile-field {
+  margin-bottom: 20px;
+}
+
+/* Style for profile image */
+.profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ /* Profile image */
+.profile-image-container img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px; /* Add rounded corners to the image */
+  border: 2px solid #fff;
+}
+
+
+
+/* ----------For image-----------------------------------------------------------------) */
+
+
+#container {
+  text-align: right;
+}
+
+
+
+/* ---------------------------------------------------------------------------) */
+
+.card {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+  margin-bottom: 20px;
+  padding: 30px 20px;
+  border-radius: 10px;
+}
+  
+  /* Apply these styles to all elements inside the container */
+  .container * {
+    color: #fff; /* Set text color to white */
+  }
+  
+  .container input[type="text"],
+  .container input[type="password"],
+  .container input[type="email"],
+  .container input[type="date"],
+  .container select,
+  .container input[type="tel"], /* Add phone number field style */
+  .container input[type="time"] {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 10px; /* Adjust padding for better visual */
+    width: 100%; /* Take full width of the container */
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Add margin to separate fields */
+    margin-top: 5px;
+  }
+
+  .container h1 {
+    text-align: center; /* Center only the h2 within the container */
+    /* Add any other styles you want for the h2 */
+  }
+  
+  .container button {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Add margin to separate buttons */
+    font-size: small;
+    margin: 0 auto; /* Center the button horizontally */
+    display: block; /* Ensure the button takes full width and centers */
+    margin-bottom: 1%;
+    
+  }
+  
+  .container button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .container table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  .container th,
+  .container td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+
+/* Common styles for service containers */
+.service-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+  margin-bottom: 10px;
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+
+
+
+
+#editServiceForm .price input,
+#editServiceForm .duration input {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  border: 2px solid #fff;
+
+}
+
+#addServiceForm .price input,
+#addServiceForm .duration input {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  border: 2px solid #fff;
+
+}
+
+
+
+/* delete and logout account buttons */
+
+/* delete and logout account buttons */
+
+.bottom-container {
+  margin-top: 100px;
+  padding: 5px; /* Adjust padding as needed */
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap to the next line if necessary */
+  justify-content: center; /* Align buttons to the right */
+  margin-bottom: 10px;
+}
+
+.bottom-container form {
+  margin-bottom: 10px; /* Add some space between buttons */
+}
+
+
+
+
+
+
+/* Media query for smaller screens */
+@media screen and (max-width: 767px) {
+  .container {
+    width: 100%; /* Full width on smaller screens */
+    padding: 10px; /* Adjusted padding for better spacing */
+    margin-bottom: 20%;
+  }
+
+  .bottom-container form button {
+    min-width: 120px; /* Adjust minimum width for smaller screens */
+  }
+  
+  
+}
