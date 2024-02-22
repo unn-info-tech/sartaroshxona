@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import CustomAuthenticationForm
 from django.contrib.auth.decorators import login_required
+from .utils import middleware
 
 def signup(request):
     if request.method == 'POST':
@@ -45,10 +46,8 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                if request.user.is_barber:  # Assuming is_barber is a boolean field in your User model
-                    return redirect('barber_profile')  # Redirect to the barber profile URL
-                else:
-                    return redirect('client_profile')
+                return middleware(request)
+                
     else:
         formMe_signIn = CustomAuthenticationForm()
     return render(request, 'main/signIn.html', {'formMe_signIn': formMe_signIn})
