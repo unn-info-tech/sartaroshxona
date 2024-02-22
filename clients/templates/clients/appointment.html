@@ -118,6 +118,7 @@
       
       <form method="post" onsubmit="prepareSelectedServices()" id="appointment-form">
         {% csrf_token %}
+        <h5>Выберите время</h5>
         <input type="datetime-local" name="appointment_time" class="form-control mb-4 black-input" value="{{ appointment_form.appointment_time.value }}" id="appointmentDatetime">
       
         <h5>Выберите услуги</h5>
