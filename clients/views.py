@@ -56,6 +56,8 @@ def client_profile(request):
 
 
 
+from django.db.models import Q
+
 @login_required
 @is_client_required
 def barbers_list(request):
@@ -73,10 +75,19 @@ def barbers_list(request):
         Q(user__district=district) &
         Q(user__city=city)
     )
-    # Filter barbers based on the user's address
+
+   # Filter barbers based on the user's address
     barbers = Barber.objects.filter(q_filter, active_barber=True)
 
+    # Search functionality
+    query = request.GET.get('query')
+    if query:
+        barbers = barbers.filter(Q(user__username__icontains=query))
+        if not barbers.exists():  # If no barbers matched the query
+            barbers = Barber.objects.filter(q_filter, active_barber=True)  # Retrieve all barbers
+
     return render(request, 'clients/barbers_list.html', {'header': "Список парикмахеров", 'barbers': barbers})
+
 
 @login_required
 @is_client_required

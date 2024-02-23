@@ -10,38 +10,48 @@
 <link rel="stylesheet" href="{% static 'css/barbers_list.css' %}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+  
 
   <div class="scrollable-cards">
+    <div class="search-container">
+      <form action="{% url 'barbers_list' %}" method="get">
+          <input type="text" placeholder="Search barbers..." name="query">
+          <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
     <div class="header">
       <h2>{{header}}</h2> <!-- Add your h1 text here -->
     </div>
     
+    {% if barbers %}
     <div class="row">
-      {% for barber in barbers %}
+        {% for barber in barbers %}
         {% if barber.payment %}
-          <div class="ocl-12 clo-sm-6 col-lg-4">
+        <div class="ocl-12 clo-sm-6 col-lg-4">
             <div class="barber_profile">
-              <a href="{% url 'appointment' barber.id %}" class="card-link">
-                <div class="barber_image">
-                    {% if barber.profile_image %}
+                <a href="{% url 'appointment' barber.id %}" class="card-link">
+                    <div class="barber_image">
+                        {% if barber.profile_image %}
                         <img src="{{ barber.profile_image.url }}" alt="Profile Image">
-                    {% else %}
+                        {% else %}
                         <img src="{% static 'images/default.jpg' %}" alt="Default Image">
-                    {% endif %}
-                </div>
-              </a>
+                        {% endif %}
+                    </div>
+                </a>
                 <div class="barber_info">
-                  <h1>{{ barber.user.username }}</h1>
-                  <p><strong><i class="fas fa-building"></i></strong> {{ barber.organization_name }}</p>
-                  <p><strong><i class="fas fa-map-marker-alt"></i></strong></i></strong> {{ barber.location }}</p>
-                  <p class="reputation">⭐️⭐️⭐️⭐️⭐️{{ user.reputation }}</p>
+                    <h1>{{ barber.user.username }}</h1>
+                    <p><strong><i class="fas fa-building"></i></strong> {{ barber.organization_name }}</p>
+                    <p><strong><i class="fas fa-map-marker-alt"></i></strong></i></strong> {{ barber.location }}</p>
+                    <p class="reputation">⭐️⭐️⭐️⭐️⭐️{{ user.reputation }}</p>
                 </div>
             </div>
-          </div>
+        </div>
         {% endif %}
-      {% endfor %}
+        {% endfor %}
     </div>
+      {% else %}
+        <p>No barbers matched your search query.</p>
+      {% endif %}
   </div>
 
  
