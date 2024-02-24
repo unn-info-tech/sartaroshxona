@@ -11,15 +11,24 @@
 
 <div class="container" style="background-color: rgba(0, 0, 0, 0.5);">
     {% if display == 'payment_info' %}
-        <h1>Профиль пользователя</h1>
-        <p>Пожалуйста, сделайте оплату, чтобы ваш профиль стал общедоступным</p>
-
-        <div style="margin-top: 10px;">
+        <h1>Оплата</h1>
+        <p>Пожалуйста, следуйте инструкциям, чтобы сделать ваш профиль общедоступным:</p>
+        <p>1. Пожалуйста, скопируйте номер карты для отправки оплаты:</p>
+        <div>
+            <p> (Оплата: {{ payment_fee }})</p>
             <input type="text" id="copyInput1" value="0000 0000 0000 0000">
-            <input type="text" id="copyInput2" value="{{ barber.id }}">
             <button onclick="copyToClipboard('copyInput1')" class="btn btn-outline-primary btn-duration">Скопировать номер карты</button>
-            <button onclick="copyToClipboard('copyInput2')" class="btn btn-outline-primary btn-duration">Скопировать парикмахера</button>
         </div>
+        
+        <p>2. Укажите информацию о парикмахере в комментариях при отправке оплаты:</p>
+        <div>
+            <input type="text" id="copyInput2" value="{{ barber.id }}">
+            <button onclick="copyToClipboard('copyInput2')" class="btn btn-outline-primary btn-duration">Скопировать информацию о парикмахере</button>
+        </div>
+        
+        <p>3. Дождитесь подтверждения оплаты в течение 3 рабочих дней.</p>
+
+
         
         <script>
             function copyToClipboard(inputId) {

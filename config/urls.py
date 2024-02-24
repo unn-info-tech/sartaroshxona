@@ -19,9 +19,12 @@ from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.static import serve
+from . import views
 
 urlpatterns = [
-    path('secret/boshqaruv_of_unn/', admin.site.urls),
+    path('!boshqaruv_of_unn>/', admin.site.urls),
+    path('!public_barbers>/', views.public_barbers, name='public_barbers'),
+
     path('sar/', include('sartaroshxona.urls')),
     path('cl/', include('clients.urls')),
     path('main/', include('main.urls')),

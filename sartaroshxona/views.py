@@ -100,16 +100,23 @@ def barber_profile(request):
                 return redirect('barber_profile')
             
         elif 'active_barber' in request.POST:
+            payment_fee_labels = {
+                'Таджикистан': '30 TJS',
+                }
+            payment_fee = payment_fee_labels.get(str(user.country))
+
             if barber.payment:
                 barber.active_barber = not barber.active_barber
                 barber.save()
                 return redirect('barber_profile')
-
-            return render(request, 'main/others.html', {
-                'barber': barber,
-                'display': 'payment_info',
-                
-                })
+            
+            else:
+                return render(request, 'main/others.html', {
+                    'barber': barber,
+                    'display': 'payment_info',
+                    'payment_fee': payment_fee,
+                    
+                    })
             
 
         
