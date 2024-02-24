@@ -16,6 +16,7 @@ from .utils import is_overlapping
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from main.decorators import is_client_required
+from sartaroshxona.models import ClientBarberInteraction
 
 @login_required
 @is_client_required
@@ -99,11 +100,26 @@ def favorites(request):
 
 @login_required
 @is_client_required
-def my_appointments(request):
+def my_appointments(request, category):
     client = request.user
+    interactions = ClientBarberInteraction.objects.filter(client=client)
+    interactions_count = interactions.count()
     my_appointments = Appointment.objects.filter(client=client).prefetch_related('service')
+    my_appointments_count = my_appointments.count()
+    category_labels = {
+        'my_appointments': 'Мои записи',
+        'done': 'История',
+        }
+    human_readable_category = category_labels.get(category)
 
-    return render(request, 'clients/my_appointments.html', {'my_appointments': my_appointments.order_by('appointment_time')})
+    return render(request, 'clients/my_appointments.html', {
+        'my_appointments': my_appointments.order_by('appointment_time'),
+        'interactions': interactions,
+        'interactions_count': interactions_count,
+        'my_appointments_count': my_appointments_count,
+        'human_readable_category': human_readable_category,
+        'category': category,
+        })
 
 
 

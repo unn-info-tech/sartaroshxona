@@ -173,9 +173,9 @@ def appointments_by_category(request, category):
     daily_work_records = DailyWorkRecord.objects.filter(barber=barber_model)
 
     if category == 'in_queue':
-        appointments = appointment_in_queue
+        appointments = appointment_in_queue.order_by('appointment_time')
     elif category == 'confirmed':
-        appointments = appointment_confirmed
+        appointments = appointment_confirmed.order_by('appointment_time')
     elif category == 'done':
         pass
     elif category == 'money':
@@ -194,7 +194,7 @@ def appointments_by_category(request, category):
 
     # RETURN 
     return render(request, 'sartaroshxona/clients.html', {
-        'appointments': appointments.order_by('appointment_time'),
+        'appointments': appointments,
         'category': category,
         'human_readable_category': human_readable_category,
         'appointment_in_queue_count': appointment_in_queue_count,
