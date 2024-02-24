@@ -18,6 +18,42 @@ body {
     border-radius: 10px;
 }
 
+/* Search container */
+/* Search container */
+.search-container {
+    text-align: center;
+    margin-top: 20px; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container form {
+    display: inline-block;
+}
+
+.search-container input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eeeeee;
+    background-color: rgba(0, 0, 0, 0.701);
+    color: #f9f7f7;
+}
+
+.search-container button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.search-container button:hover {
+    background-color: #ffffff;
+    color: #020202;
+}
+
 .header {
     text-align: center;
     backdrop-filter: blur(5px);
@@ -40,10 +76,9 @@ body {
 /* Barber image img */
 .barber_profile .barber_image img {
     display: block;
-    width: 200px; /* Adjusted width */
-    height: 200px; /* Adjusted height */
-    object-fit: cover;
-    border-radius: 50%;
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* or object-fit: contain; */
     margin-bottom: 3px; /* Smaller margin */
 }
 
@@ -131,7 +166,6 @@ body {
         width: 100%;
         height: auto; /* Maintain aspect ratio */
         object-fit: cover;
-        border-radius: 50%;
         margin-bottom: 3px; /* Smaller margin */
     }
 
