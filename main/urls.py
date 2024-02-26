@@ -13,7 +13,9 @@ urlpatterns = [
     path('others/', views.others, name='others'),
     path('tospp/', views.tospp, name='tospp'),
     path('contact_dev/', views.contact_dev, name='contact_dev'),
+
     path('feedback/', views.feedback, name='feedback'),
+    path('download/', views.download, name='download'),
 
     path('middleware/', views.middleware, name='middleware'),
 
