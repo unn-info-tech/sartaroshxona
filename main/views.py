@@ -95,7 +95,7 @@ def ads_list(request):
     ads = Ads.objects.filter(q_filter)  # Use filter() instead of all()
     return render(request, 'main/ads.html', {'ads': ads})
 
-
+@login_required
 def others(request):
     return render(request, 'main/others.html', {'display': 'others',})
 
@@ -103,12 +103,12 @@ def others(request):
 def tospp(request):
     return render(request, 'main/others.html', {'display': 'tospp',})
 
-
+@login_required
 def contact_dev(request):
     return render(request, 'main/others.html', {'display': 'contact_dev',})
 
 
-
+@login_required
 def feedback(request):
     return render(request, 'main/404.html', {'error_message': 'Страница еще не готова'})
 
