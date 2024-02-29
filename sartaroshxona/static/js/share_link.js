@@ -4,7 +4,7 @@ document.getElementById('shareButton').addEventListener('click', function() {
     var barberId = this.getAttribute('data-barber-id');
 
     if (barberId) {
-        var shareUrl = `http://127.0.0.1:8000/cl/appointment/${encodeURIComponent(barberId)}`;
+        var shareUrl = `https://unn.pythonanywhere.com/cl/appointment/${encodeURIComponent(barberId)}`;
 
         if (navigator.share) {
             navigator.share({

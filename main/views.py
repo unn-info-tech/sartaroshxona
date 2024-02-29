@@ -112,8 +112,7 @@ def contact_dev(request):
 def feedback(request):
     return render(request, 'main/404.html', {'error_message': 'Страница еще не готова'})
 
-def download(request):
-    return render(request, 'main/download.html')
+
 
 
 
