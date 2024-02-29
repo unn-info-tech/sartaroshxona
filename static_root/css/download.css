@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 150px auto 50px; /* More space at the top, less at the bottom */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+.heading {
+    color: #333;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #222;
+}
+
+.app-icon {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px;
+    border-radius: 20px;
+}
+
+
+/* Mobile styles */
+@media (max-width: 600px) {
+    .container {
+        max-width: 90%; /* Adjust as needed */
+        margin: 20px auto; /* Adjust as needed */
+        padding: 10px;
+        margin-top: 100px; /* Adjust as needed for mobile devices */
+    }
+
+    .app-icon {
+        width: 80px; /* Adjust as needed */
+        height: 80px;
+        border-radius: 15px;
+    }
+
+    .heading {
+        font-size: 1.5em; /* Adjust as needed */
+    }
+
+    .description {
+        font-size: 0.9em; /* Adjust as needed */
+        margin-bottom: 15px;
+    }
+
+    .download-button {
+        padding: 8px 16px; /* Adjust as needed */
+        font-size: 0.9em; /* Adjust as needed */
+    }
+}
