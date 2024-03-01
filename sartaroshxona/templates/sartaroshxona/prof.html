@@ -246,10 +246,9 @@
         </form>
 
 
-        <button style="border-color: rgb(255, 174, 0);" class="bottom-container-button" id="shareButton" data-barber-id="{{ barber.id }}">
+        <button style="border-color: rgb(255, 174, 0);" class="bottom-container-button" id="shareButton " data-barber-id="{{ barber.id }}">
             Поделиться профилем <i class="fa-solid fa-share-nodes"></i>
         </button>
-        
         <script src="{% static 'js/share_link.js' %}"></script>
         
 
@@ -257,6 +256,24 @@
 
 
     </div>
+
+
+    <div style="margin-bottom: 30px;">
+        <div>
+            <i class="fa-solid fa-info-circle" id="infoIcon" style="color: gray; cursor: pointer; padding: 10px; margin-left: 10px;"></i>
+            <p id="infoText" style="color: gray; font-size: 14px; display: none;"> - Поделиться профилем доступен только на веб-сайте (Chrome, Microsoft Edge и т. д.), а не в приложении.</p>
+            
+            
+            <script>
+                document.getElementById('infoIcon').addEventListener('click', function() {
+                    var infoText = document.getElementById('infoText');
+                    infoText.style.display = infoText.style.display === 'none' ? 'block' : 'none';
+                });
+            </script>
+        </div>
+    </div>
+    
+    
 
 </div>
 
