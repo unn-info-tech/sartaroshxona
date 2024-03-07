@@ -28,7 +28,7 @@ def signup(request):
                 barber = Barber.objects.create(
                     user=user,
                 )
-                barber.activate_premium(11)
+                barber.activate_premium(31)
             return redirect('signin')
     else:
         formMe_signup = CustomUserCreationForm()

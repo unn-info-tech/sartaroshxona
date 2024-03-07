@@ -7,4 +7,4 @@ def middleware(request):
         else:
             return redirect('barbers_list')
     else:
-        return redirect('signin')  # Redirect to login page if user is not logged in.
+        return redirect('signin')  # Redirect to login page if user is not logged in
