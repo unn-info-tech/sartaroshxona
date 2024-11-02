@@ -29,6 +29,7 @@ Sartaroshxona is a web application designed for managing client appointments, bo
 - Developed responsive UI using **Bootstrap**.
 - Implemented **CRUD functionalities** and secure user authentication.
 - Improved project organization and code maintainability.
+- **Deployment Skills:** Experience deploying Django applications on PythonAnywhere.
 
 ## Access the Deployed Project
 Access the project's functionalities seamlessly using [link](https://sartaroshxona.pythonanywhere.com/mixed/download/)
