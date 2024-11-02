@@ -31,7 +31,7 @@ Sartaroshxona is a web application designed for managing client appointments, bo
 - Improved project organization and code maintainability.
 
 ## Access the Deployed Project
-Access the project's functionalities seamlessly using [link]([https://tajmaxpro.pythonanywhere.com/](https://sartaroshxona.pythonanywhere.com/mixed/download/)
+Access the project's functionalities seamlessly using [link](https://sartaroshxona.pythonanywhere.com/mixed/download/)
 
 ## Installation
 
